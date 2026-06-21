@@ -1,43 +1,11 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "express",
-  "env": {
-    "NODE_ENV": {
-      "default": "production"
-    }
-  },
-  "functions": {
-    "src/index.ts": {
-      "memory": 1024,
-      "maxDuration": 60
-    }
-  },
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "src/index.ts",
-      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        }
-      ]
-    }
+  "rewrites": [
+    { "source": "/api/db", "destination": "/api/db" },
+    { "source": "/api/pensamento", "destination": "/api/pensamento" },
+    { "source": "/api/x402/status", "destination": "/api/x402-status" },
+    { "source": "/api/x402", "destination": "/api/x402" },
+    { "source": "/orai", "destination": "/api/orai" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
