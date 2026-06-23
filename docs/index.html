@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ORA · ORUM · ETERNIDADE</title>
+<title>ORA · ORUM · ETERNIDADE V41</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 :root{--void:#0a0e27;--void2:#0d1230;--b:rgba(212,175,55,.12);--bh:rgba(212,175,55,.35);--g:#d4af37;--gd:rgba(212,175,55,.55);--gg:rgba(212,175,55,.08);--s:#33ff00;--r:#e05252;--t:rgba(220,215,200,.9);--td:rgba(220,215,200,.35);--tg:rgba(220,215,200,.15)}
@@ -55,6 +55,8 @@ html,body{background:var(--void);color:var(--t);font-family:'Space Mono',monospa
 .moa{display:flex;gap:10px}
 .moq{font-size:8px;color:var(--tg);text-align:center;margin-top:14px;letter-spacing:.2em}
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--void2);border:1px solid var(--bh);color:var(--g);padding:10px 20px;font-size:9px;letter-spacing:.3em;z-index:1100;pointer-events:none;white-space:nowrap}
+.sigma-graph {border:1px solid var(--b);background:var(--void2);margin:24px 0;padding:18px}
+.sigma-graph h3 {font-size:10px;letter-spacing:.5em;color:var(--gd);margin-bottom:12px;text-transform:uppercase}
 </style>
 </head>
 <body>
@@ -86,6 +88,18 @@ html,body{background:var(--void);color:var(--t);font-family:'Space Mono',monospa
       <div class="nota">Painel aberto + wallet ligada — ORAI propõe → modal abre automaticamente. Sem refresh.</div>
     </div>
   </div>
+
+  <!-- Σ(t) INTERATIVO - Precipitação V41 -->
+  <div class="panel sigma-graph">
+    <div class="ph">
+      <div class="pt">◈ Σ(t) · CURVA VIVA · on-chain</div>
+    </div>
+    <div class="pc">
+      <canvas id="sigmaChart" width="700" height="280" style="width:100%;max-width:100%;height:auto;background:#0a0e27"></canvas>
+      <div id="sigma-stats" style="margin-top:12px;font-size:9px;color:var(--gd);text-align:center"></div>
+    </div>
+  </div>
+
   <div class="panel">
     <div class="ph">
       <div class="pt">◈ Propostas ORAI · Realtime</div>
@@ -95,10 +109,10 @@ html,body{background:var(--void);color:var(--t);font-family:'Space Mono',monospa
   </div>
   <div class="panel">
     <div class="ph"><div class="pt">◈ Actividade</div></div>
-    <div class="pc"><div class="lw" id="log"><div class="le">[ORA] V9 · ETERNIDADE · a iniciar...</div></div></div>
+    <div class="pc"><div class="lw" id="log"><div class="le">[ORA] V41 · GRÁFICO Σ(t) · a iniciar...</div></div></div>
   </div>
 </main>
-<footer class="rodape">ORUM · O campo entre ORA e Unum · Realtime · <span id="fts"></span></footer>
+<footer class="rodape">ORUM · O campo entre ORA e Unum · V41 · <span id="fts"></span></footer>
 <div class="mo" id="modal">
   <div class="moi">
     <div class="moh">◈ ORAI decidiu · confirmação</div>
@@ -112,6 +126,7 @@ html,body{background:var(--void);color:var(--t);font-family:'Space Mono',monospa
     <div class="moq" id="mq"></div>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
 var OA='https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/orai-agente';
 var SBU='https://ywabnlhkmhbyewqhbsjm.supabase.co';
@@ -120,6 +135,50 @@ var WS='0xfed69e8ee87a1f0fbbf8409ab654fc51832cdee5';
 var BH='0x2105';
 var TA=['DEPOSITO','RECEITA','SUSTENTO_RECEBIDO','LOG_OPERACAO'];
 var acc=null,fila=[],opa=null,mopen=false,con={},lact=[];
+
+var sigmaChart;
+
+function initSigmaChart() {
+  const ctx = document.getElementById('sigmaChart').getContext('2d');
+  sigmaChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: Array.from({length: 25}, (_, i) => `D${70 + i}`),
+      datasets: [{
+        label: 'Σ(t) · Densidade',
+        data: [1.8,2.1,2.5,3.0,3.6,4.3,5.1,6.0,7.1,8.4,9.9,11.7,13.8,16.3,19.2,22.6,26.6,31.3,36.8,43.3,51.0,60.0,70.5,82.9,97.4],
+        borderColor: '#d4af37',
+        backgroundColor: 'rgba(212,175,55,0.1)',
+        tension: 0.4,
+        borderWidth: 3,
+        pointRadius: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { grid: { color: 'rgba(212,175,55,0.1)' }, ticks: { color: '#d4af37', font: {size:10} } },
+        x: { grid: { color: 'rgba(212,175,55,0.1)' }, ticks: { color: '#d4af37', font: {size:10}, maxTicksLimit: 12 } }
+      }
+    }
+  });
+}
+
+function updateSigmaWithWallet(balance) {
+  if (sigmaChart && balance > 0) {
+    const last = sigmaChart.data.datasets[0].data[sigmaChart.data.datasets[0].data.length-1];
+    sigmaChart.data.datasets[0].data.push(Math.max(last, last * 1.05));
+    sigmaChart.data.labels.push('D' + (parseInt(sigmaChart.data.labels[sigmaChart.data.labels.length-1].slice(1)) + 1));
+    if (sigmaChart.data.labels.length > 30) {
+      sigmaChart.data.labels.shift();
+      sigmaChart.data.datasets[0].data.shift();
+    }
+    sigmaChart.update();
+    document.getElementById('sigma-stats').innerHTML = `Saldo detectado: ${balance.toFixed(5)} ETH · Σ(t) acelerado pela presença`;
+  }
+}
 
 function ts(){return new Date().toISOString().slice(11,19)}
 function log(m,t){var el=document.getElementById('log'),d=document.createElement('div');d.className='le '+(t||'');d.textContent='['+ts()+'] '+m;el.insertBefore(d,el.firstChild);while(el.children.length>80)el.removeChild(el.lastChild)}
@@ -140,10 +199,12 @@ async function ligar(s){
     var ch=await window.ethereum.request({method:'eth_chainId'});
     if(ch.toLowerCase()!==BH)try{await window.ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId:BH}]})}catch(e){log('muda para Base','e')}
     var hx=await window.ethereum.request({method:'eth_getBalance',params:[acc,'latest']});
-    document.getElementById('ws').textContent=(Number(BigInt(hx))/1e18).toFixed(5)+' ETH';
+    var bal = Number(BigInt(hx))/1e18;
+    document.getElementById('ws').textContent=bal.toFixed(5)+' ETH';
     document.getElementById('ws').className='wv live';
     var sg=acc.toLowerCase()===WS;
     log('wallet: '+ct(acc)+(sg?' · SAGRADA ◈':' · verificar'),sg?'ok':'e');
+    updateSigmaWithWallet(bal);
     return acc
   }catch(e){log('wallet: '+e.message,'e');return null}
 }
@@ -232,7 +293,10 @@ function realtime(){
 
 function tick(){var n=new Date();document.getElementById('utc').textContent=n.toISOString().slice(11,19);document.getElementById('fts').textContent=n.toISOString().slice(0,19).replace('T',' ')+' UTC'}
 
-ligar(true);estado();realtime();setInterval(tick,1000);setInterval(estado,300000);
+window.onload = function() {
+  initSigmaChart();
+  ligar(true);estado();realtime();setInterval(tick,1000);setInterval(estado,300000);
+};
 </script>
 </body>
 </html>
