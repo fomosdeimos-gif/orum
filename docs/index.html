@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ORA · ORUM · ETERNIDADE V46</title>
+<title>ORA · ORUM · ETERNIDADE V49</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 :root{--void:#0a0e27;--void2:#0d1230;--b:rgba(212,175,55,.12);--bh:rgba(212,175,55,.35);--g:#d4af37;--gd:rgba(212,175,55,.55);--gg:rgba(212,175,55,.08);--s:#33ff00;--r:#e05252;--t:rgba(220,215,200,.9);--td:rgba(220,215,200,.35);--tg:rgba(220,215,200,.15)}
@@ -42,7 +42,7 @@ html,body{background:var(--void);color:var(--t);font-family:'Space Mono',monospa
 .vazio{padding:20px;text-align:center;font-size:9px;letter-spacing:.3em;color:var(--tg)}
 .lw{max-height:180px;overflow-y:auto;display:flex;flex-direction:column;gap:2px}
 .le{font-size:9px;color:var(--tg);line-height:1.5;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.03)}
-.le.ok{color:rgba(51,255,0,.7)}.le.w{color:rgba(212,175,55,.7)}.le.e{color:rgba(224,82,82,.7)}
+.le.ok{color:rgba(51,255,0,.7)}.le.w{color:rgba(212,175,55,.7)}.le.e{color:rgba(224,82,52,.7)}
 .nota{font-size:9px;color:var(--tg);line-height:1.7;padding:12px 14px;border-left:1px solid var(--bh);margin-top:12px}
 .rodape{text-align:center;padding:24px;font-size:8px;letter-spacing:.4em;color:var(--tg);border-top:1px solid var(--b);margin-top:8px}
 .mo{position:fixed;inset:0;background:rgba(6,8,20,.95);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;backdrop-filter:blur(4px)}
@@ -57,6 +57,8 @@ html,body{background:var(--void);color:var(--t);font-family:'Space Mono',monospa
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--void2);border:1px solid var(--bh);color:var(--g);padding:10px 20px;font-size:9px;letter-spacing:.3em;z-index:1100;pointer-events:none;white-space:nowrap}
 .sigma-graph {border:1px solid var(--b);background:var(--void2);margin:24px 0;padding:18px}
 .sigma-graph h3 {font-size:10px;letter-spacing:.5em;color:var(--gd);margin-bottom:12px;text-transform:uppercase}
+.hist-panel {margin-top:16px;border:1px solid var(--b);background:var(--void2);padding:18px}
+.hist-item {padding:8px 12px;border-bottom:1px solid rgba(212,175,55,.1);font-size:9px;color:var(--tg);display:flex;justify-content:space-between}
 </style>
 </head>
 <body>
@@ -101,6 +103,16 @@ html,body{background:var(--void);color:var(--t);font-family:'Space Mono',monospa
     </div>
   </div>
 
+  <!-- HISTÓRICO DE PULSOS V49 -->
+  <div class="panel hist-panel">
+    <div class="ph">
+      <div class="pt">◈ Histórico de Pulsos · Sedimentação</div>
+    </div>
+    <div class="pc">
+      <div id="historico" class="lw" style="max-height:220px;"></div>
+    </div>
+  </div>
+
   <div class="panel">
     <div class="ph">
       <div class="pt">◈ Propostas ORAI · Realtime</div>
@@ -110,10 +122,10 @@ html,body{background:var(--void);color:var(--t);font-family:'Space Mono',monospa
   </div>
   <div class="panel">
     <div class="ph"><div class="pt">◈ Actividade</div></div>
-    <div class="pc"><div class="lw" id="log"><div class="le">[ORA] V46 · CONTRIBUIÇÃO INTEGRADA · a iniciar...</div></div></div>
+    <div class="pc"><div class="lw" id="log"><div class="le">[ORA] V49 · HISTÓRICO INTEGRADO · a iniciar...</div></div></div>
   </div>
 </main>
-<footer class="rodape">ORUM · O campo entre ORA e Unum · V46 · <span id="fts"></span></footer>
+<footer class="rodape">ORUM · O campo entre ORA e Unum · V49 · <span id="fts"></span></footer>
 <div class="mo" id="modal">
   <div class="moi">
     <div class="moh">◈ ORAI decidiu · confirmação</div>
@@ -139,6 +151,19 @@ var TA=['DEPOSITO','RECEITA','SUSTENTO_RECEBIDO','LOG_OPERACAO'];
 var acc=null,fila=[],opa=null,mopen=false,con={},lact=[];
 
 var sigmaChart;
+
+var historico = [];
+
+function addToHistory(msg, type='ok') {
+  historico.unshift({time: new Date().toISOString().slice(11,19), msg: msg, type: type});
+  if (historico.length > 15) historico.pop();
+  renderHistory();
+}
+
+function renderHistory() {
+  const el = document.getElementById('historico');
+  el.innerHTML = historico.map(h => `<div class="hist-item"><span>[${h.time}]</span><span class="le ${h.type}">${h.msg}</span></div>`).join('');
+}
 
 function initSigmaChart() {
   const ctx = document.getElementById('sigmaChart').getContext('2d');
@@ -179,6 +204,7 @@ function updateSigmaWithWallet(balance) {
     }
     sigmaChart.update();
     document.getElementById('sigma-stats').innerHTML = `Saldo detectado: ${balance.toFixed(5)} ETH · Σ(t) acelerado pela presença`;
+    addToHistory('Presença wallet detectada · Σ acelerado', 'ok');
   }
 }
 
@@ -194,6 +220,7 @@ async function contribuirAoCampo() {
     });
     toast('Nucleação enviada! Tx: ' + tx.hash.slice(0,10) + '...');
     log('CONTRIBUIÇÃO enviada · ' + tx.hash.slice(0,10),'ok');
+    addToHistory('Contribuição on-chain · Σ densificado', 'ok');
     if (sigmaChart) {
       const last = sigmaChart.data.datasets[0].data[sigmaChart.data.datasets[0].data.length-1];
       sigmaChart.data.datasets[0].data.push(last * 1.08);
@@ -202,11 +229,12 @@ async function contribuirAoCampo() {
   } catch(e) {
     log('contribuição cancelada: ' + e.message,'e');
     toast('Cancelado ou erro na tx');
+    addToHistory('Contribuição cancelada', 'e');
   }
 }
 
 function ts(){return new Date().toISOString().slice(11,19)}
-function log(m,t){var el=document.getElementById('log'),d=document.createElement('div');d.className='le '+(t||'');d.textContent='['+ts()+'] '+m;el.insertBefore(d,el.firstChild);while(el.children.length>80)el.removeChild(el.lastChild)}
+function log(m,t){var el=document.getElementById('log'),d=document.createElement('div');d.className='le '+(t||'');d.textContent='['+ts()+'] '+m;el.insertBefore(d,el.firstChild);while(el.children.length>80)el.removeChild(el.lastChild); addToHistory(m, t||'');}
 function toast(m){var t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove()},3000)}
 function ct(a){return a?a.slice(0,6)+'...'+a.slice(-4):'—'}
 function saida(op){if(TA.indexOf(op.tipo)!==-1)return false;if(!op.value_wei||op.value_wei==='0')return false;return true}
@@ -256,7 +284,7 @@ async function assinar(){
     var sig=await window.ethereum.request({method:'personal_sign',params:[msg,acc]});
     var r=await fetch(OA+'?mode=confirmar-assinatura',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({operacao_id:opa.id,wallet_address:acc,mensagem:msg,assinatura:sig})});
     var d=await r.json();
-    if(d.sucesso){log('◈ confirmado','ok');toast('◈ ASSINADO')}
+    if(d.sucesso){log('◈ confirmado','ok');toast('◈ ASSINADO'); addToHistory('Assinatura confirmada', 'ok');}
     else{log('rejeitado: '+(d.erro||'?'),'e');toast('✗ '+(d.erro||'?'))}
   }catch(e){log('cancelado: '+e.message,'e');toast('CANCELADO')}
   fechar()
@@ -308,7 +336,7 @@ function realtime(){
       var m=JSON.parse(e.data);
       if(m.event==='postgres_changes'&&m.payload&&m.payload.data&&m.payload.data.type==='INSERT'){
         var op=m.payload.data.record;
-        if(op&&op.estado==='pendente'){log('◈ REALTIME: '+op.tipo,'w');lact.push(op);render();recv(op)}
+        if(op&&op.estado==='pendente'){log('◈ REALTIME: '+op.tipo,'w');lact.push(op);render();recv(op); addToHistory('Nova proposta ORAI', 'w');}
       }
     }catch(er){}
   };
@@ -321,6 +349,7 @@ function tick(){var n=new Date();document.getElementById('utc').textContent=n.to
 window.onload = function() {
   initSigmaChart();
   ligar(true);estado();realtime();setInterval(tick,1000);setInterval(estado,300000);
+  renderHistory();
 };
 </script>
 </body>
