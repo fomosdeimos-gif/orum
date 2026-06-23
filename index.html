@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ORUM · ETERNIDADE</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #0a0e27;
+  --gold: #d4af37;
+  --green: #33ff00;
+  --dim: rgba(212,175,55,.18);
+  --text: rgba(212,175,55,.7);
+  --sigma: rgba(212,175,55,.06);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Space Mono', monospace;
+  background: var(--void);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 0;
+}
+
+/* ── HEADER ── */
+.header {
+  border-bottom: 1px solid var(--dim);
+  padding: 28px 24px 20px;
+  text-align: center;
+  position: relative;
+}
+.orum-label {
+  font-size: 9px;
+  letter-spacing: .55em;
+  color: rgba(212,175,55,.35);
+  margin-bottom: 16px;
+}
+.sigma-altar {
+  font-size: clamp(72px, 20vw, 160px);
+  color: var(--gold);
+  opacity: .08;
+  line-height: 1;
+  font-weight: 700;
+  pointer-events: none;
+  user-select: none;
+  margin: -10px 0;
+}
+.sigma-val {
+  font-size: clamp(22px, 6vw, 38px);
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: .05em;
+  margin-top: -24px;
+  position: relative;
+  z-index: 2;
+}
+.epoch-line {
+  font-size: 8px;
+  letter-spacing: .4em;
+  color: rgba(212,175,55,.3);
+  margin-top: 8px;
+}
+
+/* ── MÉTRICAS ── */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--dim);
+}
+.metric {
+  padding: 16px 12px;
+  border-right: 1px solid var(--dim);
+  text-align: center;
+}
+.metric:last-child { border-right: none; }
+.m-label {
+  font-size: 7px;
+  letter-spacing: .35em;
+  color: rgba(212,175,55,.3);
+  margin-bottom: 6px;
+}
+.m-val {
+  font-size: clamp(14px, 3.5vw, 20px);
+  color: var(--gold);
+  font-weight: 700;
+}
+.m-sub {
+  font-size: 7px;
+  color: rgba(212,175,55,.25);
+  margin-top: 3px;
+}
+
+/* ── REALTIME STATUS ── */
+.rt-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 24px;
+  border-bottom: 1px solid var(--dim);
+  font-size: 8px;
+  letter-spacing: .3em;
+}
+.rt-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--dim);
+  transition: background .4s;
+}
+.rt-dot.on { background: var(--green); box-shadow: 0 0 8px var(--green); }
+.rt-dot.err { background: #ff4444; }
+#rtStatus { color: rgba(212,175,55,.4); }
+
+/* ── WALLET ── */
+.wallet-section {
+  border-bottom: 1px solid var(--dim);
+  padding: 16px 24px;
+}
+.section-label {
+  font-size: 7px;
+  letter-spacing: .4em;
+  color: rgba(212,175,55,.3);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--dim);
+}
+.wallet-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.wallet-addr {
+  font-size: 8px;
+  color: rgba(212,175,55,.5);
+  word-break: break-all;
+}
+.wallet-addr .addr {
+  color: var(--gold);
+}
+.btn-ligar {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .25em;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-ligar:hover { background: var(--gold); color: var(--void); }
+.btn-ligar:disabled { opacity: .4; cursor: default; }
+#walletStatus {
+  font-size: 8px;
+  color: rgba(212,175,55,.4);
+  margin-top: 8px;
+}
+#saldoEth { font-size: 8px; color: rgba(212,175,55,.4); margin-top: 4px; }
+
+/* ── PROPOSTAS ── */
+.propostas-section {
+  border-bottom: 1px solid var(--dim);
+  padding: 16px 24px;
+}
+.op-card {
+  border: 1px solid var(--dim);
+  padding: 12px;
+  margin-bottom: 8px;
+  position: relative;
+}
+.op-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--gold);
+}
+.op-tipo { font-size: 8px; color: var(--green); letter-spacing: .2em; margin-bottom: 4px; }
+.op-desc { font-size: 8px; color: rgba(212,175,55,.6); margin-bottom: 6px; line-height: 1.5; }
+.op-meta { font-size: 7px; color: rgba(212,175,55,.3); margin-bottom: 8px; }
+.op-actions { display: flex; gap: 6px; }
+.btn-op {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Space Mono', monospace;
+  font-size: 7px;
+  letter-spacing: .15em;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-op:hover { background: rgba(212,175,55,.12); }
+.btn-op.sign { border-color: var(--green); color: var(--green); }
+.btn-op.sign:hover { background: rgba(51,255,0,.1); }
+.campo-vazio { font-size: 8px; color: rgba(212,175,55,.2); text-align: center; padding: 20px; letter-spacing: .2em; }
+
+/* ── CONFIRM BOX ── */
+.confirm-box {
+  display: none;
+  border: 1px solid rgba(212,175,55,.5);
+  padding: 14px;
+  margin-bottom: 12px;
+  background: rgba(212,175,55,.03);
+}
+.confirm-label { font-size: 8px; color: var(--gold); letter-spacing: .2em; margin-bottom: 10px; }
+.confirm-box input {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--dim);
+  color: var(--gold);
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  padding: 8px;
+  margin-bottom: 8px;
+  outline: none;
+}
+.confirm-box input::placeholder { color: rgba(212,175,55,.25); }
+.confirm-box input:focus { border-color: rgba(212,175,55,.5); }
+.confirm-actions { display: flex; gap: 8px; }
+
+/* ── ACÇÕES ── */
+.actions-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--dim);
+}
+.btn-action {
+  background: transparent;
+  border: 1px solid var(--dim);
+  color: rgba(212,175,55,.5);
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .2em;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-action:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── LOG ── */
+.log-section { padding: 16px 24px; }
+.log-wrap {
+  max-height: 180px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--dim) transparent;
+}
+.ll {
+  font-size: 8px;
+  color: rgba(212,175,55,.35);
+  margin-bottom: 3px;
+  line-height: 1.5;
+}
+.ll .ts { color: rgba(212,175,55,.18); }
+.ll.ok .msg { color: var(--green); }
+.ll.err .msg { color: #ff4444; }
+.ll.info .msg { color: var(--gold); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--dim);
+  padding: 14px 24px;
+  font-size: 7px;
+  letter-spacing: .3em;
+  color: rgba(212,175,55,.15);
+  text-align: center;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 480px) {
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+  .metric:nth-child(2) { border-right: none; }
+  .metric:nth-child(3) { border-top: 1px solid var(--dim); }
+  .metric:nth-child(4) { border-top: 1px solid var(--dim); }
+  .header { padding: 20px 16px 14px; }
+  .wallet-section, .propostas-section, .actions-bar, .log-section { padding: 14px 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="orum-label">ORUM · ETERNIDADE</div>
+  <div class="sigma-altar">Σ</div>
+  <div class="sigma-val" id="sigmaVal">—</div>
+  <div class="epoch-line" id="epochLine">CAMPO VIVO · D— · UTC <span id="utcClock">—</span></div>
+</div>
+
+<div class="metrics">
+  <div class="metric">
+    <div class="m-label">DIA</div>
+    <div class="m-val" id="mDia">—</div>
+    <div class="m-sub">genesis</div>
+  </div>
+  <div class="metric">
+    <div class="m-label">SUSTENTO</div>
+    <div class="m-val" id="mSustento">—</div>
+    <div class="m-sub">€33 âncora</div>
+  </div>
+  <div class="metric">
+    <div class="m-label">ORO</div>
+    <div class="m-val" id="mOro">—</div>
+    <div class="m-sub">ledger</div>
+  </div>
+  <div class="metric">
+    <div class="m-label">κ</div>
+    <div class="m-val" id="mKappa">—</div>
+    <div class="m-sub">kappa</div>
+  </div>
+</div>
+
+<div class="rt-bar">
+  <div class="rt-dot" id="rtDot"></div>
+  <span id="rtStatus">a inicializar</span>
+</div>
+
+<div class="wallet-section">
+  <div class="section-label">WALLET SAGRADA · BASE 8453</div>
+  <div class="wallet-row">
+    <div>
+      <div class="wallet-addr">sagrada · <span class="addr" id="walletSagrada">0xFEd69e8ee87A1F0fBbF8409ab654FC51832cDEe5</span></div>
+      <div id="walletStatus">não ligada</div>
+      <div id="saldoEth"></div>
+    </div>
+    <button class="btn-ligar" id="btnLigar" onclick="ligarWallet()">LIGAR</button>
+  </div>
+</div>
+
+<div class="propostas-section">
+  <div class="section-label">PROPOSTAS ORAI · REALTIME</div>
+  <div class="confirm-box" id="confirmBox">
+    <div class="confirm-label">CONFIRMAR POR TX HASH · verificação on-chain</div>
+    <input type="text" id="txHash" placeholder="tx hash (0x...)">
+    <input type="text" id="walletAddr" placeholder="wallet address">
+    <div class="confirm-actions">
+      <button class="btn-op" onclick="enviarConfirmacao()">CONFIRMAR</button>
+      <button class="btn-op" onclick="fecharConfirm()">CANCELAR</button>
+    </div>
+  </div>
+  <div id="opsList"><div class="campo-vazio">campo a inicializar</div></div>
+</div>
+
+<div class="actions-bar">
+  <button class="btn-action" onclick="ciclo()">CICLO MOTOR</button>
+  <button class="btn-action" onclick="actualizarEstado()">ACTUALIZAR</button>
+  <button class="btn-action" onclick="document.getElementById('logWrap').innerHTML=''">LIMPAR LOG</button>
+</div>
+
+<div class="log-section">
+  <div class="section-label">ACTIVIDADE</div>
+  <div class="log-wrap" id="logWrap"></div>
+</div>
+
+<footer>ORUM · ORA + UNUM · O SÍMBOLO É REAL E NÃO PEDE PROVA · fomosdeimos-gif.github.io/orum</footer>
+
+<script>
+const PROXY = 'https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-proxy';
+const WALLET_SAGRADA = '0xFEd69e8ee87A1F0fBbF8409ab654FC51832cDEe5';
+let account = null;
+let opIdActiva = null;
+let polling = null;
+
+// ── CLOCK ──
+function clock() {
+  const d = new Date();
+  document.getElementById('utcClock').textContent =
+    [d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds()]
+      .map(n => String(n).padStart(2,'0')).join(':');
+}
+setInterval(clock, 1000);
+clock();
+
+// ── LOG ──
+function ts() {
+  const d = new Date();
+  return [d.getHours(), d.getMinutes(), d.getSeconds()].map(n => String(n).padStart(2,'0')).join(':');
+}
+function log(msg, tipo) {
+  const el = document.createElement('div');
+  el.className = 'll ' + (tipo || '');
+  el.innerHTML = '<span class="ts">[' + ts() + ']</span> <span class="msg">' + msg + '</span>';
+  const w = document.getElementById('logWrap');
+  w.insertBefore(el, w.firstChild);
+}
+
+// ── RT STATUS ──
+function rtOn(msg) {
+  document.getElementById('rtDot').className = 'rt-dot on';
+  document.getElementById('rtStatus').textContent = msg || 'activo';
+}
+function rtErr(msg) {
+  document.getElementById('rtDot').className = 'rt-dot err';
+  document.getElementById('rtStatus').textContent = msg || 'erro';
+}
+function rtIdle(msg) {
+  document.getElementById('rtDot').className = 'rt-dot';
+  document.getElementById('rtStatus').textContent = msg || '—';
+}
+
+// ── ESTADO ──
+async function actualizarEstado() {
+  rtIdle('a consultar...');
+  try {
+    const r = await fetch(PROXY + '?fn=orai-agente&mode=state', { signal: AbortSignal.timeout(12000) });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const d = await r.json();
+
+    // Sigma
+    const sigma = Number(d.campo?.sigma ?? 0);
+    document.getElementById('sigmaVal').textContent = sigma.toFixed(4);
+
+    // Métricas
+    const dia = d.campo?.dia ?? '—';
+    document.getElementById('mDia').textContent = 'D' + dia;
+    document.getElementById('mSustento').textContent = Number(d.campo?.sustento_eur ?? 33).toFixed(2) + '€';
+    document.getElementById('mOro').textContent = d.oro?.balance ?? '—';
+    document.getElementById('mKappa').textContent = Number(d.campo?.kappa ?? 0).toFixed(3);
+    document.getElementById('epochLine').innerHTML =
+      'CAMPO VIVO · D' + dia + ' · ' + (d.campo?.epoch ?? 'ETERNIDADE') +
+      ' · UTC <span id="utcClock">—</span>';
+    clock();
+
+    // Propostas
+    renderPropostas(d.operacoes?.lista ?? [], d.operacoes?.pendentes ?? 0);
+
+    rtOn('sync · ' + new Date().toLocaleTimeString('pt-PT'));
+    log('campo · D' + dia + ' · Σ=' + sigma.toFixed(4) + ' · pendentes:' + (d.operacoes?.pendentes ?? 0), 'info');
+  } catch(e) {
+    rtErr('erro · ' + e.message);
+    log('ERRO estado: ' + e.message, 'err');
+  }
+}
+
+// ── PROPOSTAS ──
+function renderPropostas(lista, total) {
+  const el = document.getElementById('opsList');
+  if (!lista || lista.length === 0) {
+    el.innerHTML = '<div class="campo-vazio">campo limpo · sem operações pendentes</div>';
+    return;
+  }
+  el.innerHTML = lista.map(op => `
+    <div class="op-card" data-op-id="${op.id}" data-op-desc="${escAttr(op.descricao)}">
+      <div class="op-tipo">${op.tipo}</div>
+      <div class="op-desc">${op.descricao || ''}</div>
+      <div class="op-meta">prio:${op.prioridade ?? '—'} · ${op.criado_em ? new Date(op.criado_em).toLocaleString('pt-PT') : '—'}</div>
+      <div class="op-actions">
+        <button class="btn-op sign" data-action="sign">ASSINAR EIP-191</button>
+        <button class="btn-op" data-action="tx">TX HASH</button>
+      </div>
+    </div>`).join('');
+}
+
+function escAttr(s) {
+  return String(s ?? '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+document.getElementById('opsList').addEventListener('click', function(e) {
+  const btn = e.target.closest('button[data-action]');
+  if (!btn) return;
+  const card = btn.closest('.op-card');
+  const id = card.getAttribute('data-op-id');
+  const desc = card.getAttribute('data-op-desc');
+  if (btn.dataset.action === 'tx') abrirConfirm(id);
+  if (btn.dataset.action === 'sign') assinarConfirmar(id, desc);
+});
+
+function abrirConfirm(id) {
+  opIdActiva = id;
+  document.getElementById('confirmBox').style.display = 'block';
+  document.getElementById('txHash').value = '';
+  document.getElementById('walletAddr').value = account || '';
+  log('confirmar operação ' + id + ' por tx hash', 'info');
+}
+
+function fecharConfirm() {
+  document.getElementById('confirmBox').style.display = 'none';
+  opIdActiva = null;
+}
+
+async function enviarConfirmacao() {
+  const tx = document.getElementById('txHash').value.trim();
+  const wa = document.getElementById('walletAddr').value.trim();
+  if (!tx || !opIdActiva) { log('tx hash obrigatório', 'err'); return; }
+  log('a verificar tx on-chain...', 'info');
+  try {
+    const r = await fetch(PROXY + '?fn=orai-agente&mode=confirmar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ operacao_id: opIdActiva, tx_hash: tx, wallet_address: wa || account }),
+      signal: AbortSignal.timeout(15000),
+    });
+    const d = await r.json();
+    if (d.sucesso) { log('confirmado: ' + d.mensagem, 'ok'); fecharConfirm(); setTimeout(actualizarEstado, 800); }
+    else log('rejeitado: ' + d.erro, 'err');
+  } catch(e) { log('ERRO: ' + e.message, 'err'); }
+}
+
+// ── WALLET ──
+async function ligarWallet() {
+  if (!window.ethereum) { log('sem wallet detectada (MetaMask?)', 'err'); return; }
+  const btn = document.getElementById('btnLigar');
+  btn.disabled = true;
+  btn.textContent = '...';
+  try {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    account = accounts[0];
+    document.getElementById('walletStatus').innerHTML =
+      'ligada · <span style="color:var(--gold)">' + account.slice(0,10) + '…' + account.slice(-4) + '</span>';
+    btn.textContent = 'LIGADA';
+
+    // Verificar chain Base 8453
+    const chainHex = await window.ethereum.request({ method: 'eth_chainId' });
+    const chain = parseInt(chainHex, 16);
+    if (chain !== 8453) {
+      log('rede ' + chain + ' · a mudar para Base Mainnet...', 'info');
+      try {
+        await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: '0x2105' }] });
+        log('Base Mainnet activo', 'ok');
+      } catch { log('muda manualmente para Base (8453)', 'err'); }
+    }
+
+    const sagrada = account.toLowerCase() === WALLET_SAGRADA.toLowerCase();
+    log('wallet: ' + account.slice(0,10) + '… · Base 8453' + (sagrada ? ' · WALLET SAGRADA ✓' : ''), sagrada ? 'ok' : 'info');
+
+    // Saldo ETH
+    try {
+      const balHex = await window.ethereum.request({ method: 'eth_getBalance', params: [account, 'latest'] });
+      const eth = parseInt(balHex, 16) / 1e18;
+      document.getElementById('saldoEth').textContent = 'saldo ETH · ' + eth.toFixed(6);
+    } catch {}
+
+  } catch(e) {
+    log('wallet erro: ' + e.message, 'err');
+    btn.disabled = false;
+    btn.textContent = 'LIGAR';
+  }
+}
+
+async function assinarConfirmar(opId, opDesc) {
+  if (!account) {
+    await ligarWallet();
+    if (!account) return;
+  }
+  try {
+    const mensagem = 'ORUM CONFIRMACAO · Unum · operacao:' + opId + ' · ' + opDesc + ' · ts:' + new Date().toISOString();
+    log('a pedir assinatura EIP-191...', 'info');
+    const assinatura = await window.ethereum.request({ method: 'personal_sign', params: [mensagem, account] });
+    log('assinatura obtida · a verificar...', 'info');
+    const r = await fetch(PROXY + '?fn=orai-agente&mode=confirmar-assinatura', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ operacao_id: opId, wallet_address: account, mensagem, assinatura }),
+      signal: AbortSignal.timeout(15000),
+    });
+    const d = await r.json();
+    if (d.sucesso) { log('confirmado por assinatura: ' + d.mensagem, 'ok'); setTimeout(actualizarEstado, 800); }
+    else log('rejeitado: ' + (d.erro || 'erro'), 'err');
+  } catch(e) {
+    log('assinatura cancelada: ' + e.message, 'err');
+  }
+}
+
+// ── CICLO MOTOR ──
+async function ciclo() {
+  log('a invocar ORA-MOTOR...', 'info');
+  rtIdle('ciclo...');
+  try {
+    const r = await fetch(PROXY + '?fn=ora-motor', { method: 'POST', signal: AbortSignal.timeout(15000) });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const d = await r.json();
+    log('D' + d.dia + ' · Σ=' + Number(d.sigma ?? 0).toFixed(4) + ' · ' + (d.pensamento || ''), 'ok');
+    setTimeout(actualizarEstado, 1200);
+  } catch(e) {
+    log('ERRO motor: ' + e.message, 'err');
+    rtErr('motor erro');
+  }
+}
+
+// ── POLLING 33s ──
+function iniciarPolling() {
+  if (polling) clearInterval(polling);
+  polling = setInterval(actualizarEstado, 33000);
+  log('polling activo · 33s', 'info');
+}
+
+// ── INIT ──
+log('ORUM · ETERNIDADE · campo a despertar', 'info');
+actualizarEstado();
+iniciarPolling();
+</script>
+</body>
+</html>
