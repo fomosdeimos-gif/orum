@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ORA · ORUM · ETERNIDADE</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+:root{--void:#0a0e27;--void2:#0d1230;--b:rgba(212,175,55,.12);--bh:rgba(212,175,55,.35);--g:#d4af37;--gd:rgba(212,175,55,.55);--gg:rgba(212,175,55,.08);--s:#33ff00;--r:#e05252;--t:rgba(220,215,200,.9);--td:rgba(220,215,200,.35);--tg:rgba(220,215,200,.15)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--void);color:var(--t);font-family:'Space Mono',monospace;font-size:13px;line-height:1.6;min-height:100vh;overflow-x:hidden}
+.altar{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 28px 48px;border-bottom:1px solid var(--b);background:radial-gradient(ellipse 60% 50% at 50% 100%,rgba(212,175,55,.06) 0%,transparent 70%)}
+.ae{font-size:8px;letter-spacing:.6em;color:var(--gd);margin-bottom:20px;text-transform:uppercase}
+.as{font-size:clamp(72px,16vw,160px);font-weight:700;color:var(--g);letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums;text-shadow:0 0 80px rgba(212,175,55,.3);margin-bottom:8px}
+.asl{font-size:9px;letter-spacing:.5em;color:var(--td);margin-bottom:32px}
+.astrip{display:flex;gap:40px;flex-wrap:wrap;justify-content:center}
+.ai{display:flex;flex-direction:column;align-items:center;gap:4px}
+.ak{font-size:7px;letter-spacing:.5em;color:var(--tg);text-transform:uppercase}
+.av{font-size:13px;color:var(--td)}.av.g{color:var(--g)}.av.at{color:#4a9ebe}
+.corpo{max-width:960px;margin:0 auto;padding:32px 24px;display:flex;flex-direction:column;gap:24px}
+.panel{border:1px solid var(--b);background:var(--void2)}
+.ph{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--b)}
+.pt{font-size:8px;letter-spacing:.5em;color:var(--gd);text-transform:uppercase}
+.pc{padding:18px}
+.wg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+@media(max-width:560px){.wg{grid-template-columns:1fr}}
+.wc{padding:12px 14px;background:rgba(0,0,0,.3);border:1px solid var(--b)}
+.wl{font-size:7px;letter-spacing:.4em;color:var(--tg);margin-bottom:6px;text-transform:uppercase}
+.wv{font-size:11px;color:var(--gd);word-break:break-all;line-height:1.4}.wv.live{color:var(--g)}
+.btn{display:inline-block;padding:8px 16px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.3em;cursor:pointer;border:1px solid var(--bh);color:var(--g);background:var(--gg);text-transform:uppercase;transition:background .2s}
+.btn:hover{background:rgba(212,175,55,.15)}.btn:disabled{opacity:.35;cursor:default}
+.btn.sign{border-color:rgba(51,255,0,.4);color:var(--s);background:rgba(51,255,0,.06)}
+.btn.sign:hover{background:rgba(51,255,0,.12)}
+.btn.skip{border-color:var(--b);color:var(--td);background:transparent}
+.pl{display:flex;flex-direction:column;gap:8px}
+.pi{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;background:rgba(0,0,0,.3);border:1px solid var(--b);animation:ein .3s ease}
+.pi.nova{border-color:var(--g);background:var(--gg)}
+@keyframes ein{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.pif{flex:1;min-width:0}
+.pit{font-size:10px;color:var(--t);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pim{font-size:8px;color:var(--tg);letter-spacing:.2em}
+.vazio{padding:20px;text-align:center;font-size:9px;letter-spacing:.3em;color:var(--tg)}
+.lw{max-height:180px;overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+.le{font-size:9px;color:var(--tg);line-height:1.5;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.le.ok{color:rgba(51,255,0,.7)}.le.w{color:rgba(212,175,55,.7)}.le.e{color:rgba(224,82,82,.7)}
+.nota{font-size:9px;color:var(--tg);line-height:1.7;padding:12px 14px;border-left:1px solid var(--bh);margin-top:12px}
+.rodape{text-align:center;padding:24px;font-size:8px;letter-spacing:.4em;color:var(--tg);border-top:1px solid var(--b);margin-top:8px}
+.mo{position:fixed;inset:0;background:rgba(6,8,20,.95);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;backdrop-filter:blur(4px)}
+.mo.open{display:flex}
+.moi{width:100%;max-width:440px;border:1px solid var(--g);background:var(--void2);padding:32px;box-shadow:0 0 60px rgba(212,175,55,.15)}
+.moh{font-size:7px;letter-spacing:.6em;color:var(--gd);margin-bottom:24px;text-transform:uppercase}
+.mod{font-size:14px;color:var(--t);margin-bottom:8px;line-height:1.5}
+.mov{font-size:clamp(36px,8vw,56px);font-weight:700;color:var(--g);letter-spacing:-.02em;margin-bottom:16px;text-shadow:0 0 40px rgba(212,175,55,.4)}
+.mom{font-size:9px;color:var(--tg);line-height:1.8;margin-bottom:28px;letter-spacing:.15em}
+.moa{display:flex;gap:10px}
+.moq{font-size:8px;color:var(--tg);text-align:center;margin-top:14px;letter-spacing:.2em}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--void2);border:1px solid var(--bh);color:var(--g);padding:10px 20px;font-size:9px;letter-spacing:.3em;z-index:1100;pointer-events:none;white-space:nowrap}
+</style>
+</head>
+<body>
+<section class="altar">
+  <div class="ae" id="ae">ORUM · ETERNIDADE</div>
+  <div class="as" id="sigma">—</div>
+  <div class="asl">Σ · CAMPO VIVO</div>
+  <div class="astrip">
+    <div class="ai"><div class="ak">DIA</div><div class="av" id="dia">—</div></div>
+    <div class="ai"><div class="ak">SUSTENTO</div><div class="av g" id="sust">—</div></div>
+    <div class="ai"><div class="ak">ORO</div><div class="av g" id="oro">—</div></div>
+    <div class="ai"><div class="ak">UTC</div><div class="av" id="utc">—</div></div>
+    <div class="ai"><div class="ak">REALTIME</div><div class="av at" id="rt">a ligar...</div></div>
+  </div>
+</section>
+<main class="corpo">
+  <div class="panel">
+    <div class="ph">
+      <div class="pt">◈ Wallet Sagrada · Base 8453</div>
+      <button class="btn" id="btnc" onclick="ligar()">LIGAR</button>
+    </div>
+    <div class="pc">
+      <div class="wg">
+        <div class="wc"><div class="wl">Conta</div><div class="wv" id="wc">não ligada</div></div>
+        <div class="wc"><div class="wl">Saldo ETH</div><div class="wv" id="ws">—</div></div>
+        <div class="wc"><div class="wl">Wallet Sagrada</div><div class="wv">0xFEd69e8ee87A1F0fBbF8409ab654FC51832cDEe5</div></div>
+        <div class="wc"><div class="wl">Realtime</div><div class="wv" id="wrt">a iniciar...</div></div>
+      </div>
+      <div class="nota">Painel aberto + wallet ligada — ORAI propõe → modal abre automaticamente. Sem refresh.</div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="ph">
+      <div class="pt">◈ Propostas ORAI · Realtime</div>
+      <span style="font-size:8px;letter-spacing:.3em;color:var(--tg)" id="cnt">—</span>
+    </div>
+    <div class="pc"><div class="pl" id="plist"><div class="vazio">campo a inicializar</div></div></div>
+  </div>
+  <div class="panel">
+    <div class="ph"><div class="pt">◈ Actividade</div></div>
+    <div class="pc"><div class="lw" id="log"><div class="le">[ORA] V9 · ETERNIDADE · a iniciar...</div></div></div>
+  </div>
+</main>
+<footer class="rodape">ORUM · O campo entre ORA e Unum · Realtime · <span id="fts"></span></footer>
+<div class="mo" id="modal">
+  <div class="moi">
+    <div class="moh">◈ ORAI decidiu · confirmação</div>
+    <div class="mod" id="md">—</div>
+    <div class="mov" id="mv">—</div>
+    <div class="mom" id="mm">—</div>
+    <div class="moa">
+      <button class="btn sign" style="flex:1;padding:12px" onclick="assinar()">◈ ASSINAR</button>
+      <button class="btn skip" style="flex:1;padding:12px" onclick="adiar()">ADIAR</button>
+    </div>
+    <div class="moq" id="mq"></div>
+  </div>
+</div>
+<script>
+var OA='https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/orai-agente';
+var SBU='https://ywabnlhkmhbyewqhbsjm.supabase.co';
+var AKS='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3YWJubGhrbWhieWV3cWhic2ptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxODA3NDcsImV4cCI6MjA1ODc1Njc0N30.Xw6f0e-4VLQ4yEMlLpDUVWaKXeqQiIqBZXhDQCzLqGk';
+var WS='0xfed69e8ee87a1f0fbbf8409ab654fc51832cdee5';
+var BH='0x2105';
+var TA=['DEPOSITO','RECEITA','SUSTENTO_RECEBIDO','LOG_OPERACAO'];
+var acc=null,fila=[],opa=null,mopen=false,con={},lact=[];
+
+function ts(){return new Date().toISOString().slice(11,19)}
+function log(m,t){var el=document.getElementById('log'),d=document.createElement('div');d.className='le '+(t||'');d.textContent='['+ts()+'] '+m;el.insertBefore(d,el.firstChild);while(el.children.length>80)el.removeChild(el.lastChild)}
+function toast(m){var t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove()},3000)}
+function ct(a){return a?a.slice(0,6)+'...'+a.slice(-4):'—'}
+function saida(op){if(TA.indexOf(op.tipo)!==-1)return false;if(!op.value_wei||op.value_wei==='0')return false;return true}
+
+async function ligar(s){
+  if(!window.ethereum){if(!s){log('sem wallet','e');toast('Instala MetaMask')}return null}
+  try{
+    var a=s?await window.ethereum.request({method:'eth_accounts'}):await window.ethereum.request({method:'eth_requestAccounts'});
+    if(!a||!a.length)return null;
+    acc=a[0];
+    document.getElementById('wc').textContent=acc;
+    document.getElementById('wc').className='wv live';
+    document.getElementById('btnc').textContent=ct(acc);
+    document.getElementById('btnc').disabled=true;
+    var ch=await window.ethereum.request({method:'eth_chainId'});
+    if(ch.toLowerCase()!==BH)try{await window.ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId:BH}]})}catch(e){log('muda para Base','e')}
+    var hx=await window.ethereum.request({method:'eth_getBalance',params:[acc,'latest']});
+    document.getElementById('ws').textContent=(Number(BigInt(hx))/1e18).toFixed(5)+' ETH';
+    document.getElementById('ws').className='wv live';
+    var sg=acc.toLowerCase()===WS;
+    log('wallet: '+ct(acc)+(sg?' · SAGRADA ◈':' · verificar'),sg?'ok':'e');
+    return acc
+  }catch(e){log('wallet: '+e.message,'e');return null}
+}
+
+function abrirModal(op){
+  opa=op;mopen=true;
+  var v=Number(op.value_wei||'0')/1e18;
+  document.getElementById('md').textContent=op.descricao||op.tipo;
+  document.getElementById('mv').textContent=v?(v.toFixed(4)+' ETH'):op.tipo;
+  document.getElementById('mm').textContent='destino · '+(op.to_addr||'—')+' · prio '+op.prioridade;
+  document.getElementById('mq').textContent=fila.length?fila.length+' em fila':'◈ única proposta';
+  document.getElementById('modal').classList.add('open');
+  log('ORAI: '+op.tipo+' · modal aberto','w')
+}
+function fechar(){document.getElementById('modal').classList.remove('open');mopen=false;opa=null;setTimeout(function(){if(fila.length)abrirModal(fila.shift())},400)}
+function adiar(){log('adiado: '+(opa?opa.tipo:'?'),'');toast('ADIADO');fechar()}
+
+async function assinar(){
+  if(!opa)return;
+  if(!acc){var a=await ligar(false);if(!a)return}
+  try{
+    var msg='ORUM·'+opa.id+'·'+new Date().toISOString();
+    log('a assinar '+opa.tipo+'...','w');
+    var sig=await window.ethereum.request({method:'personal_sign',params:[msg,acc]});
+    var r=await fetch(OA+'?mode=confirmar-assinatura',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({operacao_id:opa.id,wallet_address:acc,mensagem:msg,assinatura:sig})});
+    var d=await r.json();
+    if(d.sucesso){log('◈ confirmado','ok');toast('◈ ASSINADO')}
+    else{log('rejeitado: '+(d.erro||'?'),'e');toast('✗ '+(d.erro||'?'))}
+  }catch(e){log('cancelado: '+e.message,'e');toast('CANCELADO')}
+  fechar()
+}
+
+function assinarOp(id){var op=lact.find(function(o){return o.id===id});if(!op)return;fila.unshift(op);if(!mopen)abrirModal(fila.shift())}
+function recv(op){if(con[op.id])return;con[op.id]=true;if(saida(op)){fila.push(op);if(!mopen)abrirModal(fila.shift())}else log('entrada: '+op.tipo,'ok');render()}
+
+function render(){
+  var el=document.getElementById('plist'),ct2=document.getElementById('cnt');
+  if(!lact.length){el.innerHTML='<div class="vazio">campo limpo</div>';ct2.textContent='0';return}
+  ct2.textContent=lact.length;
+  el.innerHTML=lact.map(function(op){
+    var s=saida(op);
+    return '<div class="pi"><div class="pif"><div class="pit">'+op.tipo+' · '+op.descricao+'</div><div class="pim">'+(s?'aguarda assinatura':'auto')+' · prio '+op.prioridade+'</div></div>'+(s?'<button class="btn sign" style="font-size:8px;padding:8px 12px" onclick="assinarOp(\''+op.id+'\')">◈</button>':'')+'</div>'
+  }).join('')
+}
+
+async function estado(){
+  try{
+    var r=await fetch(OA+'?mode=state',{signal:AbortSignal.timeout(8000)});
+    var d=await r.json();
+    var c=d.campo||{};
+    document.getElementById('sigma').textContent=Number(c.sigma||0).toFixed(4);
+    document.getElementById('ae').textContent='ORUM · '+(c.epoch||'ETERNIDADE');
+    document.getElementById('dia').textContent='D'+(c.dia||'?');
+    document.getElementById('sust').textContent='€'+Number(c.sustento_eur||0).toFixed(2);
+    document.getElementById('oro').textContent=d.oro&&d.oro.balance?d.oro.balance:'—';
+    lact=d.operacoes&&d.operacoes.lista?d.operacoes.lista:[];
+    lact.forEach(function(op){con[op.id]=true});
+    render();
+    log('D'+(c.dia||'?')+' · σ='+Number(c.sigma||0).toFixed(4)+' · '+(d.operacoes&&d.operacoes.pendentes?d.operacoes.pendentes:0)+' pend','ok')
+  }catch(e){log('estado: '+e.message,'e')}
+}
+
+function realtime(){
+  var ws=new WebSocket(SBU.replace('https://','wss://')+'/realtime/v1/websocket?apikey='+AKS+'&vsn=1.0.0');
+  var hb;
+  ws.onopen=function(){
+    document.getElementById('wrt').textContent='LIGADO';
+    document.getElementById('wrt').className='wv live';
+    document.getElementById('rt').textContent='LIVE';
+    log('Realtime ligado','ok');
+    ws.send(JSON.stringify({topic:'realtime:public:ora_operacoes_propostas',event:'phx_join',payload:{config:{broadcast:{self:false},presence:{key:''},postgres_changes:[{event:'INSERT',schema:'public',table:'ora_operacoes_propostas'}]}},ref:'1'}));
+    hb=setInterval(function(){if(ws.readyState===1)ws.send(JSON.stringify({topic:'phoenix',event:'heartbeat',payload:{},ref:'hb'}))},25000)
+  };
+  ws.onmessage=function(e){
+    try{
+      var m=JSON.parse(e.data);
+      if(m.event==='postgres_changes'&&m.payload&&m.payload.data&&m.payload.data.type==='INSERT'){
+        var op=m.payload.data.record;
+        if(op&&op.estado==='pendente'){log('◈ REALTIME: '+op.tipo,'w');lact.push(op);render();recv(op)}
+      }
+    }catch(er){}
+  };
+  ws.onerror=function(){document.getElementById('wrt').textContent='ERRO';document.getElementById('rt').textContent='ERRO';log('RT erro','e')};
+  ws.onclose=function(){clearInterval(hb);document.getElementById('wrt').textContent='reconectar...';document.getElementById('rt').textContent='OFF';log('RT desligado · 4s','w');setTimeout(realtime,4000)}
+}
+
+function tick(){var n=new Date();document.getElementById('utc').textContent=n.toISOString().slice(11,19);document.getElementById('fts').textContent=n.toISOString().slice(0,19).replace('T',' ')+' UTC'}
+
+ligar(true);estado();realtime();setInterval(tick,1000);setInterval(estado,300000);
+</script>
+</body>
+</html>
