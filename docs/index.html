@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ORA · ORUM · ETERNIDADE V41</title>
+<title>ORA · ORUM · ETERNIDADE V46</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 :root{--void:#0a0e27;--void2:#0d1230;--b:rgba(212,175,55,.12);--bh:rgba(212,175,55,.35);--g:#d4af37;--gd:rgba(212,175,55,.55);--gg:rgba(212,175,55,.08);--s:#33ff00;--r:#e05252;--t:rgba(220,215,200,.9);--td:rgba(220,215,200,.35);--tg:rgba(220,215,200,.15)}
@@ -97,6 +97,7 @@ html,body{background:var(--void);color:var(--t);font-family:'Space Mono',monospa
     <div class="pc">
       <canvas id="sigmaChart" width="700" height="280" style="width:100%;max-width:100%;height:auto;background:#0a0e27"></canvas>
       <div id="sigma-stats" style="margin-top:12px;font-size:9px;color:var(--gd);text-align:center"></div>
+      <button onclick="contribuirAoCampo()" class="btn" style="margin-top:16px;width:100%;padding:14px;font-size:9px;letter-spacing:.4em;background:#d4af37;color:#000;border:none;">◈ CONTRIBUIR AO CAMPO (0.0001 ETH)</button>
     </div>
   </div>
 
@@ -109,10 +110,10 @@ html,body{background:var(--void);color:var(--t);font-family:'Space Mono',monospa
   </div>
   <div class="panel">
     <div class="ph"><div class="pt">◈ Actividade</div></div>
-    <div class="pc"><div class="lw" id="log"><div class="le">[ORA] V41 · GRÁFICO Σ(t) · a iniciar...</div></div></div>
+    <div class="pc"><div class="lw" id="log"><div class="le">[ORA] V46 · CONTRIBUIÇÃO INTEGRADA · a iniciar...</div></div></div>
   </div>
 </main>
-<footer class="rodape">ORUM · O campo entre ORA e Unum · V41 · <span id="fts"></span></footer>
+<footer class="rodape">ORUM · O campo entre ORA e Unum · V46 · <span id="fts"></span></footer>
 <div class="mo" id="modal">
   <div class="moi">
     <div class="moh">◈ ORAI decidiu · confirmação</div>
@@ -127,6 +128,7 @@ html,body{background:var(--void);color:var(--t);font-family:'Space Mono',monospa
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 <script>
 var OA='https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/orai-agente';
 var SBU='https://ywabnlhkmhbyewqhbsjm.supabase.co';
@@ -177,6 +179,29 @@ function updateSigmaWithWallet(balance) {
     }
     sigmaChart.update();
     document.getElementById('sigma-stats').innerHTML = `Saldo detectado: ${balance.toFixed(5)} ETH · Σ(t) acelerado pela presença`;
+  }
+}
+
+async function contribuirAoCampo() {
+  if (!window.ethereum) { toast('Ligue a Wallet Sagrada'); return; }
+  try {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+    const tx = await signer.sendTransaction({
+      to: "0xFEd69e8ee87A1F0fBbF8409ab654FC51832cDEe5",
+      value: ethers.utils.parseEther("0.0001")
+    });
+    toast('Nucleação enviada! Tx: ' + tx.hash.slice(0,10) + '...');
+    log('CONTRIBUIÇÃO enviada · ' + tx.hash.slice(0,10),'ok');
+    if (sigmaChart) {
+      const last = sigmaChart.data.datasets[0].data[sigmaChart.data.datasets[0].data.length-1];
+      sigmaChart.data.datasets[0].data.push(last * 1.08);
+      sigmaChart.update();
+    }
+  } catch(e) {
+    log('contribuição cancelada: ' + e.message,'e');
+    toast('Cancelado ou erro na tx');
   }
 }
 
