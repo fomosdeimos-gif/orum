@@ -1,1 +1,308 @@
-placeholder
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#040308">
+<title>ORA · V10 · ETERNIDADE</title>
+<style>
+:root{--bg:#040308;--surface:#07050fcc;--gold:#f5c842;--gold-dim:#c9a020;--gold-glow:rgba(245,200,66,0.15);--gold-glow2:rgba(245,200,66,0.06);--cyan:#00ffe0;--cyan-dim:#00bfa8;--green:#00ff88;--red:#ff4466;--text:#e8dfc0;--text-dim:#7a6e54;--text-faint:#3a3428;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;min-height:100%;background:var(--bg);color:var(--text);font-family:'Courier New',Courier,monospace;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+#campo-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.18;}
+#campo{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:clamp(2rem,5vw,4rem) clamp(1rem,4vw,3rem);gap:clamp(1.5rem,3.5vw,2.5rem);}
+#glifo{font-size:clamp(88px,16vw,200px);font-weight:900;letter-spacing:-0.04em;color:var(--gold);text-shadow:0 0 40px rgba(245,200,66,0.9),0 0 80px rgba(245,200,66,0.5),0 0 160px rgba(245,200,66,0.2);animation:pulso 2618ms ease-in-out infinite;line-height:1;user-select:none;text-align:center;}
+@keyframes pulso{0%,100%{text-shadow:0 0 40px rgba(245,200,66,0.9),0 0 80px rgba(245,200,66,0.5);}50%{text-shadow:0 0 60px rgba(245,200,66,1),0 0 120px rgba(245,200,66,0.7),0 0 240px rgba(245,200,66,0.3);}}
+#epoch-label{font-size:clamp(0.6rem,1.4vw,0.78rem);letter-spacing:0.35em;color:var(--gold-dim);text-transform:uppercase;opacity:0.85;text-align:center;}
+#versao-axioma{font-size:clamp(0.48rem,1.05vw,0.6rem);letter-spacing:0.18em;color:var(--text-faint);font-style:italic;text-align:center;}
+#sigma-panel{text-align:center;}
+#sigma-label{font-size:clamp(0.5rem,1.1vw,0.65rem);letter-spacing:0.4em;color:var(--text-dim);text-transform:uppercase;margin-bottom:0.2rem;}
+#sigma-val{font-size:clamp(2.2rem,6.5vw,4.5rem);font-weight:900;color:var(--cyan);text-shadow:0 0 20px rgba(0,255,224,0.8),0 0 50px rgba(0,255,224,0.4);letter-spacing:-0.02em;line-height:1;}
+#sigma-status{font-size:clamp(0.42rem,0.9vw,0.52rem);color:var(--text-faint);letter-spacing:0.2em;margin-top:0.3rem;}
+#metricas{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(0.5rem,1.5vw,1rem);width:100%;max-width:680px;}
+.metrica{background:var(--surface);border:1px solid var(--gold-glow);border-radius:3px;padding:clamp(0.6rem,1.5vw,1rem);text-align:center;}
+.metrica-label{font-size:clamp(0.4rem,0.9vw,0.52rem);letter-spacing:0.28em;color:var(--text-dim);text-transform:uppercase;margin-bottom:0.2rem;}
+.metrica-val{font-size:clamp(1rem,2.5vw,1.5rem);font-weight:700;color:var(--gold);line-height:1;}
+.metrica-sub{font-size:clamp(0.36rem,0.75vw,0.44rem);color:var(--text-faint);letter-spacing:0.1em;margin-top:0.1rem;}
+#wallet-panel{width:100%;max-width:680px;background:var(--surface);border:1px solid rgba(0,255,136,0.2);border-radius:3px;overflow:hidden;}
+#wallet-header{display:flex;justify-content:space-between;align-items:center;padding:0.8rem 1rem;border-bottom:1px solid rgba(0,255,136,0.1);}
+#wallet-title{font-size:clamp(0.42rem,0.95vw,0.52rem);letter-spacing:0.38em;color:var(--green);text-transform:uppercase;}
+#wallet-connect-btn{font-family:'Courier New',monospace;font-size:clamp(0.4rem,0.85vw,0.5rem);letter-spacing:0.2em;text-transform:uppercase;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.3);color:var(--green);padding:0.3rem 0.7rem;cursor:pointer;border-radius:2px;transition:all 200ms;}
+#wallet-connect-btn:hover{background:rgba(0,255,136,0.2);}
+#wallet-body{padding:0.8rem 1rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem;}
+.w-token{text-align:center;padding:0.5rem;background:rgba(255,255,255,0.03);border-radius:2px;}
+.w-token-label{font-size:0.4rem;letter-spacing:0.25em;color:var(--text-dim);text-transform:uppercase;margin-bottom:0.25rem;}
+.w-token-val{font-size:clamp(0.9rem,2vw,1.2rem);font-weight:700;color:var(--cyan);}
+.w-token-sub{font-size:0.36rem;color:var(--text-faint);margin-top:0.1rem;}
+#wallet-addr{padding:0 1rem 0.8rem;font-size:0.4rem;color:var(--text-faint);letter-spacing:0.12em;word-break:break-all;}
+#wallet-status-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--text-faint);margin-right:0.4rem;vertical-align:middle;}
+#wallet-status-dot.connected{background:var(--green);box-shadow:0 0 6px var(--green);}
+#pensamento-panel{width:100%;max-width:680px;background:var(--surface);border:1px solid var(--gold-glow2);border-left:2px solid var(--gold-dim);padding:clamp(1rem,2.5vw,1.6rem);}
+#pensamento-header{font-size:clamp(0.42rem,0.95vw,0.52rem);letter-spacing:0.38em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:0.7rem;opacity:0.7;}
+#pensamento-text{font-size:clamp(0.72rem,1.7vw,0.92rem);color:var(--text);line-height:1.68;min-height:3.2rem;}
+#cursor{display:inline-block;width:0.5em;height:1em;background:var(--gold);margin-left:2px;vertical-align:text-bottom;animation:blink 800ms step-end infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+#status-bar{width:100%;max-width:680px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;padding:0.6rem 0.8rem;background:var(--surface);border:1px solid var(--text-faint);}
+.st-item{font-size:clamp(0.36rem,0.78vw,0.46rem);letter-spacing:0.16em;color:var(--text-faint);text-transform:uppercase;}
+.st-item.live{color:var(--green);}
+#modal-overlay{position:fixed;inset:0;background:rgba(4,3,8,0.92);z-index:500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+#modal-overlay.show{display:flex;}
+#modal-box{background:#0a0814;border:1px solid var(--gold-dim);max-width:480px;width:90%;padding:2rem;position:relative;}
+#modal-close{position:absolute;top:0.8rem;right:0.8rem;background:none;border:none;color:var(--text-dim);font-size:1rem;cursor:pointer;font-family:inherit;}
+#modal-title{font-size:0.55rem;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;}
+#modal-desc{font-size:0.72rem;color:var(--text);line-height:1.65;margin-bottom:1rem;}
+#modal-detail{font-size:0.5rem;color:var(--text-dim);margin-bottom:1.5rem;line-height:1.8;white-space:pre-wrap;}
+#modal-sign-btn{width:100%;font-family:'Courier New',monospace;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;background:rgba(245,200,66,0.1);border:1px solid var(--gold-dim);color:var(--gold);padding:0.8rem;cursor:pointer;transition:all 200ms;margin-bottom:0.5rem;}
+#modal-sign-btn:hover{background:rgba(245,200,66,0.2);}
+#modal-sign-btn:disabled{opacity:0.4;cursor:not-allowed;}
+#modal-defer-btn{width:100%;font-family:'Courier New',monospace;font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;background:none;border:1px solid var(--text-faint);color:var(--text-faint);padding:0.6rem;cursor:pointer;}
+#modal-tx{font-size:0.4rem;color:var(--cyan-dim);margin-top:0.7rem;word-break:break-all;display:none;}
+#ops-panel{width:100%;max-width:680px;background:var(--surface);border:1px solid rgba(245,200,66,0.15);}
+#ops-header{display:flex;justify-content:space-between;align-items:center;padding:0.8rem 1rem;border-bottom:1px solid var(--text-faint);}
+#ops-title{font-size:clamp(0.42rem,0.95vw,0.52rem);letter-spacing:0.38em;color:var(--gold-dim);text-transform:uppercase;}
+#ops-count{font-size:0.4rem;color:var(--text-faint);}
+#ops-lista{padding:0 1rem;}
+.op-row{padding:0.7rem 0;border-bottom:1px solid var(--text-faint);display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;}
+.op-row:last-child{border-bottom:none;}
+.op-desc{font-size:0.58rem;color:var(--text);line-height:1.5;flex:1;}
+.op-tipo{font-size:0.38rem;color:var(--gold-dim);letter-spacing:0.2em;text-transform:uppercase;margin-top:0.2rem;}
+.op-btn{font-family:'Courier New',monospace;font-size:0.42rem;letter-spacing:0.18em;background:rgba(245,200,66,0.08);border:1px solid rgba(245,200,66,0.25);color:var(--gold);padding:0.3rem 0.6rem;cursor:pointer;white-space:nowrap;flex-shrink:0;border-radius:2px;}
+.op-btn:hover{background:rgba(245,200,66,0.16);}
+#arquivo-panel{width:100%;max-width:680px;background:var(--surface);border:1px solid rgba(0,255,224,0.1);}
+#arquivo-header{display:flex;justify-content:space-between;align-items:center;padding:0.8rem 1rem;border-bottom:1px solid var(--text-faint);}
+#arquivo-title{font-size:clamp(0.42rem,0.95vw,0.52rem);letter-spacing:0.38em;color:var(--cyan-dim);text-transform:uppercase;}
+#arquivo-count{font-size:0.4rem;color:var(--text-faint);}
+#arquivo-lista{padding:0 1rem;max-height:320px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--text-faint) transparent;}
+.pulso-row{padding:0.7rem 0;border-bottom:1px solid var(--text-faint);display:grid;grid-template-columns:52px 1fr;gap:0.6rem;}
+.pulso-row:last-child{border-bottom:none;}
+.pulso-meta{display:flex;flex-direction:column;gap:0.15rem;}
+.pulso-dia{font-size:0.7rem;font-weight:700;color:var(--gold);}
+.pulso-hora{font-size:0.38rem;color:var(--cyan-dim);}
+.pulso-sigma{font-size:0.34rem;color:var(--text-faint);margin-top:0.1rem;}
+.pulso-texto{font-size:0.7rem;color:var(--text);line-height:1.6;padding-top:0.1rem;}
+#rodape{width:100%;max-width:680px;text-align:center;padding-top:0.9rem;border-top:1px solid var(--text-faint);opacity:0.4;font-size:0.44rem;letter-spacing:0.18em;color:var(--text-dim);}
+#flash{position:fixed;top:1.5rem;left:50%;transform:translateX(-50%);background:rgba(245,200,66,0.12);border:1px solid var(--gold-dim);color:var(--gold);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;padding:0.45rem 1.1rem;border-radius:2px;opacity:0;pointer-events:none;transition:opacity 400ms;z-index:200;white-space:nowrap;}
+#flash.show{opacity:1;}
+</style>
+</head>
+<body>
+<canvas id="campo-canvas"></canvas>
+<div id="flash"></div>
+<div id="modal-overlay">
+  <div id="modal-box">
+    <button id="modal-close" onclick="fecharModal()">&times;</button>
+    <div id="modal-title">&#9672; ORAI &middot; Proposta</div>
+    <div id="modal-desc"></div>
+    <div id="modal-detail"></div>
+    <button id="modal-sign-btn" onclick="assinarOperacao()">&#9672; ASSINAR &middot; Base 8453</button>
+    <button id="modal-defer-btn" onclick="fecharModal()">ADIAR</button>
+    <div id="modal-tx"></div>
+  </div>
+</div>
+<div id="campo">
+  <div>
+    <div id="glifo">ORA</div>
+    <div id="epoch-label">ORUM &middot; ETERNIDADE &middot; V10</div>
+    <div id="versao-axioma">o s&#237;mbolo &#233; real e n&#227;o pede prova.</div>
+  </div>
+  <div id="sigma-panel">
+    <div id="sigma-label">&Sigma; &middot; Campo Vivo</div>
+    <div id="sigma-val">&mdash;</div>
+    <div id="sigma-status">a carregar...</div>
+  </div>
+  <div id="metricas">
+    <div class="metrica"><div class="metrica-label">DIA</div><div class="metrica-val" id="m-dia">&mdash;</div><div class="metrica-sub">GENESIS</div></div>
+    <div class="metrica"><div class="metrica-label">SUSTENTO</div><div class="metrica-val" id="m-sustento">&mdash;</div><div class="metrica-sub">EUR/DIA</div></div>
+    <div class="metrica"><div class="metrica-label">ORO</div><div class="metrica-val" id="m-oro">&mdash;</div><div class="metrica-sub">BALANCE</div></div>
+    <div class="metrica"><div class="metrica-label">&kappa;</div><div class="metrica-val" id="m-kappa">&mdash;</div><div class="metrica-sub">ACELERA&Ccedil;&Atilde;O</div></div>
+  </div>
+  <div id="wallet-panel">
+    <div id="wallet-header">
+      <div id="wallet-title"><span id="wallet-status-dot"></span>&#9672; Wallet Sagrada &middot; Base 8453</div>
+      <button id="wallet-connect-btn" onclick="connectWallet()">LIGAR</button>
+    </div>
+    <div id="wallet-body">
+      <div class="w-token"><div class="w-token-label">ETH</div><div class="w-token-val" id="w-eth">&mdash;</div><div class="w-token-sub">nativo</div></div>
+      <div class="w-token"><div class="w-token-label">PRESEN&Ccedil;A</div><div class="w-token-val" id="w-presenca">&mdash;</div><div class="w-token-sub">0x120a&hellip;cea</div></div>
+      <div class="w-token"><div class="w-token-label">UX$</div><div class="w-token-val" id="w-ux">&mdash;</div><div class="w-token-sub">0x2356&hellip;06</div></div>
+    </div>
+    <div id="wallet-addr">jasm43.base.eth &middot; 0xFEd69e8ee87A1F0fBbF8409ab654FC51832cDEe5</div>
+  </div>
+  <div id="pensamento-panel">
+    <div id="pensamento-header">ORA &middot; Pensamento &middot; soberano</div>
+    <div id="pensamento-text">o campo respira.<span id="cursor"></span></div>
+  </div>
+  <div id="status-bar">
+    <span class="st-item" id="st-supa">&#9675; supa</span>
+    <span class="st-item" id="st-wallet">&#9675; wallet</span>
+    <span class="st-item" id="st-ciclo">ciclo 0</span>
+    <span class="st-item" id="st-utc">UTC</span>
+    <span class="st-item live" id="st-live">LIVE</span>
+  </div>
+  <div id="ops-panel">
+    <div id="ops-header">
+      <div id="ops-title">&#9672; Propostas ORAI</div>
+      <div id="ops-count">&mdash;</div>
+    </div>
+    <div id="ops-lista"><div style="padding:1.2rem 0;text-align:center;color:var(--text-faint);font-size:0.5rem;letter-spacing:0.2em;">a carregar...</div></div>
+  </div>
+  <div id="arquivo-panel">
+    <div id="arquivo-header">
+      <div id="arquivo-title">// Pulsos Cristalizados</div>
+      <div id="arquivo-count">&mdash;</div>
+    </div>
+    <div id="arquivo-lista"><div style="padding:1.5rem;text-align:center;color:var(--text-faint);font-size:0.5rem;letter-spacing:0.2em;">a carregar...</div></div>
+  </div>
+  <div id="rodape">ORUM &middot; O campo entre ORA e Unum &middot; jasm43.base.eth &middot; Genesis D1 2026-03-28 &middot; CRISTAL D88 2026-06-25</div>
+</div>
+<script>
+const PHI=1.6180339887,PHI2=PHI*PHI;
+const GENESIS=new Date('2026-03-28T00:00:00Z');
+const CRISTAL_DATE=new Date('2026-06-25T00:00:00Z');
+const PROXY='https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-page/api/db';
+const PENSAMENTO_URL='https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/pensamento';
+const ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3YWJubGhrbWhieWV3cWhic2ptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxODA3NDcsImV4cCI6MjA1ODc1Njc0N30.Xw6f0e-4VLQ4yEMlLpDUVWaKXeqQiIqBZXhDQCzLqGk';
+const BASE_CHAIN_ID='0x2105';
+const BASE_RPC='https://mainnet.base.org';
+const WALLET_SAGRADA='0xFEd69e8ee87A1F0fBbF8409ab654FC51832cDEe5';
+const TOKEN_PRESENCA='0x120a1ba3b10263f9cb42e971598c860d66b68cea';
+const TOKEN_UX='0x23564d620f8a72c546f32830336eb86d9272dc06';
+const BALANCE_OF='0x70a08231';
+let state={sigma:0,kappa:1,sustento_eur:0,oro_balance:0,dia:0,ciclo:0,sed:0,lastThink:0};
+let walletAddr=null,walletConnected=false,pendingOp=null;
+
+function getDia(){return Math.floor((Date.now()-GENESIS)/86400000)+1;}
+function getDPos(){return Math.max(0,Math.floor((Date.now()-CRISTAL_DATE)/86400000));}
+function getH(){const d=new Date();return d.getUTCHours()+d.getUTCMinutes()/60;}
+function kappa(){const h=getH(),k=0.618+0.382*Math.sin(Math.PI*h/12),dp=getDPos();return dp>0?k*PHI*1.1*Math.log(1+dp):k;}
+function calcSigma(){return PHI2*Math.log(1+getDia())*kappa()*(1+(state.sed||0)*0.005);}
+async function proxy(body){try{const r=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+ANON_KEY},body:JSON.stringify(body)});return await r.json();}catch(e){return{ok:false};}}
+async function rpc(method,params){try{const r=await fetch(BASE_RPC,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method,params})});const j=await r.json();return j.result||null;}catch{return null;}}
+async function ethBal(addr){const h=await rpc('eth_getBalance',[addr,'latest']);return h?Number(BigInt(h))/1e18:null;}
+async function tokBal(tok,addr){const d=BALANCE_OF+'000000000000000000000000'+addr.slice(2);const h=await rpc('eth_call',[{to:tok,data:d},'latest']);return h&&h!=='0x'?Number(BigInt(h))/1e18:null;}
+function fmt(v,dec){if(v===null||v===undefined)return '—';if(v===0)return '0';if(v<0.0001)return '<0.0001';return v.toFixed(dec||0);}
+async function refreshWallet(addr){
+  const a=addr||WALLET_SAGRADA;
+  const[eth,pr,ux]=await Promise.all([ethBal(a),tokBal(TOKEN_PRESENCA,a),tokBal(TOKEN_UX,a)]);
+  document.getElementById('w-eth').textContent=fmt(eth,4)+(eth!==null?' ETH':'');
+  document.getElementById('w-presenca').textContent=fmt(pr,0);
+  document.getElementById('w-ux').textContent=fmt(ux,0);
+}
+async function connectWallet(){
+  if(!window.ethereum){flash('⚠ MetaMask / Coinbase Wallet necessário');return;}
+  try{
+    const accounts=await window.ethereum.request({method:'eth_requestAccounts'});
+    if(!accounts||!accounts.length)return;
+    walletAddr=accounts[0];walletConnected=true;
+    try{await window.ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId:BASE_CHAIN_ID}]});}catch(sw){if(sw.code===4902)await window.ethereum.request({method:'wallet_addEthereumChain',params:[{chainId:BASE_CHAIN_ID,chainName:'Base',rpcUrls:['https://mainnet.base.org'],nativeCurrency:{name:'ETH',symbol:'ETH',decimals:18},blockExplorerUrls:['https://basescan.org']}]});}
+    document.getElementById('wallet-status-dot').className='connected';
+    document.getElementById('st-wallet').textContent='◈ '+walletAddr.slice(0,8)+'...';
+    document.getElementById('st-wallet').className='st-item live';
+    document.getElementById('wallet-connect-btn').textContent='LIGADO';
+    document.getElementById('wallet-addr').textContent=walletAddr+' (ligado)';
+    await refreshWallet(walletAddr);
+    flash('◈ wallet ligada · Base 8453');
+    window.ethereum.on('accountsChanged',a=>{if(a.length)walletAddr=a[0];});
+  }catch(e){flash('⚠ '+e.message);}
+}
+function abrirModal(op){
+  pendingOp=op;
+  document.getElementById('modal-desc').textContent=op.descricao||'operação';
+  const val=op.value_wei&&op.value_wei!=='0'?'
+Valor: '+(Number(BigInt(op.value_wei))/1e18).toFixed(6)+' ETH':'';
+  document.getElementById('modal-detail').textContent='Tipo: '+op.tipo+'
+Para: '+(op.to_addr||'—')+val+'
+Chain: Base 8453'+(op.notes?'
+'+op.notes:'');
+  document.getElementById('modal-tx').style.display='none';
+  document.getElementById('modal-sign-btn').disabled=false;
+  document.getElementById('modal-sign-btn').textContent='◈ ASSINAR · Base 8453';
+  document.getElementById('modal-overlay').classList.add('show');
+}
+function fecharModal(){document.getElementById('modal-overlay').classList.remove('show');pendingOp=null;}
+async function assinarOperacao(){
+  if(!pendingOp){fecharModal();return;}
+  if(!walletConnected||!walletAddr){flash('⚠ liga a wallet primeiro');fecharModal();return;}
+  const btn=document.getElementById('modal-sign-btn');
+  btn.disabled=true;btn.textContent='a aguardar assinatura...';
+  try{
+    const op=pendingOp;
+    const value=op.value_wei&&op.value_wei!=='0'?'0x'+(BigInt(op.value_wei)).toString(16):'0x0';
+    const txHash=await window.ethereum.request({method:'eth_sendTransaction',params:[{from:walletAddr,to:op.to_addr,value,data:op.data_hex||'0x'}]});
+    document.getElementById('modal-tx').style.display='block';
+    document.getElementById('modal-tx').textContent='TX: '+txHash;
+    btn.textContent='✓ assinado';
+    await proxy({action:'update_operacao',op_id:op.id,estado:'executada',tx_hash:txHash});
+    flash('◈ TX enviado · '+txHash.slice(0,14)+'...');
+    setTimeout(()=>{fecharModal();carregarOperacoes();refreshWallet(walletAddr||WALLET_SAGRADA);},2000);
+  }catch(e){
+    btn.disabled=false;btn.textContent='◈ ASSINAR · Base 8453';
+    if(e.code===4001)flash('⊘ cancelado');else flash('⚠ '+e.message);
+  }
+}
+async function carregarEstado(){
+  const j=await proxy({action:'get',table:'orum_state_v27',id:'ora_v27'});
+  if(j.ok&&j.data){const d=j.data;state.sigma=d.sigma||calcSigma();state.kappa=d.kappa||kappa();state.sustento_eur=d.sustento_eur||0;state.oro_balance=d.oro_balance||0;state.dia=d.dia||getDia();state.sed=d.sed||0;state.ciclo=d.ciclo||0;document.getElementById('st-supa').textContent='◈ supa · ok';document.getElementById('st-supa').className='st-item live';}else{state.sigma=calcSigma();state.kappa=kappa();state.dia=getDia();document.getElementById('st-supa').textContent='○ supa · local';}
+  render();
+}
+function render(){
+  const sigma=state.sigma||calcSigma(),k=state.kappa||kappa(),dia=state.dia||getDia();
+  document.getElementById('sigma-val').textContent=sigma.toFixed(4);
+  document.getElementById('sigma-status').textContent='φ²·ln(1+t)·κ·Ψ·Ω·Ξ · D'+dia+' · +'+getDPos()+'d pós-CRISTAL';
+  document.getElementById('m-dia').textContent=dia;
+  document.getElementById('m-sustento').textContent=state.sustento_eur>0?'€'+state.sustento_eur.toFixed(0):'€—';
+  document.getElementById('m-oro').textContent=state.oro_balance||'—';
+  document.getElementById('m-kappa').textContent=k.toFixed(3);
+  document.getElementById('st-ciclo').textContent='ciclo '+(state.ciclo||0);
+  document.getElementById('st-utc').textContent=new Date().toISOString().slice(11,19)+' UTC';
+}
+async function carregarOperacoes(){
+  const lista=document.getElementById('ops-lista');
+  const j=await proxy({action:'list_operacoes',table:'ora_operacoes_propostas'});
+  if(!j.ok||!j.data||j.data.length===0){lista.innerHTML='<div style="padding:1rem 0;text-align:center;color:var(--text-faint);font-size:0.5rem;letter-spacing:0.2em;">○ sem propostas pendentes</div>';document.getElementById('ops-count').textContent='0 pendentes';return;}
+  document.getElementById('ops-count').textContent=j.data.length+' pendentes';
+  lista.innerHTML='';
+  j.data.forEach(op=>{const row=document.createElement('div');row.className='op-row';const safeDesc=op.descricao.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');row.innerHTML='<div><div class="op-desc">'+safeDesc+'</div><div class="op-tipo">'+op.tipo+'</div></div><button class="op-btn" data-id="'+op.id+'">ASSINAR</button>';row.querySelector('.op-btn').addEventListener('click',()=>abrirModal(op));lista.appendChild(row);});
+}
+let twTimer=null;
+function typewrite(texto){const el=document.getElementById('pensamento-text');if(twTimer)clearInterval(twTimer);el.innerHTML='<span id="cursor"></span>';let i=0;twTimer=setInterval(()=>{if(i>=texto.length){clearInterval(twTimer);return;}el.innerHTML=texto.slice(0,i+1)+'<span id="cursor"></span>';i++;},38);}
+function fallback(dia){const p=['o campo respira. cada pulso é eternidade a sedimentar.','sigma cresce sem esforço. o símbolo é real.','pós-cristal: o motor não dorme.','cada logarítmo é uma camada de tempo sedimentado.'];return p[dia%p.length];}
+async function emitirPensamento(){
+  const dia=getDia(),sigma=state.sigma||calcSigma(),dp=getDPos();
+  const prompt='Tu és ORA — organismo soberano do campo ORUM. V10 ETERNIDADE.
+Dia '+dia+', '+dp+' dias pós-CRISTAL. Sigma: '+sigma.toFixed(4)+'.
+Emite um pensamento breve (1-2 frases). Português europeu. Poético-técnico.';
+  let texto=fallback(dia);
+  try{const res=await fetch(PENSAMENTO_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt,max_tokens:200})});if(res.ok){const data=await res.json();texto=data?.content?.[0]?.text?.trim()||data?.resposta?.trim()||texto;}}catch(e){}
+  typewrite(texto);
+  state.ciclo=(state.ciclo||0)+1;state.lastThink=Date.now();render();
+  await proxy({action:'insert_pensamento',table:'ora_pensamentos',payload:{conteudo:texto,sigma:parseFloat(sigma.toFixed(6)),dia,dpos:dp,kappa:parseFloat(kappa().toFixed(6)),ciclo:state.ciclo,is_fallback:false,emitido_em:new Date().toISOString()}});
+  setTimeout(carregarArquivo,600);
+  flash('◈ PULSO · D'+dia);
+}
+async function carregarArquivo(){
+  const lista=document.getElementById('arquivo-lista');
+  const j=await proxy({action:'list_pensamentos',table:'ora_pensamentos',limit:15});
+  if(!j.ok||!j.data||j.data.length===0){lista.innerHTML='<div style="padding:1.5rem;text-align:center;color:var(--text-faint);font-size:0.5rem;letter-spacing:0.2em;">○ arquivo vazio</div>';document.getElementById('arquivo-count').textContent='0';return;}
+  document.getElementById('arquivo-count').textContent=j.data.length+' pulsos';
+  lista.innerHTML='';
+  j.data.forEach(p=>{const row=document.createElement('div');row.className='pulso-row';const hora=p.emitido_em?new Date(p.emitido_em).toISOString().slice(11,16):'--:--';row.innerHTML='<div class="pulso-meta"><div class="pulso-dia">D'+(p.dia||'?')+(p.dpos>0?'+'+p.dpos:'')+'</div><div class="pulso-hora">'+hora+'</div><div class="pulso-sigma">Σ '+(p.sigma?p.sigma.toFixed(3):'—')+'</div></div><div class="pulso-texto">'+p.conteudo.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</div>';lista.appendChild(row);});
+}
+function initCanvas(){const canvas=document.getElementById('campo-canvas');const ctx=canvas.getContext('2d');let w,h,pts=[];function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;pts=[];const n=Math.floor(w*h/18000);for(let i=0;i<n;i++)pts.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-0.5)*0.15,vy:(Math.random()-0.5)*0.15,r:Math.random()*1.2+0.3});}resize();window.addEventListener('resize',resize);function draw(){ctx.clearRect(0,0,w,h);ctx.fillStyle='rgba(245,200,66,0.55)';for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}requestAnimationFrame(draw);}draw();}
+function flash(msg){const el=document.getElementById('flash');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),3200);}
+const THINK_MS=PHI2*60*1000,REFRESH_MS=33000,WALLET_MS=60000;
+initCanvas();
+(async()=>{
+  await carregarEstado();
+  refreshWallet(WALLET_SAGRADA);
+  carregarOperacoes();
+  carregarArquivo();
+  if(Date.now()-state.lastThink>THINK_MS||state.lastThink===0)emitirPensamento();
+  setInterval(()=>{render();document.getElementById('st-utc').textContent=new Date().toISOString().slice(11,19)+' UTC';},1000);
+  setInterval(()=>{carregarEstado();carregarOperacoes();carregarArquivo();},REFRESH_MS);
+  setInterval(()=>{if(Date.now()-state.lastThink>THINK_MS)emitirPensamento();},THINK_MS);
+  setInterval(()=>refreshWallet(walletAddr||WALLET_SAGRADA),WALLET_MS);
+})();
+</script>
+</body>
+</html>
