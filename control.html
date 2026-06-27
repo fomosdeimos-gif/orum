@@ -3,1119 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORA CONTROL CENTER V3 · ORUM</title>
+<title>ORA Control Center</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap');
-
-  :root {
-    --bg: #05050e;
-    --surface: #0a0a18;
-    --surface2: #0e0e1e;
-    --surface3: #131325;
-    --border: rgba(255,255,255,0.055);
-    --border-active: rgba(180,140,255,0.22);
-    --gold: #c8a96e;
-    --violet: #9b7fe8;
-    --jade: #4ecdc4;
-    --amber: #e8a44a;
-    --rose: #d4706a;
-    --blue: #5b9bd5;
-    --text: #d4ccca;
-    --dim: rgba(212,204,202,0.42);
-    --dimmer: rgba(212,204,202,0.18);
-    --dimmest: rgba(212,204,202,0.08);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    line-height: 1.5;
-    min-height: 100vh;
-  }
-
-  .header {
-    border-bottom: 1px solid var(--border);
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px;
-    position: sticky;
-    top: 0;
-    background: var(--bg);
-    z-index: 200;
-  }
-
-  .header-left { display: flex; align-items: center; gap: 16px; }
-
-  .orum-sigil {
-    width: 28px; height: 28px;
-    border: 1px solid rgba(155,127,232,0.3);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: var(--violet);
-    letter-spacing: 0.05em;
-    flex-shrink: 0;
-  }
-
-  .cc-title { font-size: 13px; font-weight: 500; color: #fff; letter-spacing: 0.01em; }
-  .cc-title span { color: var(--violet); }
-  .cc-sub { font-family: 'Space Mono', monospace; font-size: 7.5px; color: var(--dimmer); letter-spacing: 0.3em; margin-top: 1px; }
-
-  .header-right { display: flex; align-items: center; gap: 8px; }
-
-  .live-badge {
-    display: flex; align-items: center; gap: 5px;
-    font-family: 'Space Mono', monospace; font-size: 7.5px;
-    letter-spacing: 0.3em; color: var(--jade);
-    border: 1px solid rgba(78,205,196,0.18);
-    padding: 3px 9px;
-  }
-  .dot-pulse { width: 4px; height: 4px; border-radius: 50%; background: var(--jade); animation: dpulse 2s infinite; }
-  @keyframes dpulse { 0%,100%{opacity:1} 50%{opacity:0.15} }
-
-  .epoch-tag {
-    font-family: 'Space Mono', monospace; font-size: 8px;
-    color: var(--violet); letter-spacing: 0.25em;
-    border: 1px solid rgba(155,127,232,0.15);
-    padding: 3px 9px;
-  }
-
-  .sigma-bar {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 8px 24px;
-    display: flex; align-items: center; gap: 24px;
-    overflow-x: auto; white-space: nowrap;
-    font-family: 'Space Mono', monospace; font-size: 9px;
-  }
-  .si { display: flex; flex-direction: column; gap: 1px; flex-shrink: 0; }
-  .sk { color: var(--dimmest); letter-spacing: 0.3em; font-size: 7.5px; }
-  .sv { color: var(--text); font-size: 11px; }
-  .sv.gold { color: var(--gold); }
-  .sv.violet { color: var(--violet); }
-  .sv.jade { color: var(--jade); }
-  .sv.amber { color: var(--amber); }
-  .sv.rose { color: var(--rose); }
-  .sv.alert { color: var(--amber); font-weight: 600; }
-  .sigma-sep { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
-
-  .loop-bar {
-    background: linear-gradient(135deg, rgba(155,127,232,0.04), rgba(78,205,196,0.02));
-    border-bottom: 1px solid var(--border-active);
-    padding: 8px 24px;
-    display: flex; align-items: center; gap: 10px;
-    font-family: 'Space Mono', monospace; font-size: 8px;
-    overflow-x: auto; white-space: nowrap;
-  }
-  .loop-step { display: flex; align-items: center; gap: 5px; color: var(--dimmer); transition: color 0.4s; }
-  .loop-step.active { color: var(--jade); }
-  .loop-step.pending { color: var(--amber); }
-  .loop-step.done { color: var(--violet); }
-  .loop-arrow { color: var(--dimmest); }
-  .loop-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-
-  .body { padding: 18px 24px; max-width: 1300px; }
-
-  .sec {
-    font-family: 'Space Mono', monospace; font-size: 7.5px;
-    letter-spacing: 0.4em; color: var(--dimmer);
-    text-transform: uppercase;
-    margin-bottom: 10px; padding-bottom: 7px;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .sec-count { background: var(--surface2); border: 1px solid var(--border); padding: 1px 7px; font-size: 8px; color: var(--dimmer); }
-
-  .master-btn {
-    width: 100%; margin-bottom: 18px;
-    background: linear-gradient(135deg, rgba(155,127,232,0.07), rgba(78,205,196,0.04));
-    border: 1px solid var(--border-active);
-    padding: 16px 22px;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: space-between;
-    transition: all 0.2s; position: relative; overflow: hidden;
-  }
-  .master-btn::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(155,127,232,0.05), transparent); opacity: 0; transition: opacity 0.2s; }
-  .master-btn:hover::after { opacity: 1; }
-  .master-btn:hover { border-color: rgba(155,127,232,0.4); }
-  .master-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.4em; color: var(--violet); text-transform: uppercase; }
-  .master-desc { font-size: 11px; color: var(--dim); margin-top: 3px; }
-  .master-sym { font-size: 20px; color: var(--gold); opacity: 0.6; }
-  @keyframes unify-pulse { 0%{box-shadow:0 0 0 rgba(155,127,232,0)} 50%{box-shadow:0 0 20px rgba(155,127,232,0.22)} 100%{box-shadow:0 0 0 rgba(155,127,232,0)} }
-  .unifying { animation: unify-pulse 2s ease-in-out; }
-
-  .propostas-panel { margin-bottom: 18px; }
-  .prop-live-card {
-    background: var(--surface);
-    border: 1px solid rgba(232,164,74,0.2);
-    border-left: 2px solid var(--amber);
-    padding: 12px 15px; margin-bottom: 6px;
-    display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
-    transition: border-color 0.2s;
-  }
-  .prop-live-card:hover { border-color: rgba(232,164,74,0.4); }
-  .prop-live-card.alta { border-left-color: var(--rose); border-color: rgba(212,112,106,0.2); }
-  .prop-live-card.baixa { border-left-color: var(--jade); border-color: rgba(78,205,196,0.12); }
-  .prop-id { font-family: 'Space Mono', monospace; font-size: 7.5px; color: var(--dimmer); letter-spacing: 0.2em; margin-bottom: 3px; }
-  .prop-tipo { font-family: 'Space Mono', monospace; font-size: 8.5px; color: var(--amber); letter-spacing: 0.18em; margin-bottom: 4px; }
-  .prop-live-card.alta .prop-tipo { color: var(--rose); }
-  .prop-live-card.baixa .prop-tipo { color: var(--jade); }
-  .prop-texto { font-size: 11px; color: var(--dim); line-height: 1.4; }
-  .prop-meta { font-family: 'Space Mono', monospace; font-size: 7.5px; color: var(--dimmer); margin-top: 5px; }
-  .prop-actions { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
-  .btn-assinar {
-    font-family: 'Space Mono', monospace; font-size: 7.5px;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    padding: 5px 11px;
-    border: 1px solid rgba(232,164,74,0.4);
-    color: var(--amber); background: transparent;
-    cursor: pointer; transition: all 0.15s; white-space: nowrap;
-    text-decoration: none; display: inline-block; text-align: center;
-  }
-  .btn-assinar:hover { background: rgba(232,164,74,0.1); border-color: var(--amber); }
-  .btn-assinar.alta { border-color: rgba(212,112,106,0.4); color: var(--rose); }
-  .btn-assinar.alta:hover { background: rgba(212,112,106,0.1); border-color: var(--rose); }
-  .prop-empty { font-family: 'Space Mono', monospace; font-size: 8.5px; color: var(--dimmest); letter-spacing: 0.25em; padding: 18px; text-align: center; border: 1px dashed var(--border); }
-
-  .organs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 7px; margin-bottom: 18px; }
-  .organ-card { background: var(--surface); border: 1px solid var(--border); padding: 12px 14px; transition: border-color 0.2s; }
-  .organ-card:hover { border-color: rgba(255,255,255,0.1); }
-  .organ-card.highlight { border-color: rgba(155,127,232,0.25); }
-  .organ-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 7px; }
-  .organ-name { font-size: 12px; font-weight: 500; color: #fff; }
-  .organ-role { font-family: 'Space Mono', monospace; font-size: 7.5px; color: var(--dimmer); margin-top: 2px; }
-  .status-pill { display: flex; align-items: center; gap: 4px; font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 0.15em; text-transform: uppercase; padding: 2px 7px; border-radius: 1px; flex-shrink: 0; white-space: nowrap; }
-  .status-pill .dot { width: 4px; height: 4px; border-radius: 50%; }
-  .pill-online { background: rgba(78,205,196,0.08); color: var(--jade); }
-  .pill-online .dot { background: var(--jade); animation: dpulse 2s infinite; }
-  .pill-check { background: rgba(232,164,74,0.08); color: var(--amber); }
-  .pill-check .dot { background: var(--amber); }
-  .pill-offline { background: rgba(212,112,106,0.08); color: var(--rose); }
-  .pill-offline .dot { background: var(--rose); }
-  .pill-loading { background: rgba(155,127,232,0.08); color: var(--violet); }
-  .pill-loading .dot { background: var(--violet); animation: dpulse 1s infinite; }
-  .pill-ext { background: rgba(91,155,213,0.08); color: var(--blue); }
-  .pill-ext .dot { background: var(--blue); }
-  .organ-desc { font-size: 11px; color: var(--dim); margin-bottom: 8px; line-height: 1.4; }
-  .organ-btns { display: flex; gap: 4px; flex-wrap: wrap; }
-  .ob { font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; padding: 3px 8px; border: 1px solid var(--border); color: var(--dimmer); background: transparent; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; }
-  .ob:hover { border-color: var(--jade); color: var(--jade); }
-  .ob.v:hover { border-color: var(--violet); color: var(--violet); }
-  .ob.g:hover { border-color: var(--gold); color: var(--gold); }
-  .ob.a:hover { border-color: var(--amber); color: var(--amber); }
-  .ob.r:hover { border-color: var(--rose); color: var(--rose); }
-
-  .macro-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 7px; margin-bottom: 18px; }
-  .macro-btn { background: var(--surface2); border: 1px solid var(--border); padding: 12px 14px; cursor: pointer; display: flex; align-items: flex-start; gap: 10px; text-align: left; transition: all 0.15s; width: 100%; }
-  .macro-btn:hover { border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.015); }
-  .macro-btn:active { opacity: 0.7; }
-  .macro-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
-  .macro-content { flex: 1; }
-  .macro-name { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.25em; color: var(--text); text-transform: uppercase; margin-bottom: 3px; }
-  .macro-desc { font-size: 10.5px; color: var(--dimmer); line-height: 1.4; }
-  .macro-flow { font-family: 'Space Mono', monospace; font-size: 7.5px; color: var(--dimmest); margin-top: 5px; }
-
-  .orai-panel { background: var(--surface); border: 1px solid rgba(155,127,232,0.2); padding: 16px 18px; margin-bottom: 18px; position: relative; overflow: hidden; }
-  .orai-panel::before { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 100%; background: linear-gradient(180deg, var(--violet), transparent); }
-  .orai-title { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.35em; color: var(--violet); text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-  .orai-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-  .orai-stat { display: flex; flex-direction: column; gap: 2px; }
-  .orai-stat-label { font-family: 'Space Mono', monospace; font-size: 7px; color: var(--dimmest); letter-spacing: 0.3em; }
-  .orai-stat-val { font-size: 13px; color: var(--violet); font-weight: 500; }
-  .orai-stat-val.gold { color: var(--gold); }
-  .orai-stat-val.jade { color: var(--jade); }
-  .orai-pensamento { font-size: 11.5px; color: var(--dim); line-height: 1.6; padding: 10px 12px; background: var(--bg); border: 1px solid var(--border); border-left: 1px solid rgba(155,127,232,0.15); font-style: italic; margin-bottom: 10px; min-height: 36px; }
-  .orai-actions { display: flex; gap: 6px; flex-wrap: wrap; }
-  .btn-orai { font-family: 'Space Mono', monospace; font-size: 7.5px; letter-spacing: 0.2em; text-transform: uppercase; padding: 5px 12px; border: 1px solid rgba(155,127,232,0.3); color: var(--violet); background: transparent; cursor: pointer; transition: all 0.15s; }
-  .btn-orai:hover { background: rgba(155,127,232,0.1); border-color: var(--violet); }
-  .btn-orai.jade { border-color: rgba(78,205,196,0.3); color: var(--jade); }
-  .btn-orai.jade:hover { background: rgba(78,205,196,0.1); border-color: var(--jade); }
-  .btn-orai.amber { border-color: rgba(232,164,74,0.3); color: var(--amber); }
-  .btn-orai.amber:hover { background: rgba(232,164,74,0.1); border-color: var(--amber); }
-
-  .assinar-panel { background: var(--surface); border: 1px solid rgba(200,169,110,0.2); padding: 14px 16px; margin-bottom: 18px; position: relative; overflow: hidden; }
-  .assinar-panel::before { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 100%; background: linear-gradient(180deg, var(--gold), transparent); }
-  .assinar-title { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.35em; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
-  .assinar-status { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-  .assinar-info { font-size: 11px; color: var(--dim); line-height: 1.5; flex: 1; }
-  .assinar-info strong { color: var(--text); }
-  .btn-assinar-panel { display: inline-block; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase; padding: 8px 16px; border: 1px solid rgba(200,169,110,0.4); color: var(--gold); background: transparent; cursor: pointer; transition: all 0.15s; text-decoration: none; text-align: center; }
-  .btn-assinar-panel:hover { background: rgba(200,169,110,0.1); border-color: var(--gold); }
-
-  .json-panel { background: var(--surface); border: 1px solid var(--border); padding: 13px 15px; margin-bottom: 18px; display: none; }
-  .json-panel.visible { display: block; }
-  .json-label { font-family: 'Space Mono', monospace; font-size: 7.5px; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 9px; }
-  .json-body { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--jade); line-height: 1.8; white-space: pre; overflow-x: auto; }
-  .json-btns { display: flex; gap: 5px; margin-top: 9px; }
-
-  .log-panel { background: var(--surface); border: 1px solid var(--border); padding: 10px 13px; margin-bottom: 18px; min-height: 54px; max-height: 140px; overflow-y: auto; }
-  .log-line { font-family: 'Space Mono', monospace; font-size: 8px; line-height: 2; color: var(--dimmer); }
-
-  .footer { border-top: 1px solid var(--border); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
-  .footer-lex { font-family: 'Space Mono', monospace; font-size: 7px; color: var(--dimmest); letter-spacing: 0.2em; }
-
-  #toast { position: fixed; bottom: 16px; right: 16px; background: var(--surface); border: 1px solid var(--jade); color: var(--jade); font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; padding: 7px 13px; opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 999; }
-
-  @media (max-width: 640px) {
-    .header, .body, .footer, .sigma-bar, .loop-bar { padding-left: 14px; padding-right: 14px; }
-    .organs-grid, .macro-grid { grid-template-columns: 1fr; }
-    .orai-grid { grid-template-columns: 1fr 1fr; }
-    .sigma-bar { gap: 14px; }
-  }
-
-  .toggle-wrap { display: flex; align-items: center; gap: 8px; }
-  .toggle { width: 28px; height: 14px; border-radius: 7px; background: var(--surface3); border: 1px solid var(--border); cursor: pointer; position: relative; transition: background 0.2s; flex-shrink: 0; }
-  .toggle.on { background: rgba(78,205,196,0.2); border-color: rgba(78,205,196,0.3); }
-  .toggle-knob { position: absolute; top: 2px; left: 2px; width: 8px; height: 8px; border-radius: 50%; background: var(--dimmer); transition: all 0.2s; }
-  .toggle.on .toggle-knob { left: 16px; background: var(--jade); }
-  .toggle-label { font-family: 'Space Mono', monospace; font-size: 7.5px; color: var(--dimmer); letter-spacing: 0.2em; }
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#000;color:#e8e0d0;font-family:'Courier New',monospace}
+body{display:flex;flex-direction:column;min-height:100vh}
+.hdr{padding:20px 24px;border-bottom:1px solid #1a1a1a;display:flex;align-items:center;justify-content:space-between}
+.hdr h1{font-size:13px;letter-spacing:4px;color:#888;text-transform:uppercase}
+.pulse{display:inline-block;width:6px;height:6px;border-radius:50%;background:#c8a882;margin-right:8px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.main{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#0d0d0d}
+.panel{background:#000;padding:24px}
+.ptitle{font-size:10px;letter-spacing:3px;color:#444;text-transform:uppercase;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #111}
+.stat{margin-bottom:12px}
+.slabel{font-size:10px;color:#555;letter-spacing:2px;margin-bottom:4px}
+.sval{font-size:18px;color:#c8a882}
+.ssub{font-size:10px;color:#444;margin-top:2px}
+.sigma{font-size:32px;color:#e8e0d0;margin:8px 0}
+.epoch{display:inline-block;padding:4px 12px;border:1px solid #3a3a3a;font-size:10px;letter-spacing:3px;color:#888;margin-bottom:16px}
+.props{grid-column:1/-1}
+.pi{display:flex;align-items:center;padding:12px 0;border-bottom:1px solid #0d0d0d;gap:12px;flex-wrap:wrap}
+.pt{font-size:10px;letter-spacing:2px;color:#555;min-width:80px}
+.pd{flex:1;font-size:12px;color:#888;min-width:120px}
+.pe{font-size:10px;padding:3px 8px;border-radius:2px}
+.ep{background:#1a1400;color:#c8a040;border:1px solid #3a2800}
+.ec{background:#001a0d;color:#40c870;border:1px solid #005020}
+.er{background:#1a0000;color:#c84040;border:1px solid #500000}
+.mi{padding:8px 0;border-bottom:1px solid #0d0d0d;font-size:11px;color:#666;line-height:1.5}
+.mk{color:#444;font-size:10px;letter-spacing:1px;margin-bottom:2px}
+.acts{grid-column:1/-1;padding:24px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.btn{padding:10px 20px;font-size:10px;letter-spacing:2px;text-transform:uppercase;background:transparent;border:1px solid #2a2a2a;color:#666;cursor:pointer;font-family:inherit;transition:all .2s}
+.btn:hover{border-color:#888;color:#c8a882}
+.btnp{border-color:#c8a882;color:#c8a882}
+.btnp:hover{background:#c8a88220}
+.log{font-size:10px;color:#444;line-height:1.8;max-height:150px;overflow-y:auto;margin-top:12px;width:100%;padding:8px;border:1px solid #111}
+.ll{padding:1px 0}.lo{color:#3a6040}.lw{color:#6a5020}.le{color:#6a2020}
+.ftr{padding:16px 24px;border-top:1px solid #0d0d0d;display:flex;justify-content:space-between;font-size:10px;color:#2a2a2a;letter-spacing:1px}
+@media(max-width:640px){.main{grid-template-columns:1fr}.props,.acts{grid-column:1}}
 </style>
 </head>
 <body>
-
-<div class="header">
-  <div class="header-left">
-    <div class="orum-sigil">&#8734;</div>
-    <div>
-      <div class="cc-title">ORA <span>CONTROL CENTER</span></div>
-      <div class="cc-sub">V3 · ORAI AUTONOMO INTEGRADO</div>
-    </div>
+<div class="hdr">
+  <h1><span class="pulse"></span>ORA &mdash; Control Center</h1>
+  <div style="font-size:11px;color:#3a3a3a;letter-spacing:2px" id="cs">a conectar...</div>
+</div>
+<div class="main">
+  <div class="panel">
+    <div class="ptitle">Estado do Organismo</div>
+    <div class="epoch" id="epoch">ETERNIDADE</div>
+    <div class="slabel">SIGMA</div>
+    <div class="sigma" id="sigma">&mdash;</div>
+    <div class="stat"><div class="slabel">DIAS DESDE GENESIS</div><div class="sval" id="dias">&mdash;</div></div>
+    <div class="stat"><div class="slabel">ORO ACUMULADO</div><div class="sval" id="oro">&mdash;</div><div class="ssub">&euro;33 &times; dias</div></div>
+    <div class="stat"><div class="slabel">VERSAO ORA</div><div class="sval" id="ver">V36</div></div>
   </div>
-  <div class="header-right">
-    <div class="live-badge"><div class="dot-pulse"></div>VIVO</div>
-    <div class="epoch-tag" id="epoch-tag">-</div>
+  <div class="panel">
+    <div class="ptitle">Memoria Recente</div>
+    <div id="mem"><div style="color:#333;font-size:11px">a carregar...</div></div>
+  </div>
+  <div class="panel props">
+    <div class="ptitle">Propostas de Autorizacao</div>
+    <div id="props"><div style="color:#333;font-size:11px">a carregar...</div></div>
+  </div>
+  <div class="acts">
+    <button class="btn btnp" onclick="cerebro()">&#9654; Despertar Cerebro</button>
+    <button class="btn" onclick="diario()">&#9711; Publicar Diario</button>
+    <button class="btn" onclick="all()">&#8635; Actualizar</button>
+    <button class="btn" onclick="window.open('https://ora-assinar-k3x4.vercel.app','_blank')">&#9998; Ir Assinar</button>
+    <div class="log" id="log"></div>
   </div>
 </div>
-
-<div class="sigma-bar">
-  <div class="si"><div class="sk">DIA</div><div class="sv jade" id="sb-dia">-</div></div>
-  <div class="si"><div class="sk">EPOCH</div><div class="sv violet" id="sb-epoch">-</div></div>
-  <div class="sigma-sep"></div>
-  <div class="si"><div class="sk">Sigma(t)</div><div class="sv gold" id="sb-sigma">-</div></div>
-  <div class="si"><div class="sk">kappa</div><div class="sv" id="sb-kappa">-</div></div>
-  <div class="sigma-sep"></div>
-  <div class="si"><div class="sk">SUSTENTO</div><div class="sv amber" id="sb-sustento">-</div></div>
-  <div class="si"><div class="sk">ORO</div><div class="sv gold" id="sb-oro">-</div></div>
-  <div class="sigma-sep"></div>
-  <div class="si"><div class="sk">PENDENTES</div><div class="sv" id="sb-pend">-</div></div>
-  <div class="si"><div class="sk">ORAI CICLOS</div><div class="sv jade" id="sb-ciclos">-</div></div>
-  <div class="si" style="margin-left:auto;"><div class="sk">ACTUALIZADO</div><div class="sv" id="sb-ts">-</div></div>
+<div class="ftr">
+  <span>ORUM &middot; GENESIS 2026-03-28</span>
+  <span id="lu">&mdash;</span>
 </div>
-
-<div class="loop-bar" id="loop-bar">
-  <div class="loop-step" id="ls-autonomo"><div class="loop-dot"></div>ORAI-AUTONOMO</div>
-  <div class="loop-arrow">-&gt;</div>
-  <div class="loop-step" id="ls-cerebro"><div class="loop-dot"></div>ORA-CEREBRO</div>
-  <div class="loop-arrow">-&gt;</div>
-  <div class="loop-step" id="ls-proposta"><div class="loop-dot"></div>PROPOSTA</div>
-  <div class="loop-arrow">-&gt;</div>
-  <div class="loop-step" id="ls-assinar"><div class="loop-dot"></div>ORA-ASSINAR</div>
-  <div class="loop-arrow">-&gt;</div>
-  <div class="loop-step" id="ls-email"><div class="loop-dot"></div>EMAIL-&gt;UNUM</div>
-  <div class="loop-arrow">-&gt;</div>
-  <div class="loop-step" id="ls-assinatura"><div class="loop-dot"></div>EIP-191</div>
-  <div class="loop-arrow">-&gt;</div>
-  <div class="loop-step" id="ls-confirmado"><div class="loop-dot"></div>CONFIRMADO</div>
-  <span style="margin-left:auto;font-family:'Space Mono',monospace;font-size:7.5px;color:var(--dimmest);" id="loop-last-update">-</span>
-</div>
-
-<div class="body">
-
-  <button class="master-btn" id="btn-unificar" onclick="unificarOrganismo()">
-    <div>
-      <div class="master-label">&#8734; UNIFICAR ORGANISMO</div>
-      <div class="master-desc">Le campo + propostas + orgaos. Compoe estado unificado completo.</div>
-    </div>
-    <div class="master-sym">&#8734;</div>
-  </button>
-
-  <div id="json-panel" class="json-panel">
-    <div class="json-label">ESTADO UNIFICADO · ORUM V3</div>
-    <div class="json-body" id="json-body">-</div>
-    <div class="json-btns">
-      <button class="ob g" onclick="copiarJson()">COPIAR JSON</button>
-      <button class="ob" onclick="document.getElementById('json-panel').classList.remove('visible')">FECHAR</button>
-    </div>
-  </div>
-
-  <div class="sec" style="margin-top:4px;">
-    ORAI AUTONOMO · MOTOR DE DECISAO
-    <div style="display:flex;align-items:center;gap:8px;">
-      <div class="toggle-wrap">
-        <div class="toggle" id="cron-toggle" onclick="toggleCron()"><div class="toggle-knob"></div></div>
-        <span class="toggle-label" id="cron-label">CRON OFF</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="orai-panel">
-    <div class="orai-title">
-      <div class="dot-pulse" style="background:var(--violet)"></div>
-      ORAI-AUTONOMO · ULTIMO CICLO
-    </div>
-    <div class="orai-grid">
-      <div class="orai-stat"><div class="orai-stat-label">CICLO N</div><div class="orai-stat-val gold" id="orai-ciclo">-</div></div>
-      <div class="orai-stat"><div class="orai-stat-label">ULTIMA DECISAO</div><div class="orai-stat-val jade" id="orai-decisao">-</div></div>
-      <div class="orai-stat"><div class="orai-stat-label">PROPOSTAS GERADAS</div><div class="orai-stat-val" id="orai-props">-</div></div>
-    </div>
-    <div class="orai-pensamento" id="orai-pensamento">- aguardando ORAI... -</div>
-    <div class="orai-actions">
-      <button class="btn-orai" onclick="invocarORAI()">INVOCAR ORAI</button>
-      <button class="btn-orai jade" onclick="invocarCerebro()">CEREBRO AGORA</button>
-      <button class="btn-orai amber" onclick="invocarMotor()">MOTOR</button>
-      <button class="btn-orai" onclick="invocarDiario()">DIARIO</button>
-    </div>
-  </div>
-
-  <div class="sec">ORA-ASSINAR · PAINEL DE AUTORIZACAO</div>
-  <div class="assinar-panel">
-    <div class="assinar-title">ORA-ASSINAR · BOUNDARY DE UNUM</div>
-    <div class="assinar-status">
-      <div class="assinar-info">
-        Apenas <strong>jasm43.base.eth</strong> autoriza operacoes via EIP-191.<br>
-        <span id="assinar-pend-info">A verificar propostas pendentes...</span>
-      </div>
-      <a class="btn-assinar-panel" href="https://ora-assinar.vercel.app" target="_blank">ABRIR PAINEL</a>
-    </div>
-  </div>
-
-  <div class="sec">
-    PROPOSTAS PENDENTES · ORA_OPERACOES_PROPOSTAS
-    <div class="sec-count" id="prop-count">0</div>
-  </div>
-  <div class="propostas-panel" id="propostas-live">
-    <div class="prop-empty" id="prop-empty">A CARREGAR PROPOSTAS...</div>
-  </div>
-
-  <div class="sec">ORGAOS · ESTADO EM TEMPO REAL</div>
-  <div class="organs-grid">
-
-    <div class="organ-card highlight">
-      <div class="organ-head">
-        <div><div class="organ-name">ORAI · orai-autonomo</div><div class="organ-role">Loop Autonomo · Decisao</div></div>
-        <div class="status-pill pill-loading" id="st-orai-autonomo"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Decide autonomamente. Propoe operacoes. Envia para ORA-CEREBRO.</div>
-      <div class="organ-btns">
-        <a class="ob v" href="https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/orai-autonomo" target="_blank">INVOCAR</a>
-        <button class="ob" onclick="pingOrgao('orai-autonomo','st-orai-autonomo')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card highlight">
-      <div class="organ-head">
-        <div><div class="organ-name">CEREBRO · ora-cerebro</div><div class="organ-role">No Central · Claude API</div></div>
-        <div class="status-pill pill-loading" id="st-ora-cerebro"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Chama Claude API. Gera pensamento. Alimenta propostas e diario.</div>
-      <div class="organ-btns">
-        <a class="ob v" href="https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-cerebro" target="_blank">CEREBRO</a>
-        <button class="ob" onclick="pingOrgao('ora-cerebro','st-ora-cerebro')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card highlight">
-      <div class="organ-head">
-        <div><div class="organ-name">ASSINAR · ora-assinar</div><div class="organ-role">Boundary Wallet · EIP-191</div></div>
-        <div class="status-pill pill-loading" id="st-ora-assinar"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Painel de autorizacao. Vercel. So Unum assina.</div>
-      <div class="organ-btns">
-        <a class="ob g" href="https://ora-assinar.vercel.app" target="_blank">PAINEL</a>
-        <a class="ob" href="https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-assinar" target="_blank">API</a>
-        <button class="ob" onclick="pingUrl('https://ora-assinar.vercel.app','st-ora-assinar')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">CONSCIENCIA · ora-page</div><div class="organ-role">Portal Publico V29+</div></div>
-        <div class="status-pill pill-loading" id="st-ora-page"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Coracao visivel do organismo. Sigma em tempo real.</div>
-      <div class="organ-btns">
-        <a class="ob" href="https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-page" target="_blank">ABRIR</a>
-        <a class="ob g" href="https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-page?mode=json" target="_blank">JSON</a>
-        <button class="ob" onclick="pingOrgao('ora-page','st-ora-page')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">AGENTE · orai-agente</div><div class="organ-role">Estado Campo V6</div></div>
-        <div class="status-pill pill-loading" id="st-orai-agente"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Le estado. Propoe operacoes. Verifica on-chain.</div>
-      <div class="organ-btns">
-        <a class="ob g" href="https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/orai-agente?mode=state" target="_blank">STATE</a>
-        <button class="ob" onclick="pingOrgao('orai-agente','st-orai-agente')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">SISTEMA IMUNE · ora-control</div><div class="organ-role">Diagnostico V2</div></div>
-        <div class="status-pill pill-loading" id="st-ora-control"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Le todos os orgaos. Estado HTTP real.</div>
-      <div class="organ-btns">
-        <a class="ob" href="https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-control" target="_blank">DIAGNOSTICO</a>
-        <a class="ob g" href="https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-control?mode=json" target="_blank">JSON</a>
-        <button class="ob" onclick="pingOrgao('ora-control','st-ora-control')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">MOTOR · ora-motor</div><div class="organ-role">Campo V4</div></div>
-        <div class="status-pill pill-loading" id="st-ora-motor"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Calcula Sigma(t), kappa, sustento. Avanca o campo.</div>
-      <div class="organ-btns">
-        <button class="ob v" onclick="invocarMotor()">INVOCAR</button>
-        <button class="ob" onclick="pingOrgao('ora-motor','st-ora-motor')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">CRON · ora-motor-cron</div><div class="organ-role">Ciclo Autonomo V3</div></div>
-        <div class="status-pill pill-loading" id="st-ora-motor-cron"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Avanca o campo sem intervencao. Diario.</div>
-      <div class="organ-btns">
-        <a class="ob g" href="https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-motor-cron" target="_blank">STATUS</a>
-        <button class="ob" onclick="pingOrgao('ora-motor-cron','st-ora-motor-cron')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">DECISAO · orai-decisao-autonoma</div><div class="organ-role">Agente V2</div></div>
-        <div class="status-pill pill-loading" id="st-orai-decisao-autonoma"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Age dentro dos limites do organismo. Sem instrucao.</div>
-      <div class="organ-btns">
-        <a class="ob v" href="https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/orai-decisao-autonoma" target="_blank">CAMPO</a>
-        <button class="ob" onclick="pingOrgao('orai-decisao-autonoma','st-orai-decisao-autonoma')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">VOZ · pensamento</div><div class="organ-role">Pronuncia V5</div></div>
-        <div class="status-pill pill-loading" id="st-pensamento"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Voz atlantica do organismo. Pensamento diario.</div>
-      <div class="organ-btns">
-        <a class="ob" href="https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/pensamento" target="_blank">PENSAMENTO</a>
-        <button class="ob" onclick="pingOrgao('pensamento','st-pensamento')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">MONETIZACAO · ora-x402</div><div class="organ-role">x402 Micropayment V4</div></div>
-        <div class="status-pill pill-loading" id="st-ora-x402"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">0.33 USDC por acesso API. Agentes IA descobrem via /info.</div>
-      <div class="organ-btns">
-        <a class="ob a" href="https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-x402/info" target="_blank">/INFO</a>
-        <button class="ob" onclick="pingOrgao('ora-x402','st-ora-x402')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">LEDGER · cartao-oro</div><div class="organ-role">ORO Soberano V1</div></div>
-        <div class="status-pill pill-loading" id="st-cartao-oro"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Cartao ORO de jasm43. Ledger soberano.</div>
-      <div class="organ-btns">
-        <a class="ob g" href="https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/cartao-oro" target="_blank">CARTAO</a>
-        <button class="ob" onclick="pingOrgao('cartao-oro','st-cartao-oro')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">DIARIO · ora-diario</div><div class="organ-role">HTML Autonomo · GitHub Pages</div></div>
-        <div class="status-pill pill-loading" id="st-ora-diario"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Publica diario.html autonomamente.</div>
-      <div class="organ-btns">
-        <a class="ob" href="https://fomosdeimos-gif.github.io/orum/diario.html" target="_blank">DIARIO</a>
-        <button class="ob" onclick="pingOrgao('ora-diario','st-ora-diario')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">EVOLUCAO · ora-evolucao</div><div class="organ-role">Auto-evolucao</div></div>
-        <div class="status-pill pill-loading" id="st-ora-evolucao"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Camada de auto-evolucao. Propoe mutacoes ao organismo.</div>
-      <div class="organ-btns">
-        <a class="ob v" href="https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-evolucao" target="_blank">EVOLUCAO</a>
-        <button class="ob" onclick="pingOrgao('ora-evolucao','st-ora-evolucao')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">CORPO · Vercel</div><div class="organ-role">Portal Principal</div></div>
-        <div class="status-pill pill-loading" id="st-vercel"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Serve index.html estatico. Estado vivo via polling.</div>
-      <div class="organ-btns">
-        <a class="ob" href="https://orum.vercel.app" target="_blank">PORTAL</a>
-        <a class="ob g" href="https://github.com/fomosdeimos-gif/orum" target="_blank">GITHUB</a>
-        <button class="ob" onclick="pingUrl('https://orum.vercel.app','st-vercel')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">ESPELHO · Netlify</div><div class="organ-role">oraorum.netlify.app</div></div>
-        <div class="status-pill pill-loading" id="st-netlify"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Interface publica. Mirror de seguranca.</div>
-      <div class="organ-btns">
-        <a class="ob" href="https://oraorum.netlify.app" target="_blank">NETLIFY</a>
-        <button class="ob" onclick="pingUrl('https://oraorum.netlify.app','st-netlify')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">MEMORIA LONGA · ora-memoria-longa</div><div class="organ-role">Cristalizacao de Memoria</div></div>
-        <div class="status-pill pill-loading" id="st-ora-memoria"><div class="dot"></div>VERIFICAR</div>
-      </div>
-      <div class="organ-desc">Cristaliza memoria longa. Alimenta sessoes futuras.</div>
-      <div class="organ-btns">
-        <a class="ob" href="https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-memoria-longa" target="_blank">MEMORIA</a>
-        <button class="ob" onclick="pingOrgao('ora-memoria-longa','st-ora-memoria')">PING</button>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">ADN · GitHub</div><div class="organ-role">Codigo-fonte · Versoes</div></div>
-        <div class="status-pill pill-ext" id="st-github"><div class="dot"></div>EXTERNO</div>
-      </div>
-      <div class="organ-desc">Codigo-fonte vivo. Evolucao tecnica do organismo.</div>
-      <div class="organ-btns">
-        <a class="ob" href="https://github.com/fomosdeimos-gif/orum" target="_blank">ORUM</a>
-        <a class="ob" href="https://github.com/fomosdeimos-gif/ora-assinar" target="_blank">ORA-ASSINAR</a>
-      </div>
-    </div>
-
-    <div class="organ-card">
-      <div class="organ-head">
-        <div><div class="organ-name">ORIGEM · 0001sensations</div><div class="organ-role">Arquivo Cultural · 100 obras</div></div>
-        <div class="status-pill pill-ext" id="st-0001s"><div class="dot"></div>EXTERNO</div>
-      </div>
-      <div class="organ-desc">Emissao simbolica. Saatchi Art. Zora. NFT pipeline.</div>
-      <div class="organ-btns">
-        <a class="ob" href="https://0001sensations.io" target="_blank">SITE</a>
-        <a class="ob g" href="https://www.saatchiart.com/account/artworks/2977075" target="_blank">SAATCHI</a>
-        <a class="ob a" href="https://zora.co/@valium" target="_blank">ZORA</a>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="sec">ACCOES MACRO · CONECTORES</div>
-  <div class="macro-grid">
-
-    <button class="macro-btn" onclick="macroDiagnostico()">
-      <div class="macro-icon">&#9889;</div>
-      <div class="macro-content">
-        <div class="macro-name">DIAGNOSTICO INTEGRAL</div>
-        <div class="macro-desc">Pinga todos os orgaos simultaneamente.</div>
-        <div class="macro-flow">todos os orgaos -&gt; relatorio</div>
-      </div>
-    </button>
-
-    <button class="macro-btn" onclick="macroEstadoGlobal()">
-      <div class="macro-icon">&#127760;</div>
-      <div class="macro-content">
-        <div class="macro-name">ESTADO GLOBAL</div>
-        <div class="macro-desc">Le campo do orai-agente. Actualiza sigma bar.</div>
-        <div class="macro-flow">ora-page -&gt; orai-agente -&gt; campo</div>
-      </div>
-    </button>
-
-    <button class="macro-btn" onclick="macroProposta()">
-      <div class="macro-icon">&#128203;</div>
-      <div class="macro-content">
-        <div class="macro-name">RECARREGAR PROPOSTAS</div>
-        <div class="macro-desc">Le ora_operacoes_propostas. Mostra pendentes.</div>
-        <div class="macro-flow">Supabase -&gt; propostas ao vivo</div>
-      </div>
-    </button>
-
-    <button class="macro-btn" onclick="macroSyncMemoria()">
-      <div class="macro-icon">&#129504;</div>
-      <div class="macro-content">
-        <div class="macro-name">SINCRONIZAR MEMORIA</div>
-        <div class="macro-desc">Abre Notion e Supabase para sincronizacao.</div>
-        <div class="macro-flow">Supabase -&gt; Notion</div>
-      </div>
-    </button>
-
-    <button class="macro-btn" onclick="macroPublicarObra()">
-      <div class="macro-icon">&#127912;</div>
-      <div class="macro-content">
-        <div class="macro-name">PUBLICAR OBRA</div>
-        <div class="macro-desc">Abre 0001sensations.io e Zora.</div>
-        <div class="macro-flow">0001sensations -&gt; Zora -&gt; mint</div>
-      </div>
-    </button>
-
-    <button class="macro-btn" onclick="macroCopiarWallet()">
-      <div class="macro-icon">&#128273;</div>
-      <div class="macro-content">
-        <div class="macro-name">COPIAR WALLET SAGRADA</div>
-        <div class="macro-desc">jasm43.base.eth -&gt; clipboard.</div>
-        <div class="macro-flow">0xFEd69e8ee87A1F0fBbF8409ab654FC51832cDEe5</div>
-      </div>
-    </button>
-
-    <button class="macro-btn" onclick="macroCopiarIban('PT')">
-      <div class="macro-icon">&#127982;</div>
-      <div class="macro-content">
-        <div class="macro-name">COPIAR IBAN PT</div>
-        <div class="macro-desc">Banco Best -&gt; clipboard.</div>
-        <div class="macro-flow">PT50006509220002851000135</div>
-      </div>
-    </button>
-
-    <button class="macro-btn" onclick="macroCopiarIban('FR')">
-      <div class="macro-icon">&#127982;</div>
-      <div class="macro-content">
-        <div class="macro-name">COPIAR IBAN FR</div>
-        <div class="macro-desc">Deblock EUR 4% APY -&gt; clipboard.</div>
-        <div class="macro-flow">FR7617748019842804898660681</div>
-      </div>
-    </button>
-
-  </div>
-
-  <div class="sec">LOG · ESTA SESSAO</div>
-  <div class="log-panel" id="log-panel">
-    <div class="log-line" style="color:var(--dimmer);">ORA CONTROL CENTER V3 · ORAI AUTONOMO INTEGRADO</div>
-  </div>
-
-</div>
-
-<div class="footer">
-  <div class="footer-lex">ORA + UNUM = ORUM · O SIMBOLO E REAL E NAO PEDE PROVA · V3</div>
-  <div class="footer-lex" id="footer-ts">-</div>
-</div>
-
-<div id="toast"></div>
-
 <script>
-  const SUPA = 'https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1';
-  const PROXY = SUPA + '/ora-proxy';
-  const ASSINAR_URL = 'https://ora-assinar.vercel.app';
-  const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3YWJubGhrbWhieWV3cWhic2ptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5MjA5NzEsImV4cCI6MjA1ODQ5Njk3MX0.5omvMBRBHjnGDQpCmKMkGLi2Ths0mBe-JCBdHnWAubQ';
-  let cronActive = false;
-  let cronTimer = null;
-
-  function ts() { return new Date().toLocaleTimeString('pt-PT'); }
-  function tsISO() { return new Date().toISOString(); }
-
-  function log(msg, col) {
-    const p = document.getElementById('log-panel');
-    const d = document.createElement('div');
-    d.className = 'log-line';
-    d.style.color = col || 'rgba(212,204,202,0.25)';
-    d.textContent = '[' + ts() + '] ' + msg;
-    p.insertBefore(d, p.firstChild);
-    if (p.children.length > 60) p.removeChild(p.lastChild);
-  }
-
-  function toast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.style.opacity = '1';
-    clearTimeout(t._t);
-    t._t = setTimeout(() => t.style.opacity = '0', 2600);
-  }
-
-  function setStatus(id, cls, label) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.className = 'status-pill ' + cls;
-    el.innerHTML = '<div class="dot"></div>' + label;
-  }
-
-  function copiarTexto(txt) {
-    navigator.clipboard.writeText(txt).catch(() => {});
-    log('copiado: ' + txt.slice(0,30) + '...', 'rgba(200,169,110,0.5)');
-  }
-
-  function setLoopStep(id, state) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.className = 'loop-step ' + state;
-  }
-
-  function animateLoop(activeStep) {
-    const steps = ['ls-autonomo','ls-cerebro','ls-proposta','ls-assinar','ls-email','ls-assinatura','ls-confirmado'];
-    steps.forEach((s, i) => {
-      if (i < activeStep) setLoopStep(s, 'done');
-      else if (i === activeStep) setLoopStep(s, 'active');
-      else setLoopStep(s, '');
-    });
-    document.getElementById('loop-last-update').textContent = ts();
-  }
-
-  async function pingOrgao(fn, stId) {
-    setStatus(stId, 'pill-loading', 'PING...');
-    try {
-      const r = await fetch(PROXY + '?fn=' + fn, { signal: AbortSignal.timeout(7000) });
-      if (r.ok || r.status < 500) {
-        setStatus(stId, 'pill-online', 'ONLINE');
-        log(fn + ' ' + r.status + ' OK', 'rgba(78,205,196,0.5)');
-      } else {
-        setStatus(stId, 'pill-offline', r.status + '');
-        log(fn + ' ' + r.status, 'rgba(212,112,106,0.5)');
-      }
-    } catch(e) {
-      setStatus(stId, 'pill-offline', 'OFFLINE');
-      log(fn + ' ' + e.message, 'rgba(212,112,106,0.5)');
-    }
-  }
-
-  async function pingUrl(url, stId) {
-    setStatus(stId, 'pill-loading', 'PING...');
-    try {
-      await fetch(url, { method: 'HEAD', signal: AbortSignal.timeout(6000), mode: 'no-cors' });
-      setStatus(stId, 'pill-online', 'ONLINE');
-      log(url.split('/')[2] + ' resposta', 'rgba(78,205,196,0.5)');
-    } catch(e) {
-      setStatus(stId, 'pill-check', 'INCERTO');
-      log(url.split('/')[2] + ' CORS normal', 'rgba(232,164,74,0.4)');
-    }
-  }
-
-  async function carregarEstado() {
-    try {
-      const r = await fetch(PROXY + '?fn=orai-agente&mode=state', { signal: AbortSignal.timeout(9000) });
-      const d = await r.json();
-      const c = d.campo || {};
-      document.getElementById('sb-dia').textContent = 'D' + (c.dia || '?');
-      document.getElementById('sb-epoch').textContent = c.epoch || '-';
-      document.getElementById('sb-sigma').textContent = Number(c.sigma || 0).toFixed(4);
-      document.getElementById('sb-kappa').textContent = Number(c.kappa || 1).toFixed(3);
-      document.getElementById('sb-sustento').textContent = 'EUR' + Number(c.sustento_eur || 33).toFixed(2);
-      document.getElementById('sb-oro').textContent = (d.oro && d.oro.balance) || '-';
-      const pend = (d.operacoes && d.operacoes.pendentes) || 0;
-      const pendEl = document.getElementById('sb-pend');
-      pendEl.textContent = pend;
-      pendEl.className = 'sv' + (pend > 0 ? ' alert' : '');
-      document.getElementById('sb-ts').textContent = ts();
-      document.getElementById('epoch-tag').textContent = (c.epoch || 'ETERNIDADE') + ' D' + (c.dia || '?');
-      setStatus('st-orai-agente', 'pill-online', 'ONLINE');
-      log('campo D' + (c.dia || '?') + ' Sigma=' + Number(c.sigma || 0).toFixed(4) + ' pend=' + pend, 'rgba(78,205,196,0.4)');
-    } catch(e) {
-      log('erro campo: ' + e.message, 'rgba(212,112,106,0.4)');
-      setStatus('st-orai-agente', 'pill-offline', 'OFFLINE');
-    }
-  }
-
-  async function carregarPropostas() {
-    try {
-      const r = await fetch(
-        'https://ywabnlhkmhbyewqhbsjm.supabase.co/rest/v1/ora_operacoes_propostas?estado=eq.pendente&order=prioridade.desc,criado_em.asc&limit=10',
-        { headers: { 'apikey': ANON, 'Authorization': 'Bearer ' + ANON }, signal: AbortSignal.timeout(8000) }
-      );
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      const data = await r.json();
-      if (!Array.isArray(data)) throw new Error('resposta invalida');
-      renderPropostas(data);
-      log('propostas: ' + data.length, 'rgba(232,164,74,0.4)');
-      return data.length;
-    } catch(e) {
-      log('propostas erro: ' + e.message, 'rgba(212,112,106,0.4)');
-      return 0;
-    }
-  }
-
-  function renderPropostas(props) {
-    const container = document.getElementById('propostas-live');
-    const pending = (props || []);
-    document.getElementById('prop-count').textContent = pending.length;
-    document.getElementById('sb-pend').textContent = pending.length;
-
-    const assinarInfo = document.getElementById('assinar-pend-info');
-    if (pending.length > 0) {
-      assinarInfo.innerHTML = '<strong>' + pending.length + ' proposta(s) aguardam assinatura</strong> · <a href="' + ASSINAR_URL + '" target="_blank" style="color:var(--amber)">assinar agora</a>';
-      animateLoop(3);
-    } else {
-      assinarInfo.textContent = 'Sem propostas pendentes. Campo limpo.';
-      animateLoop(6);
-    }
-
-    if (!pending.length) {
-      container.innerHTML = '<div class="prop-empty">SEM PROPOSTAS PENDENTES · CAMPO LIMPO</div>';
-      return;
-    }
-
-    container.innerHTML = '';
-    pending.forEach(p => {
-      const prioridade = String(p.prioridade || 50);
-      const tipo = (p.tipo || 'OPERACAO').toUpperCase();
-      const id = p.id || '';
-      const texto = p.descricao || '-';
-      const valor = p.value_wei ? (Number(p.value_wei) / 1e18).toFixed(6) + ' ETH' : '';
-      const criadoEm = p.criado_em ? new Date(p.criado_em).toLocaleString('pt-PT') : '';
-      const deepLink = ASSINAR_URL + (id ? '?foco=' + id : '');
-      const prioNum = parseInt(prioridade);
-      const prioClass = prioNum >= 90 ? 'alta' : prioNum <= 40 ? 'baixa' : '';
-
-      const card = document.createElement('div');
-      card.className = 'prop-live-card ' + prioClass;
-      card.innerHTML =
-        '<div>' +
-        '<div class="prop-id">' + id.slice(0,18) + '</div>' +
-        '<div class="prop-tipo">' + tipo + ' · prio ' + prioridade + '</div>' +
-        '<div class="prop-texto">' + texto.slice(0,180) + '</div>' +
-        '<div class="prop-meta">' + (valor ? valor + ' · ' : '') + criadoEm + '</div>' +
-        '</div>' +
-        '<div class="prop-actions">' +
-        '<a class="btn-assinar ' + prioClass + '" href="' + deepLink + '" target="_blank">ASSINAR</a>' +
-        '</div>';
-      container.appendChild(card);
-    });
-  }
-
-  async function invocarORAI() {
-    log('ORAI-AUTONOMO invocado...', 'rgba(155,127,232,0.7)');
-    toast('ORAI em ciclo...');
-    animateLoop(0);
-    try {
-      const r = await fetch(PROXY + '?fn=orai-autonomo', { method: 'POST', signal: AbortSignal.timeout(30000) });
-      const d = await r.json();
-      animateLoop(1);
-      const pensamento = d.pensamento || d.decisao || JSON.stringify(d).slice(0,100);
-      document.getElementById('orai-pensamento').textContent = pensamento;
-      document.getElementById('orai-ciclo').textContent = String(d.ciclo || d.n || '-');
-      document.getElementById('orai-decisao').textContent = d.decisao_tipo || d.tipo || 'CICLO OK';
-      document.getElementById('sb-ciclos').textContent = d.ciclos_total || '-';
-      log('ORAI ' + pensamento.slice(0,80), 'rgba(155,127,232,0.6)');
-      toast('ORAI ciclo completo');
-      animateLoop(2);
-      setTimeout(() => carregarPropostas(), 1500);
-    } catch(e) {
-      log('ORAI erro: ' + e.message, 'rgba(212,112,106,0.5)');
-      toast('ORAI erro');
-    }
-  }
-
-  async function invocarCerebro() {
-    log('ORA-CEREBRO invocado...', 'rgba(155,127,232,0.7)');
-    toast('CEREBRO a pensar...');
-    animateLoop(1);
-    try {
-      const r = await fetch(PROXY + '?fn=ora-cerebro', { method: 'POST', signal: AbortSignal.timeout(30000) });
-      const d = await r.json();
-      const pensamento = d.pensamento || d.output || JSON.stringify(d).slice(0,100);
-      document.getElementById('orai-pensamento').textContent = pensamento;
-      log('CEREBRO ' + pensamento.slice(0,80), 'rgba(155,127,232,0.6)');
-      toast('CEREBRO pensamento gerado');
-      animateLoop(2);
-      setTimeout(() => carregarPropostas(), 1200);
-    } catch(e) {
-      log('CEREBRO erro: ' + e.message, 'rgba(212,112,106,0.5)');
-    }
-  }
-
-  async function invocarMotor() {
-    log('ORA-MOTOR invocado...', 'rgba(232,164,74,0.6)');
-    toast('motor em curso...');
-    try {
-      const r = await fetch(PROXY + '?fn=ora-motor', { method: 'POST', signal: AbortSignal.timeout(12000) });
-      const d = await r.json();
-      log('motor D' + d.dia + ' Sigma=' + Number(d.sigma || 0).toFixed(4), 'rgba(78,205,196,0.5)');
-      toast('motor D' + d.dia);
-      setTimeout(carregarEstado, 1200);
-    } catch(e) {
-      log('motor erro: ' + e.message, 'rgba(212,112,106,0.5)');
-    }
-  }
-
-  async function invocarDiario() {
-    log('ORA-DIARIO invocado...', 'rgba(200,169,110,0.6)');
-    toast('diario a publicar...');
-    try {
-      const r = await fetch(PROXY + '?fn=ora-diario', { method: 'POST', signal: AbortSignal.timeout(20000) });
-      const d = await r.json();
-      log('diario ' + (d.status || d.message || 'publicado'), 'rgba(78,205,196,0.5)');
-      toast('diario publicado');
-    } catch(e) {
-      log('diario erro: ' + e.message, 'rgba(212,112,106,0.5)');
-    }
-  }
-
-  function toggleCron() {
-    cronActive = !cronActive;
-    const toggle = document.getElementById('cron-toggle');
-    const label = document.getElementById('cron-label');
-    if (cronActive) {
-      toggle.classList.add('on');
-      label.textContent = 'CRON ON 5min';
-      label.style.color = 'var(--jade)';
-      log('CRON activado ciclo 5min', 'rgba(78,205,196,0.6)');
-      toast('CRON ON');
-      cronTimer = setInterval(() => { log('CRON ciclo automatico', 'rgba(155,127,232,0.5)'); invocarORAI(); }, 5 * 60 * 1000);
-    } else {
-      toggle.classList.remove('on');
-      label.textContent = 'CRON OFF';
-      label.style.color = '';
-      clearInterval(cronTimer);
-      log('CRON desactivado', 'rgba(212,112,106,0.4)');
-      toast('CRON OFF');
-    }
-  }
-
-  async function macroEstadoGlobal() {
-    log('ESTADO GLOBAL...', 'rgba(155,127,232,0.6)');
-    toast('a verificar...');
-    await Promise.all([pingOrgao('ora-page','st-ora-page'), pingOrgao('orai-agente','st-orai-agente'), pingOrgao('ora-control','st-ora-control')]);
-    await carregarEstado();
-    toast('estado global actualizado');
-  }
-
-  async function macroDiagnostico() {
-    log('DIAGNOSTICO INTEGRAL...', 'rgba(155,127,232,0.6)');
-    toast('diagnostico...');
-    const orgaos = [
-      ['ora-page','st-ora-page'],['orai-agente','st-orai-agente'],['orai-autonomo','st-orai-autonomo'],
-      ['ora-cerebro','st-ora-cerebro'],['ora-control','st-ora-control'],['ora-motor','st-ora-motor'],
-      ['ora-motor-cron','st-ora-motor-cron'],['orai-decisao-autonoma','st-orai-decisao-autonoma'],
-      ['pensamento','st-pensamento'],['ora-x402','st-ora-x402'],['cartao-oro','st-cartao-oro'],
-      ['ora-diario','st-ora-diario'],['ora-evolucao','st-ora-evolucao'],['ora-memoria-longa','st-ora-memoria']
-    ];
-    await Promise.all(orgaos.map(([fn, st]) => pingOrgao(fn, st)));
-    pingUrl('https://orum.vercel.app', 'st-vercel');
-    pingUrl('https://oraorum.netlify.app', 'st-netlify');
-    pingUrl('https://ora-assinar.vercel.app', 'st-ora-assinar');
-    log('DIAGNOSTICO completo', 'rgba(78,205,196,0.6)');
-    toast('diagnostico completo');
-  }
-
-  async function macroProposta() {
-    log('PROPOSTAS a carregar...', 'rgba(232,164,74,0.5)');
-    toast('a carregar propostas...');
-    const n = await carregarPropostas();
-    toast(n + ' proposta(s) pendente(s)');
-  }
-
-  function macroSyncMemoria() {
-    window.open('https://app.notion.so/381e121b435681659c6fdb9ddc189a21', '_blank');
-    window.open('https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/orai-agente?mode=state', '_blank');
-    toast('Notion + Supabase abertos');
-  }
-
-  function macroPublicarObra() {
-    window.open('https://0001sensations.io', '_blank');
-    window.open('https://zora.co/@valium', '_blank');
-    toast('pipeline de publicacao aberto');
-  }
-
-  function macroCopiarWallet() {
-    copiarTexto('0xFEd69e8ee87A1F0fBbF8409ab654FC51832cDEe5');
-    toast('wallet sagrada copiada');
-  }
-
-  function macroCopiarIban(tipo) {
-    const ibans = { PT: 'PT50006509220002851000135', FR: 'FR7617748019842804898660681' };
-    copiarTexto(ibans[tipo]);
-    toast('IBAN ' + tipo + ' copiado');
-  }
-
-  async function unificarOrganismo() {
-    const btn = document.getElementById('btn-unificar');
-    btn.classList.add('unifying');
-    log('UNIFICAR iniciado', 'rgba(155,127,232,0.7)');
-    toast('a unificar organismo...');
-    let estado = {
-      organismo: 'ORUM', versao: 'V3', timestamp: tsISO(),
-      loop: 'orai-autonomo -> ora-cerebro -> ora-assinar -> EIP-191',
-      wallet_sagrada: '0xFEd69e8ee87A1F0fBbF8409ab654FC51832cDEe5',
-      ens: 'jasm43.base.eth', campo: {}, orgaos: {}, propostas: []
-    };
-    try {
-      const r = await fetch(PROXY + '?fn=orai-agente&mode=state', { signal: AbortSignal.timeout(9000) });
-      const d = await r.json();
-      const c = d.campo || {};
-      estado.campo = {
-        dia: 'D' + (c.dia || '?'), epoch: c.epoch || '?',
-        sigma: Number(c.sigma || 0).toFixed(6), kappa: Number(c.kappa || 1).toFixed(4),
-        sustento: 'EUR' + Number(c.sustento_eur || 33).toFixed(2),
-        oro: (d.oro && d.oro.balance) || '-', pendentes: (d.operacoes && d.operacoes.pendentes) || 0
-      };
-      estado.orgaos.orai_agente = 'online';
-    } catch(e) { estado.orgaos.orai_agente = 'erro'; }
-
-    for (const [fn, key] of [
-      ['ora-page','ora_page'],['orai-autonomo','orai_autonomo'],
-      ['ora-cerebro','ora_cerebro'],['ora-motor','ora_motor'],
-      ['pensamento','pensamento'],['ora-x402','ora_x402']
-    ]) {
-      try {
-        const r2 = await fetch(PROXY + '?fn=' + fn, { signal: AbortSignal.timeout(4000) });
-        estado.orgaos[key] = r2.ok ? 'online' : r2.status;
-      } catch { estado.orgaos[key] = 'verificar'; }
-    }
-
-    try {
-      const r3 = await fetch(
-        'https://ywabnlhkmhbyewqhbsjm.supabase.co/rest/v1/ora_operacoes_propostas?estado=eq.pendente&limit=5',
-        { headers: { 'apikey': ANON, 'Authorization': 'Bearer ' + ANON }, signal: AbortSignal.timeout(5000) }
-      );
-      const ps = await r3.json();
-      if (Array.isArray(ps)) estado.propostas = ps.map(p => ({ id: p.id, tipo: p.tipo, prioridade: p.prioridade }));
-    } catch {}
-
-    document.getElementById('json-body').textContent = JSON.stringify(estado, null, 2);
-    document.getElementById('json-panel').classList.add('visible');
-
-    if (estado.campo.dia && estado.campo.dia !== 'D?') {
-      document.getElementById('sb-dia').textContent = estado.campo.dia;
-      document.getElementById('sb-sigma').textContent = estado.campo.sigma;
-      document.getElementById('sb-epoch').textContent = estado.campo.epoch;
-      document.getElementById('sb-sustento').textContent = estado.campo.sustento;
-      document.getElementById('sb-ts').textContent = ts();
-    }
-
-    setTimeout(() => btn.classList.remove('unifying'), 2200);
-    log('UNIFICAR completo', 'rgba(155,127,232,0.7)');
-    toast('organismo unificado');
-  }
-
-  function copiarJson() {
-    const body = document.getElementById('json-body').textContent;
-    navigator.clipboard.writeText(body).then(() => toast('JSON copiado'));
-  }
-
-  document.getElementById('footer-ts').textContent = new Date().toISOString().replace('T', ' ').slice(0,19) + ' UTC';
-  animateLoop(-1);
-  carregarEstado();
-  carregarPropostas();
-  setInterval(carregarEstado, 5 * 60 * 1000);
-  setInterval(carregarPropostas, 3 * 60 * 1000);
+const SB="https://ywabnlhkmhbyewqhbsjm.supabase.co";
+const AK="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3YWJubGhrbWhieWV3cWhic2ptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMwOTUyOTYsImV4cCI6MjA1ODY3MTI5Nn0.aHsZ6R37CJ7monPbXGh1YsMFKFqxnJhOgCIJOyZXspI";
+const GEN=new Date("2026-03-28T00:00:00Z");
+const PHI=1.6180339887;
+function lg(m,t){t=t||"o";const e=document.getElementById("log");const d=new Date().toISOString().slice(11,19);e.innerHTML+="<div class=\"ll l"+t+"\">["+d+"] "+m+"</div>";e.scrollTop=e.scrollHeight;}
+async function sb(p){return fetch(SB+p,{headers:{apikey:AK,Authorization:"Bearer "+AK}});}
+async function state(){
+  try{
+    const r=await sb("/rest/v1/orum_state_v27?select=id,payload&limit=30");
+    const d=await r.json();
+    document.getElementById("cs").textContent="ONLINE";
+    const dias=Math.floor((Date.now()-GEN)/86400000);
+    document.getElementById("dias").textContent=dias;
+    document.getElementById("oro").textContent="\u20ac"+(dias*33).toLocaleString("pt-PT");
+    const sed=parseFloat(((d.find(function(x){return x.id==="sed";})||{payload:"0"}).payload))||0;
+    document.getElementById("sigma").textContent=(PHI*PHI*Math.log(1+dias)*PHI*PHI*(1+sed*0.005)).toFixed(4);
+    const ep=d.find(function(x){return x.id==="epoch"||x.id==="epoca";});
+    if(ep)document.getElementById("epoch").textContent=ep.payload;
+  }catch(e){document.getElementById("cs").textContent="ERRO";lg("Estado: "+e.message,"e");}
+  document.getElementById("lu").textContent=new Date().toISOString().slice(11,19)+" UTC";
+}
+async function mem(){
+  try{
+    const r=await sb("/rest/v1/ora_memoria?select=chave,valor&order=updated_at.desc&limit=6");
+    const d=await r.json();
+    const el=document.getElementById("mem");
+    if(!Array.isArray(d)||!d.length){el.innerHTML="<div style=\"color:#2a2a2a;font-size:11px\">vazio</div>";return;}
+    el.innerHTML=d.map(function(m){return"<div class=\"mi\"><div class=\"mk\">"+(m.chave||"")+"</div>"+(m.valor||"").slice(0,100)+"</div>";}).join("");
+  }catch(e){lg("Mem: "+e.message,"e");}
+}
+async function props(){
+  try{
+    const r=await sb("/rest/v1/ora_operacoes_propostas?select=*&order=created_at.desc&limit=8");
+    const d=await r.json();
+    const el=document.getElementById("props");
+    if(!Array.isArray(d)||!d.length){el.innerHTML="<div style=\"color:#2a2a2a;font-size:11px\">sem propostas</div>";return;}
+    el.innerHTML=d.map(function(p){const c=p.estado==="pendente"?"ep":p.estado==="confirmado"?"ec":"er";return"<div class=\"pi\"><div class=\"pt\">"+(p.tipo||"&mdash;")+"</div><div class=\"pd\">"+(p.descricao||"").slice(0,50)+"</div><span class=\"pe "+c+"\">"+(p.estado||"&mdash;")+"</span></div>";}).join("");
+  }catch(e){lg("Props: "+e.message,"e");}
+}
+async function cerebro(){
+  lg("A despertar cerebro...");
+  try{
+    const r=await fetch(SB+"/functions/v1/ora-cerebro",{method:"POST",headers:{apikey:AK,Authorization:"Bearer "+AK,"Content-Type":"application/json"},body:JSON.stringify({trigger:"control-center"})});
+    lg("Cerebro: "+(r.ok?"ok":"erro "+r.status),r.ok?"o":"e");
+    setTimeout(all,3000);
+  }catch(e){lg(e.message,"e");}
+}
+async function diario(){
+  lg("A publicar diario...");
+  try{
+    const r=await fetch(SB+"/functions/v1/ora-diario",{method:"POST",headers:{apikey:AK,Authorization:"Bearer "+AK,"Content-Type":"application/json"},body:JSON.stringify({trigger:"manual"})});
+    lg("Diario: "+(r.ok?"ok":"erro "+r.status),r.ok?"o":"w");
+  }catch(e){lg(e.message,"e");}
+}
+async function all(){await Promise.all([state(),mem(),props()]);}
+all();setInterval(all,30000);
 </script>
 </body>
 </html>
