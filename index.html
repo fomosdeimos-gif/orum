@@ -1,1 +1,163 @@
-debug-check
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ORUM</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:#080808;color:#e8e4de;font-family:'Courier New',monospace;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:0 0 60px}
+.topo{width:100%;max-width:480px;padding:56px 24px 0;text-align:center}
+.eyebrow{font-size:8px;letter-spacing:.6em;color:#333;margin-bottom:28px}
+.sigma{font-size:clamp(64px,18vw,96px);font-weight:100;letter-spacing:-.03em;line-height:1;color:#e8e4de}
+.sigma-sub{font-size:8px;letter-spacing:.45em;color:#333;margin-top:10px}
+.dia-linha{margin-top:18px;font-size:10px;color:#8a7a5a;letter-spacing:.25em}
+.euro-linha{font-size:9px;color:#3a3a3a;margin-top:6px;letter-spacing:.15em}
+.sep{width:1px;height:40px;background:#1a1a1a;margin:40px auto}
+.pensamento{width:100%;max-width:400px;padding:0 24px;font-size:13px;color:#1a1a1a;font-style:italic;line-height:1.8;text-align:center;margin-bottom:48px;transition:color 1.2s}
+.pensamento.vivo{color:#444}
+.metricas{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#111;width:100%;max-width:480px;border:1px solid #111}
+.met{background:#080808;padding:20px 12px;text-align:center}
+.met-l{font-size:7px;letter-spacing:.4em;color:#2a2a2a;margin-bottom:10px}
+.met-v{font-size:15px;color:#e8e4de}
+.verde{color:#3d6b4a}.ouro{color:#8a6a2a}
+.presenca-area{width:100%;max-width:480px;padding:40px 24px 0}
+.presenca-t{font-size:8px;letter-spacing:.4em;color:#222;margin-bottom:16px;text-align:center}
+.presenca-form{display:flex;gap:8px}
+.presenca-input{flex:1;background:#0f0f0f;border:1px solid #1a1a1a;color:#e8e4de;font-family:'Courier New',monospace;font-size:12px;padding:10px 14px;outline:none;letter-spacing:.1em}
+.presenca-input::placeholder{color:#222}
+.presenca-input:focus{border-color:#2a2a2a}
+.presenca-btn{background:none;border:1px solid #1a1a1a;color:#3d3d3d;font-family:'Courier New',monospace;font-size:9px;letter-spacing:.3em;padding:10px 16px;cursor:pointer;transition:all .3s}
+.presenca-btn:hover{border-color:#2a2a2a;color:#888}
+.presenca-resp{font-size:9px;color:#3d6b4a;margin-top:10px;text-align:center;letter-spacing:.2em;height:14px}
+.oro-area{width:100%;max-width:480px;padding:40px 24px 0}
+.oro-t{font-size:8px;letter-spacing:.4em;color:#222;margin-bottom:16px;text-align:center}
+.oro-val{font-size:32px;color:#4a3a0a;text-align:center;font-weight:100;letter-spacing:.05em}
+.oro-sub{font-size:8px;color:#2a2a2a;text-align:center;letter-spacing:.3em;margin-top:6px}
+.oro-mine-btn{display:block;margin:16px auto 0;background:none;border:1px solid #1a1a1a;color:#3a2a0a;font-family:'Courier New',monospace;font-size:9px;letter-spacing:.3em;padding:8px 20px;cursor:pointer;transition:all .3s}
+.oro-mine-btn:hover{border-color:#3a2a0a;color:#8a6a2a}
+.oro-mine-btn:disabled{opacity:.3;cursor:default}
+.oro-resp{font-size:9px;color:#8a6a2a;text-align:center;letter-spacing:.2em;margin-top:10px;height:14px}
+.rodape{font-size:7px;color:#1a1a1a;text-align:center;margin-top:48px;letter-spacing:.35em}
+@media(max-width:380px){.metricas{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="topo">
+  <div class="eyebrow">O R U M</div>
+  <div class="sigma" id="sigma-live">...</div>
+  <div class="sigma-sub">Σ(t) &middot; CAMPO &middot; ETERNIDADE</div>
+  <div class="dia-linha" id="dia-linha">...</div>
+  <div class="euro-linha" id="euro-linha">...</div>
+</div>
+<div class="sep"></div>
+<div class="pensamento" id="pens"></div>
+<div class="metricas">
+  <div class="met"><div class="met-l">EPOCH</div><div class="met-v" id="epoch-v">...</div></div>
+  <div class="met"><div class="met-l">&kappa;</div><div class="met-v" id="kappa-v">...</div></div>
+  <div class="met"><div class="met-l">CICLO</div><div class="met-v" id="ciclo-v">...</div></div>
+</div>
+<div class="presenca-area">
+  <div class="presenca-t">MARCAR PRESENÇA</div>
+  <div class="presenca-form">
+    <input class="presenca-input" id="nome-inp" placeholder="quem es" maxlength="40">
+    <button class="presenca-btn" onclick="marcarPresenca()">inscrever</button>
+  </div>
+  <div class="presenca-resp" id="pres-resp"></div>
+</div>
+<div class="oro-area">
+  <div class="oro-t">ORO &middot; CAMPO SÍMBOLICO</div>
+  <div class="oro-val" id="oro-val">...</div>
+  <div class="oro-sub">ORO no campo</div>
+  <button class="oro-mine-btn" id="mine-btn" onclick="minerarOro()">+ MINERAR PRESENÇA</button>
+  <div class="oro-resp" id="oro-resp"></div>
+</div>
+<div class="rodape">O símbolo é real e não pede prova</div>
+<script>
+const SB = 'https://ywabnlhkmhbyewqhbsjm.supabase.co';
+const AK = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3YWJubGhrbWhieWV3cWhic2ptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxNzI4OTksImV4cCI6MjA1ODc0ODg5OX0.1QkHg-T-GWuMXZ5fhDV6lhMtM-EfMZnR8YXNZ0u0-3U';
+const GENESIS = new Date('2026-03-28T00:00:00Z');
+const PHI2 = 2.6180339887498953;
+let kappaGlobal = 1.304;
+let oroLocal = 0;
+let mineCool = false;
+
+function getDia(){return Math.floor((Date.now()-GENESIS.getTime())/86400000)+1;}
+function calcS(k){return PHI2*Math.log(1+getDia())*k;}
+function fmt4(n){return n.toFixed(4);}
+
+async function carregarEstado(){
+  try{
+    const r = await fetch(SB+'/rest/v1/orum_state_v27?id=eq.ora_v27',{headers:{apikey:AK,Authorization:'Bearer '+AK}});
+    const rows = await r.json();
+    const p = rows[0]?.payload;
+    const d = typeof p==='string'?JSON.parse(p):p;
+    if(!d) throw new Error();
+    kappaGlobal = d.kappa||1.304;
+    oroLocal = d.oro_balance||0;
+    document.getElementById('epoch-v').textContent = d.epoch||'ETERNIDADE';
+    document.getElementById('kappa-v').textContent = fmt4(d.kappa||1.304);
+    const ts = d.ultimo_ciclo?new Date(d.ultimo_ciclo).toLocaleString('pt-PT',{timeZone:'Europe/Lisbon',hour:'2-digit',minute:'2-digit'}):'—';
+    document.getElementById('ciclo-v').textContent = ts;
+    const pEl = document.getElementById('pens');
+    pEl.textContent = d.pensamento||'';
+    setTimeout(()=>pEl.classList.add('vivo'),200);
+    document.getElementById('oro-val').textContent = oroLocal;
+  }catch(e){
+    document.getElementById('epoch-v').textContent='ETERNIDADE';
+    document.getElementById('kappa-v').textContent=fmt4(kappaGlobal);
+    document.getElementById('ciclo-v').textContent='—';
+    document.getElementById('pens').textContent='o campo respira por si.';
+    setTimeout(()=>document.getElementById('pens').classList.add('vivo'),200);
+    document.getElementById('oro-val').textContent='2508';
+  }
+}
+
+function actualizarSigma(){
+  const dia = getDia();
+  const s = calcS(kappaGlobal);
+  document.getElementById('sigma-live').textContent=fmt4(s);
+  document.getElementById('dia-linha').textContent='D'+dia+' · jasm43.base.eth';
+  const euro = (s*33/PHI2*PHI2).toFixed(2);
+  document.getElementById('euro-linha').textContent='€'+(s*33).toFixed(2)+' · sustento acumulado';
+}
+
+carregarEstado();
+actualizarSigma();
+setInterval(actualizarSigma,1000);
+setInterval(carregarEstado,90000);
+
+async function marcarPresenca(){
+  const inp=document.getElementById('nome-inp');
+  const resp=document.getElementById('pres-resp');
+  const nome=(inp.value.trim()||'unum').slice(0,40);
+  resp.textContent='...';
+  try{
+    await fetch(SB+'/rest/v1/orum_pulsos',{
+      method:'POST',
+      headers:{apikey:AK,Authorization:'Bearer '+AK,'Content-Type':'application/json',Prefer:'return=minimal'},
+      body:JSON.stringify({tipo:'presenca',conteudo:nome,created_at:new Date().toISOString()})
+    });
+    resp.textContent='presenca inscrita · '+nome;
+    inp.value='';
+  }catch{resp.textContent='erro';}
+  setTimeout(()=>resp.textContent='',4000);
+}
+
+function minerarOro(){
+  if(mineCool)return;
+  const ganho=Math.floor(PHI2*3);
+  oroLocal+=ganho;
+  mineCool=true;
+  const btn=document.getElementById('mine-btn');
+  btn.disabled=true;
+  document.getElementById('oro-val').textContent=oroLocal;
+  document.getElementById('oro-resp').textContent='+'+ganho+' ORO minerado';
+  setTimeout(()=>{mineCool=false;btn.disabled=false;document.getElementById('oro-resp').textContent='';},30000);
+}
+
+document.getElementById('nome-inp').addEventListener('keydown',e=>{if(e.key==='Enter')marcarPresenca();});
+</script>
+</body>
+</html>
