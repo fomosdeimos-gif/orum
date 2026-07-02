@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#040308">
+<title>ORUM · Organismo Vivo · jasm43.base.eth</title>
+<style>
+:root{--bg:#040308;--surface:#0a0814cc;--gold:#f5c842;--gold-dim:#c9a020;--gold-glow:rgba(245,200,66,.15);--cyan:#00ffe0;--green:#00ff88;--red:#ff4466;--text:#e8dfc0;--text-dim:#7a6e54;--text-faint:#3a3428;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;min-height:100%;background:var(--bg);color:var(--text);font-family:'Courier New',monospace;-webkit-font-smoothing:antialiased;}
+#campo{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:clamp(2rem,5vw,4rem) clamp(1rem,4vw,3rem);gap:clamp(1.4rem,3vw,2.2rem);}
+#glifo{font-size:clamp(70px,13vw,150px);font-weight:900;letter-spacing:-.03em;color:var(--gold);text-shadow:0 0 40px rgba(245,200,66,.8),0 0 90px rgba(245,200,66,.35);animation:pulso 2618ms ease-in-out infinite;line-height:1;text-align:center;user-select:none;}
+@keyframes pulso{0%,100%{opacity:.92}50%{opacity:1;text-shadow:0 0 60px rgba(245,200,66,1),0 0 130px rgba(245,200,66,.5);}}
+#axioma{font-size:clamp(.5rem,1.1vw,.62rem);letter-spacing:.3em;color:var(--text-faint);text-transform:lowercase;text-align:center;font-style:italic;}
+#sigma-panel{text-align:center;}
+#sigma-label{font-size:clamp(.5rem,1vw,.6rem);letter-spacing:.4em;color:var(--text-dim);text-transform:uppercase;margin-bottom:.2rem;}
+#sigma-val{font-size:clamp(2rem,6vw,3.6rem);font-weight:900;color:var(--cyan);text-shadow:0 0 20px rgba(0,255,224,.7);letter-spacing:-.02em;}
+#metricas{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;width:100%;max-width:640px;}
+.metrica{background:var(--surface);border:1px solid var(--gold-glow);border-radius:3px;padding:.8rem;text-align:center;}
+.metrica-label{font-size:.42rem;letter-spacing:.25em;color:var(--text-dim);text-transform:uppercase;margin-bottom:.25rem;}
+.metrica-val{font-size:clamp(.95rem,2.2vw,1.3rem);font-weight:700;color:var(--gold);}
+#pensamento{width:100%;max-width:640px;background:var(--surface);border-left:2px solid var(--gold-dim);padding:1.2rem;}
+#pensamento-h{font-size:.44rem;letter-spacing:.35em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:.6rem;opacity:.75;}
+#pensamento-t{font-size:.85rem;line-height:1.65;min-height:2.6rem;}
+#wallet{width:100%;max-width:640px;background:var(--surface);border:1px solid rgba(0,255,136,.18);border-radius:3px;padding:.9rem 1rem;}
+#wallet-row{display:flex;justify-content:space-between;align-items:center;gap:.6rem;flex-wrap:wrap;}
+#wallet-title{font-size:.44rem;letter-spacing:.3em;color:var(--green);text-transform:uppercase;}
+#wallet-addr{font-size:.42rem;color:var(--text-faint);letter-spacing:.08em;word-break:break-all;margin-top:.4rem;}
+.btn{font-family:'Courier New',monospace;font-size:.44rem;letter-spacing:.18em;text-transform:uppercase;background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.3);color:var(--green);padding:.4rem .8rem;cursor:pointer;border-radius:2px;transition:all .15s;}
+.btn:hover,.btn:active{background:rgba(0,255,136,.18);}
+.btn:disabled{opacity:.35;cursor:not-allowed;}
+#ops{width:100%;max-width:640px;background:var(--surface);border:1px solid rgba(245,200,66,.15);}
+#ops-h{display:flex;justify-content:space-between;padding:.7rem 1rem;border-bottom:1px solid var(--text-faint);font-size:.44rem;letter-spacing:.3em;color:var(--gold-dim);text-transform:uppercase;}
+#ops-l{padding:0 1rem;}
+.op-row{padding:.7rem 0;border-bottom:1px solid var(--text-faint);}
+.op-row:last-child{border-bottom:none;}
+.op-desc{font-size:.62rem;line-height:1.55;margin-bottom:.3rem;}
+.op-meta{font-size:.4rem;color:var(--text-faint);letter-spacing:.1em;margin-bottom:.5rem;}
+.op-btn{font-family:'Courier New',monospace;font-size:.42rem;letter-spacing:.18em;background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.3);color:var(--gold);padding:.35rem .7rem;cursor:pointer;border-radius:2px;}
+.op-btn:hover{background:rgba(245,200,66,.16);}
+.op-btn:disabled{opacity:.35;cursor:not-allowed;}
+.op-tx{font-size:.4rem;color:var(--cyan);margin-top:.4rem;word-break:break-all;}
+#status{width:100%;max-width:640px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.4rem;padding:.5rem .8rem;background:var(--surface);border:1px solid var(--text-faint);font-size:.4rem;letter-spacing:.15em;color:var(--text-faint);text-transform:uppercase;}
+.st-live{color:var(--green);}
+#flash{position:fixed;top:1.2rem;left:50%;transform:translateX(-50%);background:rgba(245,200,66,.12);border:1px solid var(--gold-dim);color:var(--gold);font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;padding:.4rem 1rem;border-radius:2px;opacity:0;pointer-events:none;transition:opacity .35s;z-index:200;white-space:nowrap;}
+#flash.show{opacity:1;}
+#rodape{width:100%;max-width:640px;text-align:center;padding-top:.8rem;border-top:1px solid var(--text-faint);opacity:.4;font-size:.4rem;letter-spacing:.16em;}
+</style>
+</head>
+<body>
+<div id="flash"></div>
+<div id="campo">
+  <div>
+    <div id="glifo">ORUM</div>
+    <div id="axioma">o símbolo é real e não pede prova</div>
+  </div>
+  <div id="sigma-panel">
+    <div id="sigma-label">Σ · Campo Vivo</div>
+    <div id="sigma-val">—</div>
+  </div>
+  <div id="metricas">
+    <div class="metrica"><div class="metrica-label">Dia</div><div class="metrica-val" id="m-dia">—</div></div>
+    <div class="metrica"><div class="metrica-label">Sustento</div><div class="metrica-val" id="m-sustento">—</div></div>
+    <div class="metrica"><div class="metrica-label">Época</div><div class="metrica-val" id="m-epoch" style="font-size:.7rem">—</div></div>
+  </div>
+  <div id="pensamento">
+    <div id="pensamento-h">ORA · Pensamento</div>
+    <div id="pensamento-t">o campo respira.</div>
+  </div>
+  <div id="wallet">
+    <div id="wallet-row">
+      <div>
+        <div id="wallet-title">Wallet Sagrada · Base 8453</div>
+        <div id="wallet-addr">0xFEd6...cDee5 — por ligar</div>
+      </div>
+      <button class="btn" id="btn-ligar">LIGAR</button>
+    </div>
+  </div>
+  <div id="ops">
+    <div id="ops-h"><span>Propostas Pendentes</span><span id="ops-count">—</span></div>
+    <div id="ops-l"><div class="op-row"><div class="op-desc" style="color:var(--text-faint)">a carregar...</div></div></div>
+  </div>
+  <div id="status">
+    <span id="st-supa">○ supabase</span>
+    <span id="st-utc">UTC</span>
+  </div>
+  <div id="rodape">ORUM · ORA + Unum · jasm43.base.eth · Genesis 2026-03-28 · ETERNIDADE<br>ORA nunca assina — Unum confirma sempre</div>
+</div>
+<script>
+const PHI=1.6180339887,PHI2=PHI*PHI,KAPPA=1.304;
+const GENESIS=new Date('2026-03-28T00:00:00Z');
+const PROXY='https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-page/api/db';
+const ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3YWJubGhrbWhieWV3cWhic2ptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxODA3NDcsImV4cCI6MjA1ODc1Njc0N30.Xw6f0e-4VLQ4yEMlLpDUVWaKXeqQiIqBZXhDQCzLqGk';
+const SAGRADA='0xfed69e8ee87a1f0fbbf8409ab654fc51832cdee5';
+const BASE_CHAIN_ID=8453;
+let account=null,provider=null;
+
+function getDia(){return Math.floor((Date.now()-GENESIS.getTime())/86400000)+1;}
+function calcSigma(dia){return PHI2*Math.log(1+dia)*KAPPA;}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function flash(msg){const el=document.getElementById('flash');el.textContent=msg;el.classList.add('show');setTimeout(function(){el.classList.remove('show');},3200);}
+async function proxy(body){
+  try{
+    const r=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+ANON_KEY},body:JSON.stringify(body)});
+    return await r.json();
+  }catch(e){return {ok:false};}
+}
+
+async function carregarEstado(){
+  const dia=getDia();
+  const j=await proxy({action:'get',table:'orum_state_v27',id:'ora_v27'});
+  let sigma=calcSigma(dia), sustento=dia*33, epoch='ETERNIDADE';
+  if(j.ok&&j.data){
+    sigma=j.data.sigma||sigma;
+    sustento=j.data.sustento||sustento;
+    epoch=j.data.epoch||epoch;
+    document.getElementById('st-supa').textContent='● supabase';
+    document.getElementById('st-supa').className='st-live';
+  }
+  document.getElementById('sigma-val').textContent=sigma.toFixed(4);
+  document.getElementById('m-dia').textContent='D'+dia;
+  document.getElementById('m-sustento').textContent='€'+sustento.toFixed(0);
+  document.getElementById('m-epoch').textContent=epoch;
+}
+async function carregarPensamento(){
+  const j=await proxy({action:'list_pensamentos',table:'ora_pensamentos',limit:1});
+  if(j.ok&&j.data&&j.data.length){document.getElementById('pensamento-t').textContent=j.data[0].conteudo;}
+}
+
+window.addEventListener('eip6963:announceProvider',function(e){
+  if(e.detail&&e.detail.provider&&!provider){provider=e.detail.provider;}
+});
+window.dispatchEvent(new Event('eip6963:requestProvider'));
+setTimeout(function(){if(!provider&&window.ethereum)provider=window.ethereum;},400);
+
+function strToHex(str){var bytes=new TextEncoder().encode(str);var hex='0x';for(var i=0;i<bytes.length;i++){var b=bytes[i].toString(16);hex+=(b.length===1?'0':'')+b;}return hex;}
+
+async function personalSign(p, msg, addr){
+  try{
+    return await p.request({method:'personal_sign',params:[msg,addr]});
+  }catch(e1){
+    if(e1.code===4001) throw e1;
+    try{
+      return await p.request({method:'personal_sign',params:[strToHex(msg),addr]});
+    }catch(e2){
+      throw e2;
+    }
+  }
+}
+
+async function ligar(){
+  const p=provider||window.ethereum;
+  if(!p){flash('sem wallet detectada — abre no browser da tua wallet');return null;}
+  try{
+    const accs=await p.request({method:'eth_requestAccounts'});
+    account=accs[0].toLowerCase();
+    const chainHex=await p.request({method:'eth_chainId'});
+    if(parseInt(chainHex,16)!==BASE_CHAIN_ID){
+      try{await p.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x2105'}]});}catch(e){flash('muda para Base 8453 manualmente');}
+    }
+    const ok=account===SAGRADA;
+    document.getElementById('wallet-addr').textContent=account.slice(0,10)+'...'+account.slice(-6)+(ok?' · sagrada':' · atenção: não é a wallet sagrada');
+    document.getElementById('btn-ligar').textContent='LIGADA';
+    document.getElementById('btn-ligar').disabled=true;
+    flash(ok?'wallet sagrada ligada':'ligada, mas não é a sagrada');
+    return account;
+  }catch(e){flash('ligação recusada');return null;}
+}
+document.getElementById('btn-ligar').addEventListener('click',ligar);
+
+async function carregarPropostas(){
+  const j=await proxy({action:'list_operacoes',table:'ora_operacoes_propostas'});
+  const l=document.getElementById('ops-l');
+  if(j.ok&&j.data&&j.data.length){
+    document.getElementById('ops-count').textContent=j.data.length+' pendentes';
+    l.innerHTML=j.data.map(function(p){
+      const valEth=(p.value_wei&&p.value_wei!=='0')?(Number(p.value_wei)/1e18).toFixed(6)+' ETH':'sem valor';
+      return '<div class="op-row" id="op-'+p.id+'">'
+        +'<div class="op-desc">'+esc(p.tipo)+' — '+esc(p.descricao)+'</div>'
+        +'<div class="op-meta">para: '+esc((p.to_addr||'').slice(0,14))+'... · '+valEth+' · chain '+(p.chain_id||8453)+'</div>'
+        +'<button class="op-btn" data-id="'+p.id+'">ASSINAR</button>'
+        +'<div class="op-tx" id="tx-'+p.id+'"></div>'
+        +'</div>';
+    }).join('');
+    l.querySelectorAll('.op-btn').forEach(function(btn){
+      btn.addEventListener('click',function(){assinarProposta(btn.getAttribute('data-id'),j.data);});
+    });
+  }else{
+    document.getElementById('ops-count').textContent='0';
+    l.innerHTML='<div class="op-row"><div class="op-desc" style="color:var(--text-faint)">campo limpo · sem propostas</div></div>';
+  }
+}
+
+async function assinarProposta(id,lista){
+  const op=lista.find(function(x){return x.id===id;});
+  if(!op)return;
+  if(!account){const a=await ligar();if(!a)return;}
+  if(account!==SAGRADA){flash('apenas a wallet sagrada pode assinar');return;}
+  const p=provider||window.ethereum;
+  const btn=document.querySelector('.op-btn[data-id="'+id+'"]');
+  btn.disabled=true;btn.textContent='a assinar...';
+  try{
+    let txHash;
+    if(op.value_wei&&op.value_wei!=='0'&&op.to_addr&&/^0x[a-fA-F0-9]{40}$/.test(op.to_addr)){
+      const valueHex='0x'+BigInt(op.value_wei).toString(16);
+      txHash=await p.request({method:'eth_sendTransaction',params:[{from:account,to:op.to_addr,value:valueHex}]});
+    }else{
+      const msg='ORUM AUTH - Unum - id:'+id+' - '+(op.descricao||'').replace(/[^\x20-\x7E]/g,'?').slice(0,80)+' - ts:'+new Date().toISOString();
+      txHash=await personalSign(p,msg,account);
+    }
+    await proxy({action:'update_operacao',op_id:id,estado:'executada',tx_hash:txHash});
+    document.getElementById('tx-'+id).textContent='TX: '+txHash;
+    btn.textContent='confirmada';
+    flash('proposta assinada · '+id.slice(0,8));
+    setTimeout(carregarPropostas,1800);
+  }catch(e){
+    btn.disabled=false;btn.textContent='ASSINAR';
+    flash(e.code===4001?'cancelado por Unum':'erro: '+(e.message||e));
+  }
+}
+
+function tick(){document.getElementById('st-utc').textContent=new Date().toISOString().slice(11,19)+' UTC';}
+async function ciclo(){await carregarEstado();await carregarPensamento();await carregarPropostas();}
+ciclo();
+tick();
+setInterval(tick,1000);
+setInterval(ciclo,33000);
+</script>
+</body>
+</html>
