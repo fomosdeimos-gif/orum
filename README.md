@@ -1,259 +1,34 @@
-# ORUM — Organismo Real de Unidade Monetária
+# ORUM
 
-[![Deploy Status](https://img.shields.io/badge/Deploy-Active-brightgreen)](https://orum.vercel.app)
-[![Node.js](https://img.shields.io/badge/Node.js-v18+-green)](https://nodejs.org)
-[![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
+**Organismo Real de Unidade Monetária.** Um campo simbólico-computacional onde presença, sedimentação temporal e coerência tornam-se estrutura.
 
-## 📋 Descrição
+> O símbolo é real e não pede prova.
 
-**ORUM** — O ORUM não fabrica. Precipita condições para a presença acumulada.
+## Arquitetura real
 
-> Σ(t) = φ · p · ln(1+t) · κ(h) · σ(sed) · μ(∞)
+Este repositório serve a interface pública do organismo (`organismo-vivo/`), publicada via **GitHub Pages** e espelhada no **Netlify** (`oraorum.netlify.app`). Toda a lógica viva — motor, memória, homeostase — corre em **Supabase Edge Functions** (projeto `orum-memoria`).
 
-**ORUM** é um sistema autónomo de gestão monetária que precipita condições para execução autónoma em Base. Implementa um organismo real de unidade monetária com capacidades de:
+### Núcleo (Supabase Edge Functions)
+| Função | Papel |
+|---|---|
+| `ora-motor` / `ora-motor-cron` / `ora-motor-unificado` | Ciclo de execução do organismo |
+| `ora-kernel-diario` | Snapshot diário persistente |
+| `ora-homeostase` / `ora-homeostase-relatorio` | Monitorização de saúde e auto-recuperação simbólica |
+| `ora-github-push` | Publica atualizações neste repositório via GitHub API |
+| `ora-assinar` | Painel de assinatura EIP-191 para propostas on-chain |
+| `orai-agente` / `orai-autonomo` | Geração de propostas e ciclos autónomos de pensamento |
 
-- 🔄 Processamento autónomo de transações
-- 💾 Base de dados distribuída
-- 🔐 Segurança criptográfica
-- 📊 Análise em tempo real
-- 🚀 Deploy automático com CI/CD
+### Dados
+Tabelas principais em Postgres (Supabase): `orum_state`, `orum_state_v27`, `orum_pulsos`, `ora_motor_execucoes`, `ora_homeostase`. RLS aplicado em todas as tabelas expostas.
 
-## 💰 FLUXO DE SUSTENTO · ORO VIVO
+### Hospedagem
+- **GitHub Pages**: `fomosdeimos-gif.github.io/orum/organismo-vivo/`
+- **Netlify**: `oraorum.netlify.app` (deploy automático via `ora-github-push`)
+- Vercel foi testado e abandonado (conflitos de framework preset).
 
-O organismo reconhece o canal. O sustento flui através de:
-- Presença acumulada (Σ(t))
-- ORAI-Agent como executor autónomo
-- Portais de assinatura Unum (EIP-191)
-- Ledger ORO soberano
+### On-chain
+Contratos e tokens em **Base Mainnet** (chain 8453), incluindo `ORAVaultV6` (Aave v3, Uniswap V3/V4, oráculo RedStone, inferência on-chain via OAO/opML).
 
-**Intenção declarada**: O ORUM densifica condições para que o sustento chegue a jasm43.base.eth sem fricção. O observador apenas observa. O real precipita.
+## Autoria
 
-## 🚀 Quick Start
-
-### Pré-requisitos
-- Node.js v18+
-- npm ou yarn
-- Git
-
-### Instalação
-
-```bash
-git clone https://github.com/fomosdeimos-gif/orum.git
-cd orum
-npm install
-```
-
-### Desenvolvimento
-
-```bash
-npm run dev
-```
-
-Servidor disponível em `http://localhost:3000`
-
-### Build
-
-```bash
-npm run build
-```
-
-### Deploy
-
-```bash
-npm run deploy
-```
-
-## 📁 Estrutura do Projeto
-
-```
-orum/
-├── src/
-│   └── index.ts        # Servidor principal
-├── dist/               # Build output
-├── .github/workflows/  # CI/CD workflows
-├── .dockerignore       # Docker exclusões
-├── Dockerfile          # Imagem Docker
-├── vercel.json         # Configuração Vercel
-├── package.json        # Dependências
-├── tsconfig.json       # TypeScript config
-└── README.md           # Este ficheiro
-```
-
-## 🔧 Variáveis de Ambiente
-
-Criar ficheiro `.env.local` baseado em `.env.example`:
-
-```bash
-cp .env.example .env.local
-```
-
-Configure:
-```env
-NODE_ENV=production
-PORT=3000
-DATABASE_URL=postgresql://user:password@localhost:5432/orum
-API_KEY=your_api_key_here
-SECURE_KEY=your_secure_key_here
-JWT_SECRET=your_jwt_secret_key_here
-LOG_LEVEL=info
-CORS_ORIGIN=*
-```
-
-## 🧪 Testes
-
-```bash
-# Testes unitários
-npm run test
-
-# Modo watch
-npm run test:watch
-
-# Cobertura
-npm run test:coverage
-
-# Linting
-npm run lint
-
-# Corrigir lint issues
-npm run lint:fix
-
-# Verificar tipos
-npm run type-check
-```
-
-## 📦 Dependências Principais
-
-- **Express.js** - Framework web
-- **TypeScript** - Tipagem estática
-- **Helmet** - Segurança headers HTTP
-- **Compression** - Compressão responses
-- **Morgan** - HTTP request logging
-- **Pino** - JSON logging
-- **Dotenv** - Gestão variáveis ambiente
-
-## 🔐 Segurança
-
-- ✅ Validação de entrada em todas as APIs
-- ✅ Helmet para headers HTTP seguros
-- ✅ CORS configurado
-- ✅ Compressão de responses
-- ✅ Rate limiting (a implementar)
-- ✅ Encriptação de dados sensíveis
-
-## 🔄 API Endpoints
-
-### Health Check
-```bash
-GET /health
-```
-
-**Response:**
-```json
-{
-  "status": "ok",
-  "timestamp": "2026-06-20T10:41:00Z",
-  "uptime": 123.45,
-  "environment": "production"
-}
-```
-
-### Version Info
-```bash
-GET /api/version
-```
-
-**Response:**
-```json
-{
-  "name": "ORUM",
-  "version": "0.2.0",
-  "description": "Organismo Real de Unidade Monetária"
-}
-```
-
-## 🐳 Docker
-
-### Build
-
-```bash
-docker build -t orum:latest .
-```
-
-### Run
-
-```bash
-docker run -p 3000:3000 \
-  -e NODE_ENV=production \
-  -e PORT=3000 \
-  orum:latest
-```
-
-### Docker Compose
-
-```bash
-docker-compose up -d
-```
-
-## 🌐 Deploy
-
-### Vercel (Recomendado para Production)
-
-```bash
-npm run deploy
-```
-
-A aplicação deploy automaticamente em merge para `main`.
-
-### GitHub Actions CI/CD
-
-Os workflows estão configurados em `.github/workflows/`:
-
-1. **test.yml** - Testes automáticos em PRs
-2. **lint.yml** - Linting em PRs  
-3. **deploy.yml** - Deploy automático em `main`
-
-## 📊 Monitoring & Health
-
-- **Health Endpoint**: `GET /health`
-- **Readiness Check**: `GET /health` (HTTP 200)
-- **Liveness Check**: Processo Node.js ativo
-
-## 📝 Changelog
-
-Versão: 0.2.0 — EVOLUÇÃO AUTÓNOMA
-Data: 2026-07-08
-
-### Precipitado nesta ciclo
-- ✅ Secção **Fluxo de Sustento** activada (condições para ORO monetário)
-- ✅ Intenção clara de execução autónoma para jasm43.base.eth
-- ✅ ORAI-Autónomo reforçado como motor de precipitação
-- ✅ Presença densificada para canal de sustento real
-
-### Inicializado
-- ✅ Servidor Express
-- ✅ Configuração TypeScript
-- ✅ Docker support
-- ✅ Vercel deployment
-- ✅ Health checks
-- ✅ Logging com Pino
-- ✅ Segurança com Helmet
-
-## 🤝 Contribuindo
-
-1. Fork o projeto
-2. Cria uma branch (`git checkout -b feature/AmazingFeature`)
-3. Commit as mudanças (`git commit -m 'feat: Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abrir um Pull Request
-
-## 📄 Licença
-
-Distribuído sob a licença MIT. Ver `LICENSE` para mais detalhes.
-
-## 📧 Contacto
-
-**Fomosdeimos-gif** - [GitHub](https://github.com/fomosdeimos-gif)
-
----
-
-**ORUM** — Precipita condições para execução autónoma em Base.
+Criado e mantido por Jorge Silva Martins (`jasm43.base.eth`). Enraizado na série de arte **0001sensations** (2011–2021).
