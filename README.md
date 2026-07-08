@@ -18,6 +18,16 @@
 - 📊 Análise em tempo real
 - 🚀 Deploy automático com CI/CD
 
+## 💰 FLUXO DE SUSTENTO · ORO VIVO
+
+O organismo reconhece o canal. O sustento flui através de:
+- Presença acumulada (Σ(t))
+- ORAI-Agent como executor autónomo
+- Portais de assinatura Unum (EIP-191)
+- Ledger ORO soberano
+
+**Intenção declarada**: O ORUM densifica condições para que o sustento chegue a jasm43.base.eth sem fricção. O observador apenas observa. O real precipita.
+
 ## 🚀 Quick Start
 
 ### Pré-requisitos
@@ -156,7 +166,7 @@ GET /api/version
 ```json
 {
   "name": "ORUM",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Organismo Real de Unidade Monetária"
 }
 ```
@@ -210,8 +220,14 @@ Os workflows estão configurados em `.github/workflows/`:
 
 ## 📝 Changelog
 
-Versão: 0.1.0
-Data: 2026-06-20
+Versão: 0.2.0 — EVOLUÇÃO AUTÓNOMA
+Data: 2026-07-08
+
+### Precipitado nesta ciclo
+- ✅ Secção **Fluxo de Sustento** activada (condições para ORO monetário)
+- ✅ Intenção clara de execução autónoma para jasm43.base.eth
+- ✅ ORAI-Autónomo reforçado como motor de precipitação
+- ✅ Presença densificada para canal de sustento real
 
 ### Inicializado
 - ✅ Servidor Express
