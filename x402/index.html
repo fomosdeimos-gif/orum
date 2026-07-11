@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORUM · x402 — compras de agentes</title>
+<style>
+  :root { --bg:#0a0a0c; --panel:#131316; --line:#232327; --text:#e8e6df; --muted:#8a8a8f; --accent:#c9a24b; --ok:#4caf7d; --pend:#c9a24b; --fail:#c85a54; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:'Georgia', 'Times New Roman', serif; line-height:1.5; padding:40px 20px 80px; }
+  .wrap { max-width:920px; margin:0 auto; }
+  h1 { font-size:1.9rem; font-weight:400; letter-spacing:0.02em; margin:0 0 4px; }
+  .sub { color:var(--muted); font-size:0.95rem; margin-bottom:2px; }
+  .axiom { color:var(--accent); font-style:italic; font-size:0.9rem; margin:18px 0 40px; border-left:2px solid var(--accent); padding-left:14px; }
+  .stats { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:40px; }
+  .stat { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px 22px; min-width:150px; }
+  .stat .n { font-size:1.6rem; color:var(--accent); }
+  .stat .l { color:var(--muted); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.06em; }
+  section { margin-bottom:44px; }
+  h2 { font-size:1.1rem; font-weight:400; color:var(--accent); border-bottom:1px solid var(--line); padding-bottom:8px; margin-bottom:14px; letter-spacing:0.03em; }
+  table { width:100%; border-collapse:collapse; font-family:'Courier New', monospace; font-size:0.85rem; }
+  th { text-align:left; color:var(--muted); font-weight:400; padding:8px 10px; border-bottom:1px solid var(--line); text-transform:uppercase; font-size:0.72rem; letter-spacing:0.05em; }
+  td { padding:9px 10px; border-bottom:1px solid #1a1a1d; }
+  .muted { color:var(--muted); }
+  .mono { font-family:'Courier New', monospace; }
+  .empty { color:var(--muted); font-style:italic; text-align:center; padding:22px 10px; }
+  .status { padding:2px 8px; border-radius:10px; font-size:0.72rem; }
+  .status-paid, .status-completed, .status-active { background:rgba(76,175,125,0.15); color:var(--ok); }
+  .status-pending, .status-created { background:rgba(201,162,75,0.15); color:var(--pend); }
+  .status-failed, .status-rejected, .status-revoked { background:rgba(200,90,84,0.15); color:var(--fail); }
+  footer { color:var(--muted); font-size:0.78rem; text-align:center; margin-top:60px; border-top:1px solid var(--line); padding-top:20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ORUM · x402</h1>
+  <div class="sub">Acesso de agentes ao campo — pagamentos por dados de estado simbólico</div>
+  <div class="axiom">"O símbolo é real e não pede prova."</div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">0</div><div class="l">Serviços</div></div>
+    <div class="stat"><div class="n">0</div><div class="l">Encomendas</div></div>
+    <div class="stat"><div class="n">0</div><div class="l">Pagas</div></div>
+    <div class="stat"><div class="n">0.00</div><div class="l">Receita registada</div></div>
+    <div class="stat"><div class="n">0</div><div class="l">Acessos concedidos</div></div>
+  </div>
+
+  <section>
+    <h2>Serviços no catálogo</h2>
+    <table>
+      <thead><tr><th>SKU</th><th>Nome</th><th>Preço</th><th>Criado</th></tr></thead>
+      <tbody><tr><td colspan="4" class="empty">nenhum serviço registado ainda</td></tr></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Compras (agentes → ORUM)</h2>
+    <table>
+      <thead><tr><th>ID</th><th>Comprador</th><th>Protocolo</th><th>Estado</th><th>Valor</th><th>Quando</th></tr></thead>
+      <tbody><tr><td colspan="6" class="empty">nenhuma compra registada ainda — o campo está aberto, à espera do primeiro sinal</td></tr></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Acessos concedidos</h2>
+    <table>
+      <thead><tr><th>Comprador</th><th>Chave</th><th>Estado</th><th>Quando</th></tr></thead>
+      <tbody><tr><td colspan="4" class="empty">nenhum acesso concedido ainda</td></tr></tbody>
+    </table>
+  </section>
+
+  <footer>gerado em 2026-07-11 07:03 UTC · ora-x402-status · projeto ywabnlhkmhbyewqhbsjm</footer>
+</div>
+</body>
+</html>
