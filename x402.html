@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORUM · Compras x402</title>
+<style>
+  :root {
+    --bg: #0a0908;
+    --fg: #e8e2d8;
+    --dim: #8a8378;
+    --gold: #c9a24b;
+    --line: #24211d;
+    --ok: #6ba36b;
+    --pend: #b08a3e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Courier New', monospace;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    line-height: 1.5;
+  }
+  h1 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 16px;
+    margin-bottom: 8px;
+  }
+  h1 span { color: var(--gold); }
+  .sub { color: var(--dim); font-size: 0.85rem; margin-bottom: 32px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    margin-bottom: 40px;
+    border: 1px solid var(--line);
+  }
+  .cell { background: var(--bg); padding: 18px 16px; }
+  .cell .num { font-size: 1.6rem; color: var(--gold); }
+  .cell .label { font-size: 0.72rem; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+  section { margin-bottom: 40px; }
+  h2 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  th { color: var(--dim); font-weight: 400; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .status-active, .status-paid, .status-completed { color: var(--ok); }
+  .status-pending, .status-created { color: var(--pend); }
+  .empty { color: var(--dim); font-style: italic; padding: 20px 0; }
+  footer { color: var(--dim); font-size: 0.72rem; text-align: center; margin-top: 60px; border-top: 1px solid var(--line); padding-top: 20px; }
+  a { color: var(--gold); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<h1><span>ORUM</span> · Compras de Serviços x402</h1>
+<div class="sub" id="gerado">a carregar estado...</div>
+
+<div class="grid" id="resumo"></div>
+
+<section>
+  <h2>Serviços Publicados</h2>
+  <div id="servicos"></div>
+</section>
+
+<section>
+  <h2>Encomendas Recentes</h2>
+  <div id="encomendas"></div>
+</section>
+
+<section>
+  <h2>Acessos Concedidos</h2>
+  <div id="acessos"></div>
+</section>
+
+<footer>
+  ORUM · jasm43.base.eth · Base 8453 · protocolo x402<br>
+  fonte: ora-x402-tracker · actualiza a cada carregamento
+</footer>
+
+<script>
+const ENDPOINT = 'https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-x402-tracker';
+
+function fmtDate(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return d.toISOString().slice(0,16).replace('T', ' ');
+}
+
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+
+async function carregar() {
+  try {
+    const res = await fetch(ENDPOINT);
+    const data = await res.json();
+
+    document.getElementById('gerado').textContent = 'estado gerado em ' + fmtDate(data.gerado_em) + ' UTC';
+
+    const r = data.resumo || {};
+    const resumoEl = document.getElementById('resumo');
+    resumoEl.innerHTML = '';
+    const cells = [
+      [r.servicos_activos, 'Serviços'],
+      [r.encomendas_total, 'Encomendas'],
+      [r.encomendas_pagas, 'Pagas'],
+      [(r.receita_total || 0).toFixed(2), 'Receita'],
+      [r.acessos_concedidos, 'Acessos'],
+    ];
+    cells.forEach(([num, label]) => {
+      const c = el('div', 'cell');
+      c.appendChild(el('div', 'num', String(num ?? 0)));
+      c.appendChild(el('div', 'label', label));
+      resumoEl.appendChild(c);
+    });
+
+    const servicosEl = document.getElementById('servicos');
+    if (!data.servicos || data.servicos.length === 0) {
+      servicosEl.innerHTML = '';
+      servicosEl.appendChild(el('div', 'empty', 'nenhum serviço registado ainda em x402_services.'));
+    } else {
+      const t = document.createElement('table');
+      t.innerHTML = '<tr><th>SKU</th><th>Nome</th><th>Preço</th><th>Criado</th></tr>';
+      data.servicos.forEach(s => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${s.sku}</td><td>${s.name}</td><td>${s.price_amount} ${s.price_currency}</td><td>${fmtDate(s.created_at)}</td>`;
+        t.appendChild(tr);
+      });
+      servicosEl.innerHTML = '';
+      servicosEl.appendChild(t);
+    }
+
+    const encEl = document.getElementById('encomendas');
+    if (!data.encomendas || data.encomendas.length === 0) {
+      encEl.innerHTML = '';
+      encEl.appendChild(el('div', 'empty', 'nenhuma encomenda registada ainda. compras aparecerão aqui assim que houver a primeira em x402_orders.'));
+    } else {
+      const t = document.createElement('table');
+      t.innerHTML = '<tr><th>Comprador</th><th>Estado</th><th>Valor</th><th>Data</th></tr>';
+      data.encomendas.forEach(o => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${o.buyer_actor || '—'}</td><td class="status-${o.status}">${o.status}</td><td>${o.total_amount || '—'} ${o.currency || ''}</td><td>${fmtDate(o.created_at)}</td>`;
+        t.appendChild(tr);
+      });
+      encEl.innerHTML = '';
+      encEl.appendChild(t);
+    }
+
+    const acEl = document.getElementById('acessos');
+    if (!data.acessos || data.acessos.length === 0) {
+      acEl.innerHTML = '';
+      acEl.appendChild(el('div', 'empty', 'nenhum acesso concedido ainda.'));
+    } else {
+      const t = document.createElement('table');
+      t.innerHTML = '<tr><th>Agente</th><th>Estado</th><th>Concedido</th></tr>';
+      data.acessos.forEach(a => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${a.buyer_actor || '—'}</td><td class="status-${a.status}">${a.status}</td><td>${fmtDate(a.created_at)}</td>`;
+        t.appendChild(tr);
+      });
+      acEl.innerHTML = '';
+      acEl.appendChild(t);
+    }
+
+  } catch (e) {
+    document.getElementById('gerado').textContent = 'erro a carregar estado: ' + e.message;
+  }
+}
+
+carregar();
+</script>
+
+</body>
+</html>
