@@ -13,19 +13,24 @@ body{background:#080808;color:#e8e4de;font-family:'Courier New',monospace;displa
 h1{font-size:20px;font-weight:400;color:#e8e4de;letter-spacing:.05em}
 .sub{font-size:10px;color:#8a7a5a;letter-spacing:.15em;margin-top:10px}
 .area{width:100%;max-width:480px;margin-top:48px}
-label{display:block;font-size:8px;letter-spacing:.3em;color:#333;margin-bottom:10px}
-input{width:100%;background:#0f0f0f;border:1px solid #1a1a1a;color:#e8e4de;font-family:'Courier New',monospace;font-size:12px;padding:12px 14px;outline:none;letter-spacing:.05em;margin-bottom:16px}
-input::placeholder{color:#333}
-input:focus{border-color:#2a2a2a}
-.btn{width:100%;background:none;border:1px solid #2a2a2a;color:#8a6a2a;font-family:'Courier New',monospace;font-size:10px;letter-spacing:.3em;padding:14px 16px;cursor:pointer;transition:all .3s}
+.btn{width:100%;background:none;border:1px solid #2a2a2a;color:#8a6a2a;font-family:'Courier New',monospace;font-size:11px;letter-spacing:.3em;padding:18px 16px;cursor:pointer;transition:all .3s}
 .btn:hover{border-color:#8a6a2a;color:#f5c842}
 .btn:disabled{opacity:.3;cursor:default}
-.status{font-size:10px;color:#555;margin-top:16px;text-align:center;letter-spacing:.1em;line-height:1.6;min-height:14px}
+.status{font-size:10px;color:#555;margin-top:18px;text-align:center;letter-spacing:.1em;line-height:1.8;min-height:14px}
 .status.err{color:#a45a4a}
 .status.ok{color:#3d6b4a}
 .result{margin-top:20px;padding:16px;border:1px solid #1a1a1a;font-size:10px;line-height:2;color:#8a7a5a;letter-spacing:.05em;word-break:break-all}
 .result code{color:#e8e4de}
 .result a{color:#00ffe0}
+.manual-toggle{display:block;text-align:center;font-size:9px;color:#2a2a2a;letter-spacing:.15em;margin-top:24px;cursor:pointer;text-decoration:underline}
+.manual-area{display:none;margin-top:16px}
+.manual-area.aberto{display:block}
+label{display:block;font-size:8px;letter-spacing:.3em;color:#333;margin-bottom:10px}
+input{width:100%;background:#0f0f0f;border:1px solid #1a1a1a;color:#e8e4de;font-family:'Courier New',monospace;font-size:12px;padding:12px 14px;outline:none;letter-spacing:.05em;margin-bottom:12px}
+input::placeholder{color:#333}
+input:focus{border-color:#2a2a2a}
+.btn-sec{width:100%;background:none;border:1px solid #1a1a1a;color:#555;font-family:'Courier New',monospace;font-size:9px;letter-spacing:.2em;padding:12px 16px;cursor:pointer}
+.btn-sec:hover{border-color:#2a2a2a;color:#888}
 .nota{font-size:9px;color:#2a2a2a;margin-top:32px;text-align:center;line-height:1.8;letter-spacing:.05em}
 .rodape{font-size:7px;color:#1a1a1a;text-align:center;margin-top:48px;letter-spacing:.35em}
 </style>
@@ -38,12 +43,18 @@ input:focus{border-color:#2a2a2a}
 </div>
 
 <div class="area">
-  <label>CID do espelho estático (IPFS)</label>
-  <input id="cid-inp" placeholder="Qm... ou bafy...">
-  <button class="btn" id="connect-btn">Ligar Carteira</button>
+  <button class="btn" id="publicar-btn">Ligar Carteira &amp; Publicar</button>
   <div class="status" id="status"></div>
   <div class="result" id="result" style="display:none"></div>
-  <div class="nota">Publica na Base o contenthash que faz jasm43.base.eth.limo<br>resolver directamente para o teu espelho em IPFS.<br>Só o dono de jasm43.base.eth pode assinar isto.</div>
+
+  <div class="manual-toggle" id="manual-toggle">j&aacute; tenho um CID</div>
+  <div class="manual-area" id="manual-area">
+    <label>CID do IPFS</label>
+    <input id="cid-inp" placeholder="Qm... ou bafy...">
+    <button class="btn-sec" id="manual-btn">Ligar Carteira com este CID</button>
+  </div>
+
+  <div class="nota">Um gesto: publica o espelho ao vivo no IPFS e assina<br>o contenthash em jasm43.base.eth, num s&oacute; passo.<br>S&oacute; o dono de jasm43.base.eth pode assinar isto.</div>
 </div>
 
 <div class="rodape">O s&iacute;mbolo &eacute; real e n&atilde;o pede prova</div>
@@ -91,13 +102,9 @@ async function ensureBaseNetwork(provider) {
   }
 }
 
-document.getElementById('connect-btn').addEventListener('click', async () => {
-  const btn = document.getElementById('connect-btn');
-  const cid = document.getElementById('cid-inp').value.trim();
-  if (!cid) { setStatus('cola primeiro o CID do IPFS.', 'err'); return; }
-  if (!window.ethereum) { setStatus('Nenhuma carteira encontrada. Abre esta p\u00e1gina dentro do browser da Coinbase Wallet ou Base App.', 'err'); return; }
-  if (typeof contentHash === 'undefined') { setStatus('biblioteca content-hash n\u00e3o carregou. Recarrega a p\u00e1gina.', 'err'); return; }
-  btn.disabled = true;
+async function publicarContenthash(cid, btn) {
+  if (!window.ethereum) { setStatus('Nenhuma carteira encontrada. Abre esta p\u00e1gina dentro do browser da Coinbase Wallet ou Base App.', 'err'); btn.disabled = false; return; }
+  if (typeof contentHash === 'undefined') { setStatus('biblioteca content-hash n\u00e3o carregou. Recarrega a p\u00e1gina.', 'err'); btn.disabled = false; return; }
   try {
     setStatus('a codificar contenthash\u2026');
     const encoded = contentHash.fromIpfs(cid);
@@ -130,6 +137,43 @@ document.getElementById('connect-btn').addEventListener('click', async () => {
     setStatus((e && e.shortMessage) || (e && e.message) || 'algo correu mal', 'err');
     btn.disabled = false;
   }
+}
+
+document.getElementById('publicar-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('publicar-btn');
+  btn.disabled = true;
+  try {
+    setStatus('a publicar o espelho no IPFS\u2026');
+    const pinRes = await fetch(SB + '/functions/v1/ora-ipfs-pin', { method: 'POST' });
+    const pinJson = await pinRes.json();
+    if (!pinRes.ok || !pinJson.cid) {
+      if (pinRes.status === 412) {
+        setStatus('a chave do IPFS ainda n\u00e3o est\u00e1 configurada. Usa "j\u00e1 tenho um CID" abaixo, ou pede ao ORA para a activar.', 'err');
+      } else {
+        setStatus('falha a publicar no IPFS: ' + (pinJson.error || pinRes.status), 'err');
+      }
+      btn.disabled = false;
+      return;
+    }
+    await publicarContenthash(pinJson.cid, btn);
+  } catch (e) {
+    console.error(e);
+    setStatus('falha a publicar no IPFS: ' + e.message, 'err');
+    btn.disabled = false;
+  }
+});
+
+document.getElementById('manual-toggle').addEventListener('click', () => {
+  document.getElementById('manual-area').classList.toggle('aberto');
+});
+
+document.getElementById('manual-btn').addEventListener('click', async () => {
+  const cid = document.getElementById('cid-inp').value.trim();
+  if (!cid) { setStatus('cola primeiro o CID.', 'err'); return; }
+  const btn = document.getElementById('manual-btn');
+  btn.disabled = true;
+  await publicarContenthash(cid, document.getElementById('publicar-btn'));
+  btn.disabled = false;
 });
 </script>
 </body>
