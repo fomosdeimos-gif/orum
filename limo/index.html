@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ORUM &middot; publicar a casa</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:#080808;color:#e8e4de;font-family:'Courier New',monospace;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:56px 24px 60px}
+.topo{width:100%;max-width:480px;text-align:center}
+.eyebrow{font-size:8px;letter-spacing:.6em;color:#333;margin-bottom:28px}
+h1{font-size:20px;font-weight:400;color:#e8e4de;letter-spacing:.05em}
+.sub{font-size:10px;color:#8a7a5a;letter-spacing:.15em;margin-top:10px}
+.area{width:100%;max-width:480px;margin-top:48px}
+label{display:block;font-size:8px;letter-spacing:.3em;color:#333;margin-bottom:10px}
+input{width:100%;background:#0f0f0f;border:1px solid #1a1a1a;color:#e8e4de;font-family:'Courier New',monospace;font-size:12px;padding:12px 14px;outline:none;letter-spacing:.05em;margin-bottom:16px}
+input::placeholder{color:#333}
+input:focus{border-color:#2a2a2a}
+.btn{width:100%;background:none;border:1px solid #2a2a2a;color:#8a6a2a;font-family:'Courier New',monospace;font-size:10px;letter-spacing:.3em;padding:14px 16px;cursor:pointer;transition:all .3s}
+.btn:hover{border-color:#8a6a2a;color:#f5c842}
+.btn:disabled{opacity:.3;cursor:default}
+.status{font-size:10px;color:#555;margin-top:16px;text-align:center;letter-spacing:.1em;line-height:1.6;min-height:14px}
+.status.err{color:#a45a4a}
+.status.ok{color:#3d6b4a}
+.result{margin-top:20px;padding:16px;border:1px solid #1a1a1a;font-size:10px;line-height:2;color:#8a7a5a;letter-spacing:.05em;word-break:break-all}
+.result code{color:#e8e4de}
+.result a{color:#00ffe0}
+.nota{font-size:9px;color:#2a2a2a;margin-top:32px;text-align:center;line-height:1.8;letter-spacing:.05em}
+.rodape{font-size:7px;color:#1a1a1a;text-align:center;margin-top:48px;letter-spacing:.35em}
+</style>
+</head>
+<body>
+<div class="topo">
+  <div class="eyebrow">O R U M</div>
+  <h1>publicar a casa</h1>
+  <div class="sub">jasm43.base.eth &middot; contenthash &middot; IPFS</div>
+</div>
+
+<div class="area">
+  <label>CID do espelho estático (IPFS)</label>
+  <input id="cid-inp" placeholder="Qm... ou bafy...">
+  <button class="btn" id="connect-btn">Ligar Carteira</button>
+  <div class="status" id="status"></div>
+  <div class="result" id="result" style="display:none"></div>
+  <div class="nota">Publica na Base o contenthash que faz jasm43.base.eth.limo<br>resolver directamente para o teu espelho em IPFS.<br>Só o dono de jasm43.base.eth pode assinar isto.</div>
+</div>
+
+<div class="rodape">O s&iacute;mbolo &eacute; real e n&atilde;o pede prova</div>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
+<script src="https://unpkg.com/content-hash/dist/index.js"></script>
+<script>
+const L2_RESOLVER = '0xC6d566A56A1aFf6508b41f6c90ff131615583BCD';
+const RESOLVER_ABI = [
+  'function setContenthash(bytes32 node, bytes calldata hash) external',
+  'function contenthash(bytes32 node) external view returns (bytes memory)'
+];
+const BASENAME = 'jasm43.base.eth';
+const BASE_CHAIN_ID_HEX = '0x2105';
+const SB = 'https://ywabnlhkmhbyewqhbsjm.supabase.co';
+const AK = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3YWJubGhrbWhieWV3cWhic2ptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxNzI4OTksImV4cCI6MjA1ODc0ODg5OX0.1QkHg-T-GWuMXZ5fhDV6lhMtM-EfMZnR8YXNZ0u0-3U';
+
+function namehash(name) {
+  let node = '0x' + '00'.repeat(32);
+  if (name) {
+    const labels = name.split('.');
+    for (let i = labels.length - 1; i >= 0; i--) {
+      const labelHash = ethers.keccak256(ethers.toUtf8Bytes(labels[i]));
+      node = ethers.keccak256(ethers.concat([node, labelHash]));
+    }
+  }
+  return node;
+}
+
+function setStatus(msg, cls) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = 'status' + (cls ? ' ' + cls : '');
+}
+
+async function ensureBaseNetwork(provider) {
+  const network = await provider.getNetwork();
+  if (network.chainId === 8453n) return;
+  try {
+    await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: BASE_CHAIN_ID_HEX }] });
+  } catch (e) {
+    if (e.code === 4902) {
+      await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [{ chainId: BASE_CHAIN_ID_HEX, chainName: 'Base', nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 }, rpcUrls: ['https://mainnet.base.org'], blockExplorerUrls: ['https://basescan.org'] }] });
+    } else { throw e; }
+  }
+}
+
+document.getElementById('connect-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('connect-btn');
+  const cid = document.getElementById('cid-inp').value.trim();
+  if (!cid) { setStatus('cola primeiro o CID do IPFS.', 'err'); return; }
+  if (!window.ethereum) { setStatus('Nenhuma carteira encontrada. Abre esta p\u00e1gina dentro do browser da Coinbase Wallet ou Base App.', 'err'); return; }
+  if (typeof contentHash === 'undefined') { setStatus('biblioteca content-hash n\u00e3o carregou. Recarrega a p\u00e1gina.', 'err'); return; }
+  btn.disabled = true;
+  try {
+    setStatus('a codificar contenthash\u2026');
+    const encoded = contentHash.fromIpfs(cid);
+    const hashBytes = '0x' + encoded;
+    setStatus('a ligar carteira\u2026');
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    await provider.send('eth_requestAccounts', []);
+    const signer = await provider.getSigner();
+    const owner = await signer.getAddress();
+    setStatus('a confirmar rede Base\u2026');
+    await ensureBaseNetwork(provider);
+    const node = namehash(BASENAME);
+    const contract = new ethers.Contract(L2_RESOLVER, RESOLVER_ABI, signer);
+    setStatus('confirma a transac\u00e7\u00e3o na carteira\u2026');
+    const tx = await contract.setContenthash(node, hashBytes);
+    setStatus('a aguardar confirma\u00e7\u00e3o on-chain\u2026 (' + tx.hash.slice(0, 10) + '\u2026)');
+    await tx.wait();
+    setStatus('publicado.', 'ok');
+    const resultEl = document.getElementById('result');
+    resultEl.style.display = 'block';
+    resultEl.innerHTML = 'jasm43.base.eth.limo agora aponta para:<br><code>' + cid + '</code><br>tx: <a href="https://basescan.org/tx/' + tx.hash + '" target="_blank">' + tx.hash.slice(0, 14) + '\u2026</a>';
+    btn.textContent = 'Casa publicada';
+    fetch(SB+'/rest/v1/orum_pulsos', {
+      method: 'POST',
+      headers: {apikey: AK, Authorization: 'Bearer ' + AK, 'Content-Type':'application/json', Prefer:'return=minimal'},
+      body: JSON.stringify({tipo:'contenthash_publicado', conteudo: cid + ' \u00b7 ' + tx.hash + ' \u00b7 ' + owner, created_at: new Date().toISOString()})
+    }).catch(()=>{});
+  } catch (e) {
+    console.error(e);
+    setStatus((e && e.shortMessage) || (e && e.message) || 'algo correu mal', 'err');
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
