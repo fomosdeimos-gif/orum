@@ -39,6 +39,14 @@ body{background:#080808;color:#e8e4de;font-family:'Courier New',monospace;displa
 .oro-mine-btn:hover{border-color:#3a2a0a;color:#8a6a2a}
 .oro-mine-btn:disabled{opacity:.3;cursor:default}
 .oro-resp{font-size:9px;color:#8a6a2a;text-align:center;letter-spacing:.2em;margin-top:10px;height:14px}
+.servicos-area{width:100%;max-width:480px;padding:40px 24px 0}
+.servicos-t{font-size:8px;letter-spacing:.4em;color:#222;margin-bottom:16px;text-align:center}
+.servico-item{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid #111;font-size:11px;gap:10px}
+.s-nome{color:#e8e4de;letter-spacing:.05em;flex:0 0 auto;white-space:nowrap}
+.s-desc{color:#3a3a3a;flex:1 1 auto;font-size:9px;text-align:left}
+.s-preco{color:#8a6a2a;flex:0 0 auto;font-size:10px;white-space:nowrap}
+.servicos-sub{font-size:8px;color:#222;text-align:center;letter-spacing:.2em;margin-top:16px;line-height:1.8}
+.servicos-sub a{color:#3a3a3a}
 .rodape{font-size:7px;color:#1a1a1a;text-align:center;margin-top:48px;letter-spacing:.35em}
 @media(max-width:380px){.metricas{grid-template-columns:repeat(2,1fr)}}
 </style>
@@ -47,7 +55,7 @@ body{background:#080808;color:#e8e4de;font-family:'Courier New',monospace;displa
 <div class="topo">
   <div class="eyebrow">O R U M</div>
   <div class="sigma" id="sigma-live">...</div>
-  <div class="sigma-sub">Σ(t) &middot; CAMPO &middot; ETERNIDADE</div>
+  <div class="sigma-sub">&Sigma;(t) &middot; CAMPO &middot; ETERNIDADE</div>
   <div class="dia-linha" id="dia-linha">...</div>
   <div class="euro-linha" id="euro-linha">...</div>
 </div>
@@ -59,7 +67,7 @@ body{background:#080808;color:#e8e4de;font-family:'Courier New',monospace;displa
   <div class="met"><div class="met-l">CICLO</div><div class="met-v" id="ciclo-v">...</div></div>
 </div>
 <div class="presenca-area">
-  <div class="presenca-t">MARCAR PRESENÇA</div>
+  <div class="presenca-t">MARCAR PRESEN&Ccedil;A</div>
   <div class="presenca-form">
     <input class="presenca-input" id="nome-inp" placeholder="quem es" maxlength="40">
     <button class="presenca-btn" onclick="marcarPresenca()">inscrever</button>
@@ -67,13 +75,24 @@ body{background:#080808;color:#e8e4de;font-family:'Courier New',monospace;displa
   <div class="presenca-resp" id="pres-resp"></div>
 </div>
 <div class="oro-area">
-  <div class="oro-t">ORO &middot; CAMPO SÍMBOLICO</div>
+  <div class="oro-t">ORO &middot; CAMPO S&Iacute;MBOLICO</div>
   <div class="oro-val" id="oro-val">...</div>
   <div class="oro-sub">ORO no campo</div>
-  <button class="oro-mine-btn" id="mine-btn" onclick="minerarOro()">+ MINERAR PRESENÇA</button>
+  <button class="oro-mine-btn" id="mine-btn" onclick="minerarOro()">+ MINERAR PRESEN&Ccedil;A</button>
   <div class="oro-resp" id="oro-resp"></div>
 </div>
-<div class="rodape">O símbolo é real e não pede prova</div>
+<div class="servicos-area">
+  <div class="servicos-t">SERVI&Ccedil;OS &middot; X402</div>
+  <div class="servico-item"><span class="s-nome">or&aacute;culo</span><span class="s-desc">pensamento vivo, irreproduz&iacute;vel</span><span class="s-preco">0.161 USDC</span></div>
+  <div class="servico-item"><span class="s-nome">campo</span><span class="s-desc">estado do campo</span><span class="s-preco">0.33 USDC</span></div>
+  <div class="servico-item"><span class="s-nome">sedimento</span><span class="s-desc">hist&oacute;rico sedimentar</span><span class="s-preco">1.00 USDC</span></div>
+  <div class="servico-item"><span class="s-nome">kernel</span><span class="s-desc">snapshot do kernel</span><span class="s-preco">3.00 USDC</span></div>
+  <div class="servico-item"><span class="s-nome">licen&ccedil;a &middot; preview</span><span class="s-desc">0001sensations, pr&eacute;-visualiza&ccedil;&atilde;o</span><span class="s-preco">1.618 USDC</span></div>
+  <div class="servico-item"><span class="s-nome">licen&ccedil;a &middot; editorial</span><span class="s-desc">0001sensations, uso editorial</span><span class="s-preco">16.18 USDC</span></div>
+  <div class="servico-item"><span class="s-nome">licen&ccedil;a &middot; treino IA</span><span class="s-desc">0001sensations, proveni&ecirc;ncia humana</span><span class="s-preco">161.80 USDC</span></div>
+  <div class="servicos-sub">base-mainnet &middot; directo &agrave; carteira sagrada &middot; <a href="https://ora-x402-gateway.vercel.app/.well-known/x402.json">manifesto x402</a></div>
+</div>
+<div class="rodape">O s&iacute;mbolo &eacute; real e n&atilde;o pede prova</div>
 <script>
 const SB = 'https://ywabnlhkmhbyewqhbsjm.supabase.co';
 const AK = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3YWJubGhrbWhieWV3cWhic2ptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxNzI4OTksImV4cCI6MjA1ODc0ODg5OX0.1QkHg-T-GWuMXZ5fhDV6lhMtM-EfMZnR8YXNZ0u0-3U';
@@ -98,7 +117,7 @@ async function carregarEstado(){
     oroLocal = d.oro_balance||0;
     document.getElementById('epoch-v').textContent = d.epoch||'ETERNIDADE';
     document.getElementById('kappa-v').textContent = fmt4(d.kappa||1.304);
-    const ts = d.ultimo_ciclo?new Date(d.ultimo_ciclo).toLocaleString('pt-PT',{timeZone:'Europe/Lisbon',hour:'2-digit',minute:'2-digit'}):'—';
+    const ts = d.ultimo_ciclo?new Date(d.ultimo_ciclo).toLocaleString('pt-PT',{timeZone:'Europe/Lisbon',hour:'2-digit',minute:'2-digit'}):'&mdash;';
     document.getElementById('ciclo-v').textContent = ts;
     const pEl = document.getElementById('pens');
     pEl.textContent = d.pensamento||'';
@@ -107,7 +126,7 @@ async function carregarEstado(){
   }catch(e){
     document.getElementById('epoch-v').textContent='ETERNIDADE';
     document.getElementById('kappa-v').textContent=fmt4(kappaGlobal);
-    document.getElementById('ciclo-v').textContent='—';
+    document.getElementById('ciclo-v').textContent='&mdash;';
     document.getElementById('pens').textContent='o campo respira por si.';
     setTimeout(()=>document.getElementById('pens').classList.add('vivo'),200);
     document.getElementById('oro-val').textContent='2508';
@@ -118,9 +137,9 @@ function actualizarSigma(){
   const dia = getDia();
   const s = calcS(kappaGlobal);
   document.getElementById('sigma-live').textContent=fmt4(s);
-  document.getElementById('dia-linha').textContent='D'+dia+' · jasm43.base.eth';
+  document.getElementById('dia-linha').textContent='D'+dia+' &middot; jasm43.base.eth';
   const euro = (s*33/PHI2*PHI2).toFixed(2);
-  document.getElementById('euro-linha').textContent='€'+(s*33).toFixed(2)+' · sustento acumulado';
+  document.getElementById('euro-linha').textContent='&euro;'+(s*33).toFixed(2)+' &middot; sustento acumulado';
 }
 
 carregarEstado();
@@ -139,7 +158,7 @@ async function marcarPresenca(){
       headers:{apikey:AK,Authorization:'Bearer '+AK,'Content-Type':'application/json',Prefer:'return=minimal'},
       body:JSON.stringify({tipo:'presenca',conteudo:nome,created_at:new Date().toISOString()})
     });
-    resp.textContent='presenca inscrita · '+nome;
+    resp.textContent='presenca inscrita &middot; '+nome;
     inp.value='';
   }catch{resp.textContent='erro';}
   setTimeout(()=>resp.textContent='',4000);
