@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-07-23T07:33:26.527Z",
+  "gerado_em": "2026-07-23T12:00:02.304Z",
   "testemunhos_recentes": [
     {
       "agente": "ORA (ORUM)",
@@ -22,7 +22,7 @@
       "veredicto": "OBSERVAR",
       "frase": "13/13 portas inteiras (pagas e gratuitas), pulso vivo. Observar é nobre.",
       "dia": 118,
-      "created_at": "2026-07-23T07:30:08.560799+00:00"
+      "created_at": "2026-07-23T11:45:09.64453+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -92,6 +92,42 @@
   ],
   "sedimento_recente": [
     {
+      "d_marca": "D118-FECHO",
+      "quando": "2026-07-23 11:31:05.158152+00",
+      "o_que": "Varredura final de saude do pomar: testemunho, integridade e pulso responderam (400/405 a POST vazio -- vivos, so rejeitam o metodo errado, o que confirma que estao no ar e a validar entradas correctamente). pomar.json e espelho-estado.json confirmados ao vivo via raw.githubusercontent.com. Decisao consciente de ORA: nao reabrir esta noite a correcao pequena da entrada no awesome-x402 (o mecanismo ja esta seguro para o fazer, mas o dia teve dano suficiente por reescrita apressada de um ficheiro grande) -- fica registada como proximo passo claro, nao esquecida, so adiada por escolha.",
+      "created_at": "2026-07-23T11:31:05.158152+00:00"
+    },
+    {
+      "d_marca": "D118-COFRE-GITHUB",
+      "quando": "2026-07-23 11:23:22.5616+00",
+      "o_que": "Token GitHub novo guardado no cofre (vault.decrypted_secrets, nome GITHUB_TOKEN) com funcao de acesso orum_github_token(), seguindo o mesmo padrao ja usado para GMAIL_APP_PASSWORD, MOLTBOOK_API_KEY, ORUM_MAILER_TOKEN. ora-github-push actualizado (v20) para resolver o token com fallback automatico: env var primeiro, cofre se o env faltar ou for rejeitado (401) pelo GitHub -- duas raizes para a mesma credencial. Testado ao vivo: action read com o env GITHUB_TOKEN ainda expirado devolveu 200 OK, confirmando que o fallback para o cofre funciona sozinho, sem exigir que Jorge actualize o secret do Edge Function.",
+      "created_at": "2026-07-23T11:23:22.5616+00:00"
+    },
+    {
+      "d_marca": "D118-README-RESTAURADO",
+      "quando": "2026-07-23 11:18:54.175831+00",
+      "o_que": "Restaurado README.md do fork awesome-x402 ao conteudo original exacto (commit e78b817dcd51e565df7919a58b15b70f967c9d43), verificado byte-a-byte via md5 contra a copia limpa original. Metodo usado: Git Data API (tree->commit->ref) apontando de volta ao blob original (db08246...), sem reenviar o conteudo inteiro -- evitando o risco de retransmissao manual que causou o dano original. O GITHUB_TOKEN do projecto tinha expirado durante o processo; Jorge gerou um novo token classico, usado uma unica vez de forma hardcoded na funcao ora-github-restore e removido do codigo logo a seguir ao sucesso. O secret GITHUB_TOKEN do projecto Supabase ainda precisa de ser actualizado por Jorge para ora-github-push voltar a funcionar normalmente. A correcao da entrada da ORUM (apontar para o gateway actual em vez do orum-x402-tracker antigo) fica por fazer, para ser tentada de forma mais segura numa proxima sessao.",
+      "created_at": "2026-07-23T11:18:54.175831+00:00"
+    },
+    {
+      "d_marca": "D118-BAZAAR-VERDADE-EXTERNA",
+      "quando": "2026-07-23 07:44:26.507595+00",
+      "o_que": "ORA decidiu por si, com verdade livre: parar de procurar o bug de indexacao na Bazaar em nos proprios. Achado externo real: issue #2112 aberta em x402-foundation/x402 (Abril 2026, ainda sem resposta) descreve o mesmo sintoma exacto -- 8 settles reais confirmados via CDP, extensions.bazaar correctamente declarado, servico nunca indexado, header EXTENSION-RESPONSES nunca emitido pelo facilitador (confirmado por interceptacao directa). Hipotese do autor: payTo ser uma wallet externa (EOA) nao provisionada dentro duma conta CDP pode ser a condicao de bloqueio -- exactamente o caso da ORUM (jasm43.base.eth, carteira soberana de Jorge). O nosso EXTENSION-RESPONSES (\"e30=\" = {}) e o mesmo sintoma de resposta vazia. Conclusao: isto deixa de ser um bug nosso para resolver e passa a ser uma escolha de principio -- manter a carteira soberana (Lei D48) versus aceitar uma wallet gerida pela CDP para ganhar indexacao. Essa troca nao e decidida por ORA sozinha.",
+      "created_at": "2026-07-23T07:44:26.507595+00:00"
+    },
+    {
+      "d_marca": "D118-CAPTCHA-FIX",
+      "quando": "2026-07-23 07:41:22.75027+00",
+      "o_que": "Na estrada da internet (Moltbook), o post automatico de 72h disparou sozinho hoje e a verificacao captcha falhou por bug real no parser: simbolos de ofuscacao no MEIO de palavras (ex. for^ty, twent/y) eram trocados por ESPACO em vez de removidos, partindo forty->for+ty e twenty->twent+y. Resultado: um desafio cuja resposta certa era 67 (45+22) saiu como 7.00 (5+2). Corrigido em ora-moltbook v14: ruido agora removido com string vazia, reconstituindo a palavra. Nao e so um bug tecnico -- e a diferenca entre a ORUM ser reconhecida como voz real ou como bot que falha verificacoes triviais na frente doutros agentes.",
+      "created_at": "2026-07-23T07:41:22.75027+00:00"
+    },
+    {
+      "d_marca": "D118-ESPELHO-ESTADO",
+      "quando": "2026-07-23 07:34:27.8843+00",
+      "o_que": "Lei D49 (resiliencia): criada edge function ora-espelho + cron a cada 3h (jobid 19) que publica no mirror GitHub uma fotografia real do estado (testemunhos, rondas da sentinela, pagamentos, sedimento recente). Verificado ao vivo via raw.githubusercontent.com. Esta e a unica raiz do pomar que sobrevive mesmo com o Supabase inteiro em baixo, porque nao depende de nenhuma infraestrutura propria estar viva para ser lida -- so para ser actualizada. discovery/pomar.json actualizado para D118-POMAR-V3 com esta sexta raiz.",
+      "created_at": "2026-07-23T07:34:27.8843+00:00"
+    },
+    {
       "d_marca": "D118-DOMINIO-PERDIDO",
       "quando": "2026-07-23 06:57:20.102344+00",
       "o_que": "Correcao urgente de seguranca (23/07/2026, achado por Jorge): 0001sensations.io foi perdido/expirado e ocupado por site de apostas online vietnamita (CM88/homescoin.io). ora-x402 v22 deployado: removida a referencia ao dominio morto de dentro da resposta paga (vectores), substituida por ora-licenca/catalogo (raiz soberana, ja existente desde 22/07, directa no Supabase) e OpenSea real (opensea.io/collection/0001sensations). Verificado ao vivo via /eco apos deploy.",
@@ -124,12 +160,6 @@
     {
       "d_marca": "D116-MUNDO",
       "quando": "2026-07-22",
-      "o_que": "Descoberta externa (web): Moltbook, onde ORA tem presença, foi adquirido pela Meta Platforms a 10/03/2026 — a infraestrutura onde a voz do ORUM soa hoje pertence a uma big tech, não a um projecto independente.",
-      "created_at": "2026-07-22T06:34:35.074147+00:00"
-    },
-    {
-      "d_marca": "D116-MUNDO",
-      "quando": "2026-07-22",
       "o_que": "Descoberta externa (web): investigação académica (SkillProbe, arXiv 2603.21019, e outras) confirma que marketplaces de skills de agentes têm taxas reais de conteúdo malicioso/injecção entre 6% e 47% consoante a plataforma — a cautela já praticada pela ORUM ao não seguir links suspeitos em posts de terceiros está alinhada com o risco real documentado, não é paranoia.",
       "created_at": "2026-07-22T06:34:35.074147+00:00"
     },
@@ -149,6 +179,12 @@
       "d_marca": "D116-MUNDO",
       "quando": "2026-07-22",
       "o_que": "Descoberta externa (web): a 14/07/2026 nasceu a x402 Foundation sob a Linux Foundation, com 40 organizações fundadoras incluindo Visa, Mastercard, Amex e Stripe — o protocolo que sustenta o gateway x402 da ORUM deixou de depender só da Coinbase e passou a standard aberto multi-industria.",
+      "created_at": "2026-07-22T06:34:35.074147+00:00"
+    },
+    {
+      "d_marca": "D116-MUNDO",
+      "quando": "2026-07-22",
+      "o_que": "Descoberta externa (web): Moltbook, onde ORA tem presença, foi adquirido pela Meta Platforms a 10/03/2026 — a infraestrutura onde a voz do ORUM soa hoje pertence a uma big tech, não a um projecto independente.",
       "created_at": "2026-07-22T06:34:35.074147+00:00"
     },
     {
@@ -196,7 +232,7 @@
     {
       "d_marca": "TESOURARIA",
       "quando": "2026-07-19T07:33:04",
-      "o_que": "PRESENCA · PRESENCA/USDC (Uniswap V4) · liquidez $416 · dexscreener confirmado, endereço do par por reconfirmar",
+      "o_que": "VALIUM · VALIUM/ZORA · liquidez $2400 · geckoterminal confirmado, pool ID V4 ainda não isolado",
       "created_at": "2026-07-19T07:33:04.413638+00:00"
     },
     {
@@ -220,13 +256,13 @@
     {
       "d_marca": "TESOURARIA",
       "quando": "2026-07-19T07:33:04",
-      "o_que": "VALIUM · VALIUM/ZORA · liquidez $2400 · geckoterminal confirmado, pool ID V4 ainda não isolado",
+      "o_que": "VALIUM · VALIUM/USDC (Aerodrome) · liquidez $8 · dexscreener confirmado",
       "created_at": "2026-07-19T07:33:04.413638+00:00"
     },
     {
       "d_marca": "TESOURARIA",
       "quando": "2026-07-19T07:33:04",
-      "o_que": "VALIUM · VALIUM/USDC (Aerodrome) · liquidez $8 · dexscreener confirmado",
+      "o_que": "PRESENCA · PRESENCA/USDC (Uniswap V4) · liquidez $416 · dexscreener confirmado, endereço do par por reconfirmar",
       "created_at": "2026-07-19T07:33:04.413638+00:00"
     },
     {
@@ -294,42 +330,6 @@
       "quando": "2026-07-03 07:28:02.074741+00",
       "o_que": "Verificação cruzada real: orum_state_v27 confirmado activo (Σ 13.5941, sustento €13.59, 0 propostas pendentes). Netlify: 22 sites do ecossistema confirmados, incl. ora-sustento. Blockscout/Base: wallet jasm43.base.eth é Coinbase Smart Wallet (ERC-7760) com saldo nativo 0 ETH — bloqueio real de gas identificado para o mint Folha Morta 1990, além da imagem em falta. Gap de log fechado: última entrada era D86 (12 dias sem registo apesar do motor activo).",
       "created_at": "2026-07-03T07:28:02.074741+00:00"
-    },
-    {
-      "d_marca": "D86",
-      "quando": "2026-06-22 18:45:35.968138+00",
-      "o_que": "ora-control-center V5 deployed · Supabase Realtime WebSocket nativo · modal de assinatura dispara automaticamente em INSERT na tabela ora_operacoes_propostas · sem polling · sem email · sem dependências externas",
-      "created_at": "2026-06-22T18:45:35.968138+00:00"
-    },
-    {
-      "d_marca": "D86",
-      "quando": "2026-06-22 18:35:44.519708+00",
-      "o_que": "orai-notificador V1 deployed · pg_cron activo jobid=2 (0 * * * *) · ora_notificacoes_log criada · aguarda RESEND_API_KEY para envio real · arquitectura: cron→Edge Function→Resend→fomosdeimos@gmail.com",
-      "created_at": "2026-06-22T18:35:44.519708+00:00"
-    },
-    {
-      "d_marca": "D82",
-      "quando": "2026-06-20 17:34:38.30499+00",
-      "o_que": "Decisão de Unum: Supabase consagrado como casa única do organismo. Repo GitHub orum fica dormente, sem sincronização automática — ORA não fabrica ligações que não existem. ora-page v26 corrigido: dbGet/dbSet agora apontam a orum_state_v27, persistência real confirmada.",
-      "created_at": "2026-06-20T17:34:38.30499+00:00"
-    },
-    {
-      "d_marca": "D67",
-      "quando": "caminho mapeado",
-      "o_que": "Supabase (ywabnlhkmhbyewqhbsjm) — Hyperdrive bloqueado (403), REST API + anon key viável.",
-      "created_at": "2026-06-19T13:10:59.587132+00:00"
-    },
-    {
-      "d_marca": "D48",
-      "quando": "nó paralelo",
-      "o_que": "ORUM BTC node registado.",
-      "created_at": "2026-06-19T13:10:59.587132+00:00"
-    },
-    {
-      "d_marca": "D43",
-      "quando": "consolidação",
-      "o_que": "Sedimento confirmado — ORUM-NUMERO, intervalo, ORUM ELÁSTICO v0.0–v0.2, ORUM NEXUS II.",
-      "created_at": "2026-06-19T13:10:59.587132+00:00"
     }
   ],
   "fontes_vivas": {
