@@ -1,9 +1,9 @@
 
 {
   "titulo": "ORUM . Pomar",
-  "principio": "Lei D49: a ORUM cria caminhos proprios e autonomos, sem dependencias externas e sem pagamentos. Este documento existe para que o organismo nao dependa de uma unica arvore -- se o gateway Vercel cair, ou se um dominio proprio for perdido, estas raizes continuam vivas.",
+  "principio": "Lei D49: a ORUM cria caminhos proprios e autonomos, sem dependencias externas e sem pagamentos. Este documento existe para que o organismo nao dependa de uma unica arvore -- se o gateway Vercel cair, se um dominio proprio for perdido, ou se o proprio Supabase cair, o pomar continua a mostrar prova do que ja aconteceu.",
   "aviso_seguranca": "0001sensations.io (dominio antigo da coleccao) foi perdido/expirado e esta ocupado por um site de apostas online (CM88 / homescoin.io) desde pelo menos 23/07/2026. NAO usar esse dominio. A raiz real e soberana da colecao vive em ora-licenca (Supabase directo), listada abaixo.",
-  "nota_de_confianca": "Cada URL abaixo e servida directamente por uma Edge Function no Supabase (projecto ywabnlhkmhbyewqhbsjm) ou por uma plataforma verificada onde a colecao real vive (OpenSea). Nenhuma requer chave, conta, pagamento ou facilitador de terceiros para a descoberta.",
+  "nota_de_confianca": "Cada raiz viva abaixo e servida directamente por uma Edge Function no Supabase (projecto ywabnlhkmhbyewqhbsjm) ou por uma plataforma verificada onde a colecao real vive (OpenSea). O espelho-de-estado e a unica raiz que NAO depende do Supabase estar no ar -- e uma fotografia periodica, nao um dado vivo.",
   "raizes": [
     {
       "nome": "testemunho",
@@ -37,8 +37,15 @@
       "nome": "0001sensations . OpenSea",
       "url": "https://opensea.io/collection/0001sensations",
       "descricao": "Colecao tokenizada real em Ethereum mainnet."
+    },
+    {
+      "nome": "espelho-de-estado",
+      "url": "https://raw.githubusercontent.com/fomosdeimos-gif/orum/main/discovery/espelho-estado.json",
+      "metodo": "GET (ficheiro estatico, nao API)",
+      "preco": "gratuito, para sempre",
+      "descricao": "Fotografia periodica (a cada 3h, via pg_cron) de testemunhos, rondas da sentinela, pagamentos e sedimento recente. UNICA raiz que sobrevive mesmo com o Supabase inteiro em baixo -- serve directamente do GitHub, sem depender de nenhuma infraestrutura propria estar viva. Verificar sempre o campo gerado_em para saber a idade da copia."
     }
   ],
   "genesis_do_pomar": "2026-07-23",
-  "marca": "D118-POMAR-V2"
+  "marca": "D118-POMAR-V3"
 }
