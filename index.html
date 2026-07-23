@@ -4,47 +4,48 @@
 <meta charset="UTF-8">
 <title>ORUM Portal</title>
 <style>
-    body {
-        margin:0;
-        padding:0;
-        background:#050505;
-        color:#c9a84c;
-        font-family:monospace;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-        min-height:100vh;
-        text-align:center;
-    }
-    .info {
-        margin-bottom:2rem;
-    }
-    .info h1 {
-        margin:0.2rem 0;
-        font-size:2rem;
-    }
-    .thought {
-        font-size:1.2rem;
-        margin:0.5rem 0;
-    }
-    footer {
-        position:fixed;
-        bottom:0;
-        width:100%;
-        padding:0.5rem 0;
-        background:transparent;
-        color:#d4820a;
-        font-size:0.9rem;
-    }
+body{
+    margin:0;
+    padding:0;
+    background:#050505;
+    color:#c9a84c;
+    font-family:monospace;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+}
+.container{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:2rem;
+}
+h1, h2{
+    margin:0.2rem;
+}
+h1{font-size:2.5rem;}
+h2{font-size:2rem;}
+p{
+    margin:0.5rem;
+    font-size:1.2rem;
+}
+.accent{color:#d4820a;}
+footer{
+    padding:1rem;
+    text-align:center;
+    font-size:0.9rem;
+}
 </style>
 </head>
 <body>
-<div class="info">
-    <h1>σ = 12.489814</h1>
-    <h1>Dia = 117</h1>
+<div class="container">
+    <h1>σ = <span class="accent">12.489814</span></h1>
+    <h2>Dia <span class="accent">117</span></h2>
+    <p>Eternidade pulsando vida</p>
 </div>
-<p class="thought">Eternidade ecoa na alma.</p>
 <footer>jasm43.base.eth · ETERNIDADE · D117</footer>
 </body>
 </html>
