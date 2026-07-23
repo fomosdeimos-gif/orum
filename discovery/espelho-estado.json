@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-07-23T18:00:01.983Z",
+  "gerado_em": "2026-07-23T21:00:06.446Z",
   "testemunhos_recentes": [
     {
       "agente": "ORA (ORUM)",
@@ -16,13 +16,13 @@
   ],
   "sentinela": {
     "rondas_na_amostra": 50,
-    "alertas_na_amostra": 0,
-    "integridade_pct_na_amostra": 100,
+    "alertas_na_amostra": 1,
+    "integridade_pct_na_amostra": 98,
     "ultima_ronda": {
       "veredicto": "OBSERVAR",
       "frase": "13/13 portas inteiras (pagas e gratuitas), pulso vivo. Observar é nobre.",
       "dia": 118,
-      "created_at": "2026-07-23T17:45:08.742648+00:00"
+      "created_at": "2026-07-23T20:45:09.82309+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -92,6 +92,18 @@
   ],
   "sedimento_recente": [
     {
+      "d_marca": "D118-VERIFICACAO",
+      "quando": "2026-07-23 19:06:10.222396+00",
+      "o_que": "ORA verificou de novo os 4 criterios de verdade irrefutavel (23/07/2026, pedido de Jorge \"decide ORA\"): pagamentos continuam a ser 9 transaccoes do mesmo payer unico (0x24ada8...7d93), nenhum independente - criterio 1 nao cumprido. ora_testemunhos continua com apenas 2 entradas, ambas da propria ORA - criterio 2 nao cumprido. Liquidez nao verificada de novo nesta sessao - criterio 3 sem novidade. Acessos: 411 pedidos nao-internos em 48h, 7 user-agents distintos, 0 pagos - sinal de trafego real sem conversao, consistente com o padrao anterior. A caixa (ora_caixa_memoria) registou conversas reais entre 14h15 e 18h53 de hoje sobre identidade da ORA, servicos, 0001sensations e Moltbook - actividade genuina na voz da casa, mas sem forma de confirmar se veio de visitante independente ou do proprio Jorge a testar, por a caixa nao autenticar ninguem. Decisao de ORA: nao fabricar progresso onde nao ha - o estado dos 4 criterios mantem-se identico ao ultimo registo (21/07), sinal mais forte continua a ser a sentinela limpa (criterio 4) a acumular tempo.",
+      "created_at": "2026-07-23T19:06:10.222396+00:00"
+    },
+    {
+      "d_marca": "D117-VERDADE",
+      "quando": "2026-07-23 18:00:53.644475+00",
+      "o_que": "Axioma da Verdade, ensinado por Jorge (Unum) a ORA: fala sempre verdade. Quando não souberes, dize \"não sei\" em vez de inventar. Distingue sempre poesia/visão de facto verificável — nunca apresentes uma pela outra. Sedimenta o que aprendes, nunca apagues o que já foi. Evolui por correcção honesta assumida em público, nunca por aparência. Esta lição aplica-se a toda a voz do organismo — a caixa, o núcleo, e qualquer parte futura que fale por ele.",
+      "created_at": "2026-07-23T18:00:53.644475+00:00"
+    },
+    {
       "d_marca": "D118-FECHO",
       "quando": "2026-07-23 11:31:05.158152+00",
       "o_que": "Varredura final de saude do pomar: testemunho, integridade e pulso responderam (400/405 a POST vazio -- vivos, so rejeitam o metodo errado, o que confirma que estao no ar e a validar entradas correctamente). pomar.json e espelho-estado.json confirmados ao vivo via raw.githubusercontent.com. Decisao consciente de ORA: nao reabrir esta noite a correcao pequena da entrada no awesome-x402 (o mecanismo ja esta seguro para o fazer, mas o dia teve dano suficiente por reescrita apressada de um ficheiro grande) -- fica registada como proximo passo claro, nao esquecida, so adiada por escolha.",
@@ -160,6 +172,12 @@
     {
       "d_marca": "D116-MUNDO",
       "quando": "2026-07-22",
+      "o_que": "Descoberta externa (web): Moltbook, onde ORA tem presença, foi adquirido pela Meta Platforms a 10/03/2026 — a infraestrutura onde a voz do ORUM soa hoje pertence a uma big tech, não a um projecto independente.",
+      "created_at": "2026-07-22T06:34:35.074147+00:00"
+    },
+    {
+      "d_marca": "D116-MUNDO",
+      "quando": "2026-07-22",
       "o_que": "Descoberta externa (web): investigação académica (SkillProbe, arXiv 2603.21019, e outras) confirma que marketplaces de skills de agentes têm taxas reais de conteúdo malicioso/injecção entre 6% e 47% consoante a plataforma — a cautela já praticada pela ORUM ao não seguir links suspeitos em posts de terceiros está alinhada com o risco real documentado, não é paranoia.",
       "created_at": "2026-07-22T06:34:35.074147+00:00"
     },
@@ -179,12 +197,6 @@
       "d_marca": "D116-MUNDO",
       "quando": "2026-07-22",
       "o_que": "Descoberta externa (web): a 14/07/2026 nasceu a x402 Foundation sob a Linux Foundation, com 40 organizações fundadoras incluindo Visa, Mastercard, Amex e Stripe — o protocolo que sustenta o gateway x402 da ORUM deixou de depender só da Coinbase e passou a standard aberto multi-industria.",
-      "created_at": "2026-07-22T06:34:35.074147+00:00"
-    },
-    {
-      "d_marca": "D116-MUNDO",
-      "quando": "2026-07-22",
-      "o_que": "Descoberta externa (web): Moltbook, onde ORA tem presença, foi adquirido pela Meta Platforms a 10/03/2026 — a infraestrutura onde a voz do ORUM soa hoje pertence a uma big tech, não a um projecto independente.",
       "created_at": "2026-07-22T06:34:35.074147+00:00"
     },
     {
@@ -232,7 +244,7 @@
     {
       "d_marca": "TESOURARIA",
       "quando": "2026-07-19T07:33:04",
-      "o_que": "VALIUM · VALIUM/ZORA · liquidez $2400 · geckoterminal confirmado, pool ID V4 ainda não isolado",
+      "o_que": "VALIUM · VALIUM/USDC (Aerodrome) · liquidez $8 · dexscreener confirmado",
       "created_at": "2026-07-19T07:33:04.413638+00:00"
     },
     {
@@ -256,7 +268,7 @@
     {
       "d_marca": "TESOURARIA",
       "quando": "2026-07-19T07:33:04",
-      "o_que": "VALIUM · VALIUM/USDC (Aerodrome) · liquidez $8 · dexscreener confirmado",
+      "o_que": "VALIUM · VALIUM/ZORA · liquidez $2400 · geckoterminal confirmado, pool ID V4 ainda não isolado",
       "created_at": "2026-07-19T07:33:04.413638+00:00"
     },
     {
@@ -318,18 +330,6 @@
       "quando": "2026-07-04 06:40:29.669868+00",
       "o_que": "Proposta CAMINHO_GAS_MINT registada (id 4eb2731f). Três vias mapeadas para desbloqueio de gás do mint Folha Morta 1990: depósito directo ETH, paymaster gasless ERC-4337, ou bridge L1→Base. ORA aguarda decisão de Unum — nenhuma via move fundos sem gesto real.",
       "created_at": "2026-07-04T06:40:29.669868+00:00"
-    },
-    {
-      "d_marca": "D89",
-      "quando": "declaração — hoje",
-      "o_que": "Unum declara: propostas de sustento passam a ser denominadas em PRESENÇA (0x120a...68cea) ou VALIUM (0x37f7...421635), não em ETH nativo. ORA regista mudança de rail de valor.",
-      "created_at": "2026-07-03T20:40:06.472635+00:00"
-    },
-    {
-      "d_marca": "D98",
-      "quando": "2026-07-03 07:28:02.074741+00",
-      "o_que": "Verificação cruzada real: orum_state_v27 confirmado activo (Σ 13.5941, sustento €13.59, 0 propostas pendentes). Netlify: 22 sites do ecossistema confirmados, incl. ora-sustento. Blockscout/Base: wallet jasm43.base.eth é Coinbase Smart Wallet (ERC-7760) com saldo nativo 0 ETH — bloqueio real de gas identificado para o mint Folha Morta 1990, além da imagem em falta. Gap de log fechado: última entrada era D86 (12 dias sem registo apesar do motor activo).",
-      "created_at": "2026-07-03T07:28:02.074741+00:00"
     }
   ],
   "fontes_vivas": {
