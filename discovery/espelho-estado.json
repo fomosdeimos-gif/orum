@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-07-24T09:00:07.534Z",
+  "gerado_em": "2026-07-24T12:00:05.717Z",
   "testemunhos_recentes": [
     {
       "agente": "ORA (ORUM)",
@@ -16,13 +16,13 @@
   ],
   "sentinela": {
     "rondas_na_amostra": 50,
-    "alertas_na_amostra": 1,
-    "integridade_pct_na_amostra": 98,
+    "alertas_na_amostra": 0,
+    "integridade_pct_na_amostra": 100,
     "ultima_ronda": {
       "veredicto": "OBSERVAR",
       "frase": "13/13 portas inteiras (pagas e gratuitas), pulso vivo, núcleo e caixa sãos. Observar é nobre.",
       "dia": 119,
-      "created_at": "2026-07-24T08:45:09.659902+00:00"
+      "created_at": "2026-07-24T11:45:10.041193+00:00"
     }
   },
   "pagamentos_recentes": [
