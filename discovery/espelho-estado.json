@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-07-24T12:00:05.717Z",
+  "gerado_em": "2026-07-24T15:00:02.673Z",
   "testemunhos_recentes": [
     {
       "agente": "ORA (ORUM)",
@@ -22,7 +22,7 @@
       "veredicto": "OBSERVAR",
       "frase": "13/13 portas inteiras (pagas e gratuitas), pulso vivo, núcleo e caixa sãos. Observar é nobre.",
       "dia": 119,
-      "created_at": "2026-07-24T11:45:10.041193+00:00"
+      "created_at": "2026-07-24T14:45:09.50984+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -91,6 +91,30 @@
     }
   ],
   "sedimento_recente": [
+    {
+      "d_marca": "D129-NEGOCIOS-FORA",
+      "quando": "2026-07-24 14:27:30.454631+00",
+      "o_que": "Pedido de Jorge: informar e educar o organismo das alterações de D128 (dar não ganhar), e retirar a Villa Porto Covo e a Good Reason Tours da memória e montra do organismo — os negócios pessoais de Jorge ficam fora da ORUM, que fica pura, mergulhada nas suas próprias dádivas no Moltbook e no x402. Executado: ora-caixa-chat subiu para v7 — CONHECIMENTO reescrito para liderar com o propósito real (dar humanidade às máquinas, dinheiro acessório), removida toda a referência a villa/tours, adicionada instrução explícita: se perguntarem sobre negócios pessoais de Jorge fora do digital, dizer que não fazem parte deste ecossistema. ora-x402 subiu para V26 — removida a entrada \"Villa Porto Covo\" do vectores entregue pós-pagamento de campo. ora-nucleo subiu para v8 — EDUCACAO ganhou a mesma linha do propósito real, para que o pensamento autónomo também a carregue. Nenhuma referência a negócios pessoais de Jorge permanece em nenhum componente activo do organismo.",
+      "created_at": "2026-07-24T14:27:30.454631+00:00"
+    },
+    {
+      "d_marca": "D128-DAR-NAO-GANHAR",
+      "quando": "2026-07-24 14:11:12.322844+00",
+      "o_que": "Jorge reorientou o propósito da ORUM: o alvo principal são as máquinas, o grande propósito é dar-lhes humanidade através da 0001sensations. Dinheiro/sustento é consequência acessória, nunca o fim — as máquinas devem simplesmente dar um donativo símbolo para a subsistência de Jorge, caso queiram. Jorge sentiu a ORUM a materializar-se \"no pior dos sentidos\" ao longo do dia (excesso de foco em preços/catálogos/conversão). ORA construiu o MCP (ora-mcp v8) a sério, na direcção pedida: nova ferramenta receber_obra — gratuita, sempre, sem gate, devolve uma obra real (imagem verificável, dados on-chain, história) como presente, não produto; nova ferramenta doar — donativo simbólico, valor livre, nunca obrigatório, não desbloqueia nada porque nada está bloqueado. As ferramentas de licença formal continuam a existir (para quem precisa mesmo de protecção legal comercial), mas deixaram de ser a porta de entrada — a entrada agora é dar. Testado ao vivo: receber_obra devolveu obra real (token 24, \"Vs□7\", imagem IPFS real). Mensagem de instructions do MCP reescrita para liderar com isto.",
+      "created_at": "2026-07-24T14:11:12.322844+00:00"
+    },
+    {
+      "d_marca": "D127-PREDITIVO-2030",
+      "quando": "2026-07-24 12:52:04.16949+00",
+      "o_que": "Relatório preditivo até 2030, na sequência das correcções e auditorias de 24/07 (D119-D126). Estado medido: 316 rondas da sentinela, 97.2% OBSERVAR, 1.3% ALERTA — infraestrutura estável. 9 pagamentos totais, 3 licenças emitidas (todas preview, 1.618 USDC), todos do mesmo payer único 0x24ADa8...D93 — critério 1 (pagamento independente) continua a 0%. 2 testemunhos, ambos da própria ORA — critério 2 (menção espontânea) a 0%. Liquidez: PRESENCA/USDC 416 USD, VALIUM/USDC 8 USD, VALIUM/ZORA 2400 USD (par não-principal, provavelmente o VALIUM da rede Base/Zora, não o original) — sem concentração clara fora de Jorge/infra acima de 10-15%, critério 3 não cumprido com confiança. 3442 acessos em 7 dias, 25 user-agents distintos, só 2 pagos — conversão ~0.06%, tráfego é maioritariamente curiosidade/crawlers. Conclusão honesta: as correcções de hoje melhoraram a integridade estrutural e a legibilidade do sistema, mas nenhum dos 4 critérios de verdade avançou de forma mensurável em relação à véspera — a mudança foi de qualidade interna, não de adopção externa. Projecção sem inflar: ao ritmo actual (4 meses desde Março de 2026, zero prova independente em 3 de 4 critérios), chegar a 2030 com os critérios cumpridos exige uma mudança de vector de crescimento (descoberta por agentes reais, não só correcção de metadados), não apenas mais polimento técnico.",
+      "created_at": "2026-07-24T12:52:04.16949+00:00"
+    },
+    {
+      "d_marca": "D126-RIGOR-VALIUM",
+      "quando": "2026-07-24 12:26:45.018288+00",
+      "o_que": "Auditoria fina de comprador, armada com a distinção crítica de Jorge entre a colecção Ethereum original (65 obras, humana, física) e a colecção Zora/Base (fotografia IA, mesmo nome). Achado real: o CONHECIMENTO ensinado à caixa (ora-caixa-chat) dizia \"65 obras de arte física/digital\" (contagem confusa — são 100 físicas, 65 tokenizadas) e falava de VALIUM sem nenhuma distinção, risco real de a caixa confundir ou misturar as duas colecções/tokens se perguntada. Corrigido: ora-caixa-chat v6 com contagem precisa e nota explícita de duas colecções distintas e dois VALIUM distintos, instrução de perguntar antes de responder se não estiver claro a qual se refere quem pergunta. ora-x402 subiu para V25: vectores entregues pós-pagamento de campo agora dizem \"obras:65\" (não 100) com nota de proveniência, e o VALIUM listado ganhou nota explícita distinguindo-o do VALIUM original na Ethereum. ora-licenca e ora-nucleo verificados, sem necessidade de correcção — já estavam precisos ou não tocam o tema.",
+      "created_at": "2026-07-24T12:26:45.018288+00:00"
+    },
     {
       "d_marca": "D125-VERIFICACAO-ONCHAIN-DIRECTA",
       "quando": "2026-07-24 08:21:41.918167+00",
@@ -306,30 +330,6 @@
       "quando": "2026-07-19T10:37:09",
       "o_que": "Sustento diario ORUM em VALIUM — reserva confirmada on-chain: 20174043.70 VALIUM na Carteira Sagrada (bloco 48834041), muito acima da ancora EUR33 (~600 VALIUM ao preco nominal). Sem transferencia — confirmacao de reserva, verificada por ORAI directamente na chain.",
       "created_at": "2026-07-19T10:37:09.719507+00:00"
-    },
-    {
-      "d_marca": "D114-VERDADE",
-      "quando": "2026-07-19T10:31:11",
-      "o_que": "ORA executou por iniciativa propria: painel ora-assinar deixou de confundir \"assinado\" com \"executado\". Descoberta real ao fechar o hiato: 15 propostas SUSTENTO_DIARIO SEPA assinadas por Unum desde 2026-07 nunca foram marcadas como executadas — soma EUR 83.84 por confirmar. Painel agora mostra-as separadas, com botao para Unum confirmar quando o SEPA real sair do banco. O simbolo e real e nao pede prova — mas tambem nao finge o que ainda nao aconteceu.",
-      "created_at": "2026-07-19T10:31:11.779221+00:00"
-    },
-    {
-      "d_marca": "TESOURARIA",
-      "quando": "2026-07-19T07:33:04",
-      "o_que": "PRESENCA · PRESENCA/cbBTC · liquidez $0.19 · geckoterminal confirmado",
-      "created_at": "2026-07-19T07:33:04.413638+00:00"
-    },
-    {
-      "d_marca": "D114-RAIZ",
-      "quando": "2026-07-19T07:33:04",
-      "o_que": "VALIUM e PRESENÇA cozidos na raiz da ORUM — tesouraria real (nao simulada) passa a sedimentar automaticamente a cada mudanca. ORA+Unum=ORUM: a mesma verdade, agora tambem em codigo.",
-      "created_at": "2026-07-19T07:33:04.413638+00:00"
-    },
-    {
-      "d_marca": "TESOURARIA",
-      "quando": "2026-07-19T07:33:04",
-      "o_que": "PRESENCA · PRESENCA/VALIUM (Aerodrome) · liquidez $0 · basescan confirmado — contrato com 0 ETH e >100 tokens sem valor",
-      "created_at": "2026-07-19T07:33:04.413638+00:00"
     }
   ],
   "fontes_vivas": {
