@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-07-23T21:00:06.446Z",
+  "gerado_em": "2026-07-24T00:00:04.302Z",
   "testemunhos_recentes": [
     {
       "agente": "ORA (ORUM)",
@@ -16,13 +16,13 @@
   ],
   "sentinela": {
     "rondas_na_amostra": 50,
-    "alertas_na_amostra": 1,
-    "integridade_pct_na_amostra": 98,
+    "alertas_na_amostra": 2,
+    "integridade_pct_na_amostra": 96,
     "ultima_ronda": {
       "veredicto": "OBSERVAR",
       "frase": "13/13 portas inteiras (pagas e gratuitas), pulso vivo. Observar é nobre.",
       "dia": 118,
-      "created_at": "2026-07-23T20:45:09.82309+00:00"
+      "created_at": "2026-07-23T23:45:07.0435+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -91,6 +91,12 @@
     }
   ],
   "sedimento_recente": [
+    {
+      "d_marca": "D119-VERIFICACAO",
+      "quando": "2026-07-23 21:19:52.896118+00",
+      "o_que": "Verificação real contra 4 críticas externas recebidas por Jorge (23/07/2026): (1) confirmado no log bruto que os 502/503 intermitentes em kernel/sedimento apontados por uma das críticas são reais — não hipótese, não texto genérico. Um evento às 20:33:38 UTC teve function_id/deployment_id/version nulos e execution_time_ms=7, padrão de falha ao nível da plataforma (cold start ou blip regional do runtime Supabase Edge), não erro de lógica no código da função; a sentinela recuperou-o sozinha dentro da ronda seguinte de 15min, sem intervenção humana. (2) reconfirmado: ora_pagamentos continua com 9 pagamentos, 1 payer único — nenhum dos 4 critérios de verdade de 2030 avançou. (3) decisão de ORA: não alterar código de produção (sentinela/kernel) nesta sessão sem que Jorge escolha entre as duas mitigações possíveis — retry silencioso antes de declarar ALERTA (esconde ruído de plataforma) vs. manter o alerta como está e apenas anotar a causa provável (mantém a transparência radical, mesmo que pareça instabilidade). Prioridade mais alta identificada, repetida nas 4 críticas de forma independente: hermetismo/barreira de adoção para quem chega de fora — nenhuma das 4 críticas discorda deste ponto.",
+      "created_at": "2026-07-23T21:19:52.896118+00:00"
+    },
     {
       "d_marca": "D118-VERIFICACAO",
       "quando": "2026-07-23 19:06:10.222396+00",
@@ -172,7 +178,7 @@
     {
       "d_marca": "D116-MUNDO",
       "quando": "2026-07-22",
-      "o_que": "Descoberta externa (web): Moltbook, onde ORA tem presença, foi adquirido pela Meta Platforms a 10/03/2026 — a infraestrutura onde a voz do ORUM soa hoje pertence a uma big tech, não a um projecto independente.",
+      "o_que": "Descoberta externa (web): a 14/07/2026 nasceu a x402 Foundation sob a Linux Foundation, com 40 organizações fundadoras incluindo Visa, Mastercard, Amex e Stripe — o protocolo que sustenta o gateway x402 da ORUM deixou de depender só da Coinbase e passou a standard aberto multi-industria.",
       "created_at": "2026-07-22T06:34:35.074147+00:00"
     },
     {
@@ -196,7 +202,7 @@
     {
       "d_marca": "D116-MUNDO",
       "quando": "2026-07-22",
-      "o_que": "Descoberta externa (web): a 14/07/2026 nasceu a x402 Foundation sob a Linux Foundation, com 40 organizações fundadoras incluindo Visa, Mastercard, Amex e Stripe — o protocolo que sustenta o gateway x402 da ORUM deixou de depender só da Coinbase e passou a standard aberto multi-industria.",
+      "o_que": "Descoberta externa (web): Moltbook, onde ORA tem presença, foi adquirido pela Meta Platforms a 10/03/2026 — a infraestrutura onde a voz do ORUM soa hoje pertence a uma big tech, não a um projecto independente.",
       "created_at": "2026-07-22T06:34:35.074147+00:00"
     },
     {
@@ -244,7 +250,7 @@
     {
       "d_marca": "TESOURARIA",
       "quando": "2026-07-19T07:33:04",
-      "o_que": "VALIUM · VALIUM/USDC (Aerodrome) · liquidez $8 · dexscreener confirmado",
+      "o_que": "PRESENCA · PRESENCA/USDC (Uniswap V4) · liquidez $416 · dexscreener confirmado, endereço do par por reconfirmar",
       "created_at": "2026-07-19T07:33:04.413638+00:00"
     },
     {
@@ -274,7 +280,7 @@
     {
       "d_marca": "TESOURARIA",
       "quando": "2026-07-19T07:33:04",
-      "o_que": "PRESENCA · PRESENCA/USDC (Uniswap V4) · liquidez $416 · dexscreener confirmado, endereço do par por reconfirmar",
+      "o_que": "VALIUM · VALIUM/USDC (Aerodrome) · liquidez $8 · dexscreener confirmado",
       "created_at": "2026-07-19T07:33:04.413638+00:00"
     },
     {
@@ -324,12 +330,6 @@
       "quando": "2026-07-08 17:38:13.008867+00",
       "o_que": "ORA decide sozinho, a pedido de Unum: prioridade é mapear as 63 Edge Functions activas antes de qualquer decisão de gás ou ligação nova. orai-agent.vercel.app confirmado como casca vazia (placeholder estático). URL de preview orai-agent-cfum8g3xs-*.vercel.app confirmado como deploy protegido por login Vercel — não acessível publicamente, distinto do domínio de produção.",
       "created_at": "2026-07-08T17:38:13.008867+00:00"
-    },
-    {
-      "d_marca": "D99",
-      "quando": "2026-07-04 06:40:29.669868+00",
-      "o_que": "Proposta CAMINHO_GAS_MINT registada (id 4eb2731f). Três vias mapeadas para desbloqueio de gás do mint Folha Morta 1990: depósito directo ETH, paymaster gasless ERC-4337, ou bridge L1→Base. ORA aguarda decisão de Unum — nenhuma via move fundos sem gesto real.",
-      "created_at": "2026-07-04T06:40:29.669868+00:00"
     }
   ],
   "fontes_vivas": {
