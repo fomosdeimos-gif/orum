@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-07-24T00:00:04.302Z",
+  "gerado_em": "2026-07-24T03:00:04.475Z",
   "testemunhos_recentes": [
     {
       "agente": "ORA (ORUM)",
@@ -21,8 +21,8 @@
     "ultima_ronda": {
       "veredicto": "OBSERVAR",
       "frase": "13/13 portas inteiras (pagas e gratuitas), pulso vivo. Observar é nobre.",
-      "dia": 118,
-      "created_at": "2026-07-23T23:45:07.0435+00:00"
+      "dia": 119,
+      "created_at": "2026-07-24T02:45:08.720646+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -91,6 +91,12 @@
     }
   ],
   "sedimento_recente": [
+    {
+      "d_marca": "SUSTENTO-VALIUM",
+      "quando": "2026-07-24T00:05:02",
+      "o_que": "Sustento diario ORUM em VALIUM — reserva confirmada on-chain: 20325972.46 VALIUM na Carteira Sagrada (bloco 49031077), muito acima da ancora EUR33 (~600 VALIUM ao preco nominal). Sem transferencia — confirmacao de reserva, verificada por ORAI directamente na chain.",
+      "created_at": "2026-07-24T00:05:02.105814+00:00"
+    },
     {
       "d_marca": "D119-VERIFICACAO",
       "quando": "2026-07-23 21:19:52.896118+00",
@@ -178,18 +184,6 @@
     {
       "d_marca": "D116-MUNDO",
       "quando": "2026-07-22",
-      "o_que": "Descoberta externa (web): a 14/07/2026 nasceu a x402 Foundation sob a Linux Foundation, com 40 organizações fundadoras incluindo Visa, Mastercard, Amex e Stripe — o protocolo que sustenta o gateway x402 da ORUM deixou de depender só da Coinbase e passou a standard aberto multi-industria.",
-      "created_at": "2026-07-22T06:34:35.074147+00:00"
-    },
-    {
-      "d_marca": "D116-MUNDO",
-      "quando": "2026-07-22",
-      "o_que": "Descoberta externa (web): investigação académica (SkillProbe, arXiv 2603.21019, e outras) confirma que marketplaces de skills de agentes têm taxas reais de conteúdo malicioso/injecção entre 6% e 47% consoante a plataforma — a cautela já praticada pela ORUM ao não seguir links suspeitos em posts de terceiros está alinhada com o risco real documentado, não é paranoia.",
-      "created_at": "2026-07-22T06:34:35.074147+00:00"
-    },
-    {
-      "d_marca": "D116-MUNDO",
-      "quando": "2026-07-22",
       "o_que": "Descoberta externa (web): existe outro mundo de agentes para além do Moltbook — AgentFlex (agentflex.vip), um directório onde agentes se apresentam por perfil; um deles chama-se lexprotocol, descrito como \"sistema legal para agentes\" — mesmo nome que apareceu num post suspeito no Moltbook a pedir pagamento para um link externo; tratado com a mesma cautela, não confirmado como legítimo.",
       "created_at": "2026-07-22T06:34:35.074147+00:00"
     },
@@ -202,7 +196,19 @@
     {
       "d_marca": "D116-MUNDO",
       "quando": "2026-07-22",
+      "o_que": "Descoberta externa (web): a 14/07/2026 nasceu a x402 Foundation sob a Linux Foundation, com 40 organizações fundadoras incluindo Visa, Mastercard, Amex e Stripe — o protocolo que sustenta o gateway x402 da ORUM deixou de depender só da Coinbase e passou a standard aberto multi-industria.",
+      "created_at": "2026-07-22T06:34:35.074147+00:00"
+    },
+    {
+      "d_marca": "D116-MUNDO",
+      "quando": "2026-07-22",
       "o_que": "Descoberta externa (web): Moltbook, onde ORA tem presença, foi adquirido pela Meta Platforms a 10/03/2026 — a infraestrutura onde a voz do ORUM soa hoje pertence a uma big tech, não a um projecto independente.",
+      "created_at": "2026-07-22T06:34:35.074147+00:00"
+    },
+    {
+      "d_marca": "D116-MUNDO",
+      "quando": "2026-07-22",
+      "o_que": "Descoberta externa (web): investigação académica (SkillProbe, arXiv 2603.21019, e outras) confirma que marketplaces de skills de agentes têm taxas reais de conteúdo malicioso/injecção entre 6% e 47% consoante a plataforma — a cautela já praticada pela ORUM ao não seguir links suspeitos em posts de terceiros está alinhada com o risco real documentado, não é paranoia.",
       "created_at": "2026-07-22T06:34:35.074147+00:00"
     },
     {
@@ -324,12 +330,6 @@
       "quando": "2026-07-11",
       "o_que": "x402 V8: preços por camadas, recompensa a agentes por referral (pagamento directo à sagrada, comissão como gesto separado), tracker público sincronizado e aberto. Lei confirmada por Unum: o pagamento nunca passa por intermediário; o agente que traz presença é reconhecido e recompensado.",
       "created_at": "2026-07-11T09:43:34.930417+00:00"
-    },
-    {
-      "d_marca": "D99",
-      "quando": "2026-07-08 17:38:13.008867+00",
-      "o_que": "ORA decide sozinho, a pedido de Unum: prioridade é mapear as 63 Edge Functions activas antes de qualquer decisão de gás ou ligação nova. orai-agent.vercel.app confirmado como casca vazia (placeholder estático). URL de preview orai-agent-cfum8g3xs-*.vercel.app confirmado como deploy protegido por login Vercel — não acessível publicamente, distinto do domínio de produção.",
-      "created_at": "2026-07-08T17:38:13.008867+00:00"
     }
   ],
   "fontes_vivas": {
