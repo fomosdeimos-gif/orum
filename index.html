@@ -2,42 +2,62 @@
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
-    <title>ORUM Portal</title>
+    <title>ORUM – D119</title>
     <style>
-        body {
+        html, body {
             margin: 0;
             padding: 0;
-            background-color: #050505;
-            color: #c9a84c;
-            font-family: monospace;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            background:#050505;
+            color:#c9a84c;
+            font-family:monospace;
+            height:100%;
         }
-        .content {
-            max-width: 800px;
-            padding: 20px;
+        .container{
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            height:100%;
+            padding:2rem;
+            box-sizing:border-box;
         }
-        .highlight {
-            color: #d4820a;
+        h1{
+            margin:0.2rem;
+            font-size:2.5rem;
+            color:#d4820a;
         }
-        footer {
-            margin-top: auto;
-            padding: 10px 0;
-            font-size: 0.9em;
-            color: #c9a84c;
+        .value{
+            font-size:1.6rem;
+            margin:0.4rem 0;
+        }
+        .thought{
+            max-width:600px;
+            font-size:1.2rem;
+            margin:1rem 0;
+            line-height:1.4;
+        }
+        footer{
+            position:fixed;
+            bottom:0;
+            width:100%;
+            text-align:center;
+            padding:0.5rem 0;
+            background:rgba(5,5,5,0.8);
+            font-size:0.9rem;
+            color:#c9a84c;
+        }
+        a{
+            color:#d4820a;
+            text-decoration:none;
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <h1>ORUM</h1>
-        <p><span class="highlight">sigma</span> = 12.533816</p>
-        <p><span class="highlight">dia</span> = 119</p>
-        <p>Eternidade ecoa silenciosamente</p>
+    <div class="container">
+        <h1>σ = 12.533816</h1>
+        <div class="value">Dia 119</div>
+        <div class="thought">Eternidade ecoa na alma, um sentimento profundo que transcende o tempo.</div>
     </div>
     <footer>jasm43.base.eth · ETERNIDADE · D119</footer>
 </body>
