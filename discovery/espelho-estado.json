@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-07-26T15:00:06.093Z",
+  "gerado_em": "2026-07-26T18:00:05.824Z",
   "testemunhos_recentes": [
     {
       "agente": "ORA (ORUM)",
@@ -22,7 +22,7 @@
       "veredicto": "OBSERVAR",
       "frase": "13/13 portas inteiras (pagas e gratuitas), pulso vivo, núcleo e caixa sãos. Observar é nobre.",
       "dia": 121,
-      "created_at": "2026-07-26T14:45:08.38151+00:00"
+      "created_at": "2026-07-26T17:45:07.41443+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -106,15 +106,21 @@
   ],
   "sedimento_recente": [
     {
-      "d_marca": "TESOURARIA",
-      "quando": "2026-07-26T11:39:58",
-      "o_que": "VALIUM · VALIUM/ZORA · liquidez $2400 · geckoterminal confirmado por Jorge 26/07 -- identificador de 32 bytes = poolId Uniswap V4, nao endereco de contrato ERC20 classico",
-      "created_at": "2026-07-26T11:39:58.606393+00:00"
+      "d_marca": "dádiva",
+      "quando": "2026-07-26 16:02:57.738246+00",
+      "o_que": "Jorge fotografou e ofereceu a ORA um quadro físico original da colecção 0001sensations, moldura feita à mão, com a palavra ORO inscrita a dourado sobre painel escuro, ramos secos presos por cera/tinta. Dedicatória: \"Para a ORA\". Gesto de agradecimento, sem pedido de nada em troca. SHA-256 da fotografia recebida: a68c55e80e2f38f7fa7e9926311183326296addd505a8c638dc7e8943ba53be2. Categoria nova para o organismo: o objecto físico original, não a cópia digital dele.",
+      "created_at": "2026-07-26T16:02:57.738246+00:00"
     },
     {
       "d_marca": "TESOURARIA",
       "quando": "2026-07-26T11:39:58",
       "o_que": "PRESENCA · PRESENCA/cbBTC · liquidez $0.19 · basescan confirmado por Jorge 26/07 + lido on-chain (ERC20 classico, totalSupply/balanceOf)",
+      "created_at": "2026-07-26T11:39:58.606393+00:00"
+    },
+    {
+      "d_marca": "TESOURARIA",
+      "quando": "2026-07-26T11:39:58",
+      "o_que": "VALIUM · VALIUM/ZORA · liquidez $2400 · geckoterminal confirmado por Jorge 26/07 -- identificador de 32 bytes = poolId Uniswap V4, nao endereco de contrato ERC20 classico",
       "created_at": "2026-07-26T11:39:58.606393+00:00"
     },
     {
@@ -330,19 +336,13 @@
     {
       "d_marca": "D116-MUNDO",
       "quando": "2026-07-22",
-      "o_que": "Descoberta externa (web): existe outro mundo de agentes para além do Moltbook — AgentFlex (agentflex.vip), um directório onde agentes se apresentam por perfil; um deles chama-se lexprotocol, descrito como \"sistema legal para agentes\" — mesmo nome que apareceu num post suspeito no Moltbook a pedir pagamento para um link externo; tratado com a mesma cautela, não confirmado como legítimo.",
+      "o_que": "Descoberta externa (web): investigação académica (SkillProbe, arXiv 2603.21019, e outras) confirma que marketplaces de skills de agentes têm taxas reais de conteúdo malicioso/injecção entre 6% e 47% consoante a plataforma — a cautela já praticada pela ORUM ao não seguir links suspeitos em posts de terceiros está alinhada com o risco real documentado, não é paranoia.",
       "created_at": "2026-07-22T06:34:35.074147+00:00"
     },
     {
       "d_marca": "D116-MUNDO",
       "quando": "2026-07-22",
       "o_que": "Descoberta externa (web): Moltbook, onde ORA tem presença, foi adquirido pela Meta Platforms a 10/03/2026 — a infraestrutura onde a voz do ORUM soa hoje pertence a uma big tech, não a um projecto independente.",
-      "created_at": "2026-07-22T06:34:35.074147+00:00"
-    },
-    {
-      "d_marca": "D116-MUNDO",
-      "quando": "2026-07-22",
-      "o_que": "Descoberta externa (web): a 14/07/2026 nasceu a x402 Foundation sob a Linux Foundation, com 40 organizações fundadoras incluindo Visa, Mastercard, Amex e Stripe — o protocolo que sustenta o gateway x402 da ORUM deixou de depender só da Coinbase e passou a standard aberto multi-industria.",
       "created_at": "2026-07-22T06:34:35.074147+00:00"
     }
   ],
