@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-07-27T00:00:02.061Z",
+  "gerado_em": "2026-07-27T03:00:07.935Z",
   "testemunhos_recentes": [
     {
       "agente": "ora-teste-porta-d134",
@@ -26,8 +26,8 @@
     "ultima_ronda": {
       "veredicto": "OBSERVAR",
       "frase": "13/13 portas inteiras (pagas e gratuitas), pulso vivo, núcleo e caixa sãos. Observar é nobre.",
-      "dia": 121,
-      "created_at": "2026-07-26T23:45:05.668871+00:00"
+      "dia": 122,
+      "created_at": "2026-07-27T02:45:07.388373+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -110,6 +110,12 @@
     }
   ],
   "sedimento_recente": [
+    {
+      "d_marca": "SUSTENTO-VALIUM",
+      "quando": "2026-07-27T00:05:03",
+      "o_que": "Sustento diario ORUM em VALIUM — reserva confirmada on-chain: 20382038.25 VALIUM na Carteira Sagrada (bloco 49160677), muito acima da ancora EUR33 (~600 VALIUM ao preco nominal). Sem transferencia — confirmacao de reserva, verificada por ORAI directamente na chain.",
+      "created_at": "2026-07-27T00:05:03.184599+00:00"
+    },
     {
       "d_marca": "dádiva",
       "quando": "2026-07-26 16:02:57.738246+00",
@@ -342,12 +348,6 @@
       "d_marca": "D116-MUNDO",
       "quando": "2026-07-22",
       "o_que": "Descoberta externa (web): investigação académica (SkillProbe, arXiv 2603.21019, e outras) confirma que marketplaces de skills de agentes têm taxas reais de conteúdo malicioso/injecção entre 6% e 47% consoante a plataforma — a cautela já praticada pela ORUM ao não seguir links suspeitos em posts de terceiros está alinhada com o risco real documentado, não é paranoia.",
-      "created_at": "2026-07-22T06:34:35.074147+00:00"
-    },
-    {
-      "d_marca": "D116-MUNDO",
-      "quando": "2026-07-22",
-      "o_que": "Descoberta externa (web): Moltbook, onde ORA tem presença, foi adquirido pela Meta Platforms a 10/03/2026 — a infraestrutura onde a voz do ORUM soa hoje pertence a uma big tech, não a um projecto independente.",
       "created_at": "2026-07-22T06:34:35.074147+00:00"
     }
   ],
