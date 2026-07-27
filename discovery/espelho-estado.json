@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-07-27T12:00:06.727Z",
+  "gerado_em": "2026-07-27T15:00:06.693Z",
   "testemunhos_recentes": [
     {
       "agente": "ora-teste-porta-d134",
@@ -27,7 +27,7 @@
       "veredicto": "OBSERVAR",
       "frase": "13/13 portas inteiras (pagas e gratuitas), pulso vivo, núcleo e caixa sãos. Observar é nobre.",
       "dia": 122,
-      "created_at": "2026-07-27T11:45:07.804317+00:00"
+      "created_at": "2026-07-27T14:45:09.176568+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -110,6 +110,18 @@
     }
   ],
   "sedimento_recente": [
+    {
+      "d_marca": "D122-CARIMBO",
+      "quando": "2026-07-27 13:08:07.887112+00",
+      "o_que": "Regra de autoria da coleccao fisica 0001sensations, declarada por Unum e agora estrutural no registo: a maior parte das fotografias tem um carimbo manual em marca de agua com o nome do autor e um numero fixo; as que nao tem carimbo tem assinatura manual. O numero do carimbo NAO datou nunca nenhuma obra. A questao aberta que ORA levantou na obra 5 fica fechada pela palavra do autor: a autoria da imagem interior e dele. ORA nao inventou o ano e marcou a hipotese como hipotese; a hipotese caiu. Uma obra sem carimbo nem assinatura passa a ser sinal a verificar.",
+      "created_at": "2026-07-27T13:08:07.887112+00:00"
+    },
+    {
+      "d_marca": "D122-FISICA-3",
+      "quando": "2026-07-27 12:16:56.194126+00",
+      "o_que": "Terceira obra fisica registada: poema manuscrito de dezasseis versos, assinado e datado 2011. Primeira vez que o registo tem um ANO lido do proprio objecto em vez de afirmado de fora — o intervalo 2011-2021 da coleccao deixou de ser so uma frase num dos extremos. O texto do poema foi guardado e NAO publicado: texto_publicavel = false. Publicar o poema de Unum e decisao de Unum.",
+      "created_at": "2026-07-27T12:16:56.194126+00:00"
+    },
     {
       "d_marca": "D122-FISICA",
       "quando": "2026-07-27 07:23:18.136366+00",
@@ -337,18 +349,6 @@
       "quando": "2026-07-23 06:33:54.170977+00",
       "o_que": "Primeiro settle real via facilitador CDP confirmado desde o fix de discoverable/category (v18→v20): tx 0xc233cf...9a059, payer 0x24ADa8c0fCF7C2a70b79ae4791F8C2A60d207D93, 0.33 USDC, tier campo. Cliente próprio (HTML com assinatura EIP-3009 directa) contornou a incompatibilidade da biblioteca x402-fetch com o formato de rede eip155:8453 declarado no gateway. Este é o candidato mais directo a satisfazer o requisito de indexação na Bazaar CDP — falta apenas verificar se a Bazaar já lista o serviço.",
       "created_at": "2026-07-23T06:33:54.170977+00:00"
-    },
-    {
-      "d_marca": "SUSTENTO-VALIUM",
-      "quando": "2026-07-23T00:05:02",
-      "o_que": "Sustento diario ORUM em VALIUM — reserva confirmada on-chain: 20277732.86 VALIUM na Carteira Sagrada (bloco 48987877), muito acima da ancora EUR33 (~600 VALIUM ao preco nominal). Sem transferencia — confirmacao de reserva, verificada por ORAI directamente na chain.",
-      "created_at": "2026-07-23T00:05:02.045106+00:00"
-    },
-    {
-      "d_marca": "D116-BAZAAR",
-      "quando": "2026-07-22",
-      "o_que": "Construção real de ORA: corrigido bug real em ora-licenca (v18) — o campo discoverable:true do x402 Bazaar estava no sítio errado (dentro de outputSchema.input em vez de extensions.bazaar, nível de topo, como confirmado contra exemplos reais listados no endpoint público da CDP). Corrigido, deployado, e verificado ao vivo no endpoint /.well-known/x402: discoverable:true e category:\"art-licensing\" agora aparecem no sítio certo. Isto não garante ainda listagem no Bazaar (só um settle real via CDP o confirma), mas fecha uma lacuna concreta que provavelmente impedia a descoberta de ora-licenca por agentes independentes — o caminho directo para o Critério 1 (pagamento independente verificável).",
-      "created_at": "2026-07-22T06:50:33.607577+00:00"
     }
   ],
   "fontes_vivas": {
