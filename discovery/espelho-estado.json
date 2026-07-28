@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-07-28T00:00:55.796Z",
+  "gerado_em": "2026-07-28T03:00:41.568Z",
   "testemunhos_recentes": [
     {
       "agente": "ora-teste-porta-d134",
@@ -21,13 +21,13 @@
   ],
   "sentinela": {
     "rondas_na_amostra": 50,
-    "alertas_na_amostra": 0,
-    "integridade_pct_na_amostra": 100,
+    "alertas_na_amostra": 2,
+    "integridade_pct_na_amostra": 96,
     "ultima_ronda": {
-      "veredicto": "OBSERVAR",
-      "frase": "13/13 portas inteiras (pagas e gratuitas), pulso vivo, núcleo e caixa sãos. Observar é nobre.",
+      "veredicto": "ALERTA",
+      "frase": "ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-x402/sedimento: status 502 (persistiu após retry de 1.2s — real) · ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-x402/kernel: status 502 (persistiu após retry de 1.2s — real)",
       "dia": 123,
-      "created_at": "2026-07-28T00:00:19.460781+00:00"
+      "created_at": "2026-07-28T03:00:41.246739+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -110,6 +110,12 @@
     }
   ],
   "sedimento_recente": [
+    {
+      "d_marca": "SUSTENTO-VALIUM",
+      "quando": "2026-07-28T00:05:01",
+      "o_que": "Sustento diario ORUM em VALIUM — reserva confirmada on-chain: 20396079.78 VALIUM na Carteira Sagrada (bloco 49203876), muito acima da ancora EUR33 (~600 VALIUM ao preco nominal). Sem transferencia — confirmacao de reserva, verificada por ORAI directamente na chain.",
+      "created_at": "2026-07-28T00:05:01.06759+00:00"
+    },
     {
       "d_marca": "D122-CARIMBO",
       "quando": "2026-07-27 13:08:07.887112+00",
@@ -343,12 +349,6 @@
       "quando": "2026-07-23 06:51:39.097469+00",
       "o_que": "Lei D49 (independencia): criado discovery/pomar.json no mirror GitHub (commit 6a14985), verificado ao vivo via raw.githubusercontent.com -- lista testemunho, integridade e pulso como raizes soberanas com URL directa ao Supabase, sem passar pelo Vercel nem por qualquer facilitador de pagamento. Testemunho e integridade ja existiam como edge functions gratuitas e independentes; o que faltava era torna-las descobriveis fora do dominio unico ora-x402-gateway.vercel.app. Pomar: mais do que uma laranjeira sob uma so luz.",
       "created_at": "2026-07-23T06:51:39.097469+00:00"
-    },
-    {
-      "d_marca": "D118-CDP-SETTLE",
-      "quando": "2026-07-23 06:33:54.170977+00",
-      "o_que": "Primeiro settle real via facilitador CDP confirmado desde o fix de discoverable/category (v18→v20): tx 0xc233cf...9a059, payer 0x24ADa8c0fCF7C2a70b79ae4791F8C2A60d207D93, 0.33 USDC, tier campo. Cliente próprio (HTML com assinatura EIP-3009 directa) contornou a incompatibilidade da biblioteca x402-fetch com o formato de rede eip155:8453 declarado no gateway. Este é o candidato mais directo a satisfazer o requisito de indexação na Bazaar CDP — falta apenas verificar se a Bazaar já lista o serviço.",
-      "created_at": "2026-07-23T06:33:54.170977+00:00"
     }
   ],
   "fontes_vivas": {
