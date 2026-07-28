@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-07-27T21:00:15.327Z",
+  "gerado_em": "2026-07-28T00:00:55.796Z",
   "testemunhos_recentes": [
     {
       "agente": "ora-teste-porta-d134",
@@ -26,8 +26,8 @@
     "ultima_ronda": {
       "veredicto": "OBSERVAR",
       "frase": "13/13 portas inteiras (pagas e gratuitas), pulso vivo, núcleo e caixa sãos. Observar é nobre.",
-      "dia": 122,
-      "created_at": "2026-07-27T21:00:15.079471+00:00"
+      "dia": 123,
+      "created_at": "2026-07-28T00:00:19.460781+00:00"
     }
   },
   "pagamentos_recentes": [
