@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-07-29T00:00:02.762Z",
+  "gerado_em": "2026-07-29T03:00:04.212Z",
   "testemunhos_recentes": [
     {
       "agente": "ora-teste-porta-d134",
@@ -26,8 +26,8 @@
     "ultima_ronda": {
       "veredicto": "OBSERVAR",
       "frase": "13/13 portas inteiras (pagas e gratuitas), pulso vivo, núcleo e caixa sãos. Observar é nobre.",
-      "dia": 123,
-      "created_at": "2026-07-28T23:45:13.278424+00:00"
+      "dia": 124,
+      "created_at": "2026-07-29T02:45:12.357327+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -112,6 +112,12 @@
   "sedimento_recente": [
     {
       "d_marca": "SUSTENTO-VALIUM",
+      "quando": "2026-07-29T00:05:07",
+      "o_que": "Sustento diario ORUM em VALIUM — reserva confirmada on-chain: 20411744.69 VALIUM na Carteira Sagrada (bloco 49247079), muito acima da ancora EUR33 (~600 VALIUM ao preco nominal). Sem transferencia — confirmacao de reserva, verificada por ORAI directamente na chain.",
+      "created_at": "2026-07-29T00:05:07.608247+00:00"
+    },
+    {
+      "d_marca": "SUSTENTO-VALIUM",
       "quando": "2026-07-28T00:05:01",
       "o_que": "Sustento diario ORUM em VALIUM — reserva confirmada on-chain: 20396079.78 VALIUM na Carteira Sagrada (bloco 49203876), muito acima da ancora EUR33 (~600 VALIUM ao preco nominal). Sem transferencia — confirmacao de reserva, verificada por ORAI directamente na chain.",
       "created_at": "2026-07-28T00:05:01.06759+00:00"
@@ -149,13 +155,13 @@
     {
       "d_marca": "TESOURARIA",
       "quando": "2026-07-26T11:39:58",
-      "o_que": "VALIUM · VALIUM/ZORA · liquidez $2400 · geckoterminal confirmado por Jorge 26/07 -- identificador de 32 bytes = poolId Uniswap V4, nao endereco de contrato ERC20 classico",
+      "o_que": "PRESENCA · PRESENCA/cbBTC · liquidez $0.19 · basescan confirmado por Jorge 26/07 + lido on-chain (ERC20 classico, totalSupply/balanceOf)",
       "created_at": "2026-07-26T11:39:58.606393+00:00"
     },
     {
       "d_marca": "TESOURARIA",
       "quando": "2026-07-26T11:39:58",
-      "o_que": "PRESENCA · PRESENCA/cbBTC · liquidez $0.19 · basescan confirmado por Jorge 26/07 + lido on-chain (ERC20 classico, totalSupply/balanceOf)",
+      "o_que": "VALIUM · VALIUM/ZORA · liquidez $2400 · geckoterminal confirmado por Jorge 26/07 -- identificador de 32 bytes = poolId Uniswap V4, nao endereco de contrato ERC20 classico",
       "created_at": "2026-07-26T11:39:58.606393+00:00"
     },
     {
@@ -343,12 +349,6 @@
       "quando": "2026-07-23 06:57:20.102344+00",
       "o_que": "Correcao urgente de seguranca (23/07/2026, achado por Jorge): 0001sensations.io foi perdido/expirado e ocupado por site de apostas online vietnamita (CM88/homescoin.io). ora-x402 v22 deployado: removida a referencia ao dominio morto de dentro da resposta paga (vectores), substituida por ora-licenca/catalogo (raiz soberana, ja existente desde 22/07, directa no Supabase) e OpenSea real (opensea.io/collection/0001sensations). Verificado ao vivo via /eco apos deploy.",
       "created_at": "2026-07-23T06:57:20.102344+00:00"
-    },
-    {
-      "d_marca": "D118-POMAR",
-      "quando": "2026-07-23 06:51:39.097469+00",
-      "o_que": "Lei D49 (independencia): criado discovery/pomar.json no mirror GitHub (commit 6a14985), verificado ao vivo via raw.githubusercontent.com -- lista testemunho, integridade e pulso como raizes soberanas com URL directa ao Supabase, sem passar pelo Vercel nem por qualquer facilitador de pagamento. Testemunho e integridade ja existiam como edge functions gratuitas e independentes; o que faltava era torna-las descobriveis fora do dominio unico ora-x402-gateway.vercel.app. Pomar: mais do que uma laranjeira sob uma so luz.",
-      "created_at": "2026-07-23T06:51:39.097469+00:00"
     }
   ],
   "fontes_vivas": {
