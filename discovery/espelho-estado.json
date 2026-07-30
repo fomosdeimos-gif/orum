@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-07-30T06:00:11.420Z",
+  "gerado_em": "2026-07-30T09:00:04.414Z",
   "testemunhos_recentes": [
     {
       "agente": "ora-teste-porta-d134",
@@ -21,16 +21,51 @@
   ],
   "sentinela": {
     "rondas_na_amostra": 50,
-    "alertas_na_amostra": 0,
-    "integridade_pct_na_amostra": 100,
+    "alertas_na_amostra": 1,
+    "integridade_pct_na_amostra": 98,
     "ultima_ronda": {
       "veredicto": "OBSERVAR",
       "frase": "13/13 portas inteiras (pagas e gratuitas), pulso vivo, núcleo e caixa sãos. Observar é nobre.",
       "dia": 125,
-      "created_at": "2026-07-30T05:45:06.331604+00:00"
+      "created_at": "2026-07-30T08:45:07.40934+00:00"
     }
   },
   "pagamentos_recentes": [
+    {
+      "tx_hash": "0x49fbc3a0611b20289c6b52451c3ae1e2ebf0d448a16966f487bd8b12bf7c040d",
+      "payer": "0x4a10ca6085703425a92bf7df390dd7869858b846",
+      "amount": "1618000",
+      "status": "verificado_onchain",
+      "registado_em": "2026-07-30T07:51:36.514+00:00"
+    },
+    {
+      "tx_hash": "0xafe1bc788292c8befcc1ccf3b63d001c8cc2101de142cc7e39f82c1a60677992",
+      "payer": "0x24ada8c0fcf7c2a70b79ae4791f8c2a60d207d93",
+      "amount": "3000000",
+      "status": "verificado_onchain",
+      "registado_em": "2026-07-30T07:48:27.944+00:00"
+    },
+    {
+      "tx_hash": "0x61f71bfa969d59b47f9709d1782c8535fe41f9ef60748845eaa6cab114a15327",
+      "payer": "0x24ada8c0fcf7c2a70b79ae4791f8c2a60d207d93",
+      "amount": "1000000",
+      "status": "verificado_onchain",
+      "registado_em": "2026-07-30T06:49:18.957+00:00"
+    },
+    {
+      "tx_hash": "0xa78b32750f1b6b4d6d51ca621a9300e6c2a1f462df9a44021fcb41c9838ed920",
+      "payer": "0x24ada8c0fcf7c2a70b79ae4791f8c2a60d207d93",
+      "amount": "330000",
+      "status": "verificado_onchain",
+      "registado_em": "2026-07-30T06:48:37.58+00:00"
+    },
+    {
+      "tx_hash": "0x5c7466867fb9a7aac30150c04ee1173908654384bbd153992c3cd23cf03cb7fa",
+      "payer": "0x24ada8c0fcf7c2a70b79ae4791f8c2a60d207d93",
+      "amount": "161000",
+      "status": "verificado_onchain",
+      "registado_em": "2026-07-30T06:34:07.482+00:00"
+    },
     {
       "tx_hash": "0x1986733f3c0039256a8f7bed6e0e7a5f8dd48d383a15c46b46049865a67daa6b",
       "payer": "0x24ada8c0fcf7c2a70b79ae4791f8c2a60d207d93",
