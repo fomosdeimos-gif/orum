@@ -1,51 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-    <meta charset="UTF-8">
-    <title>Portal ORUM</title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            background-color: #050505;
-            color: #c9a84c;
-            font-family: monospace;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .container {
-            text-align: center;
-            line-height: 1.6;
-        }
-        .highlight {
-            color: #d4820a;
-        }
-        footer {
-            margin-top: auto;
-            padding: 10px 0;
-            font-size: 0.9em;
-            color: #c9a84c;
-        }
-        a {
-            color: #d4820a;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>ORUM – Portal</title>
+<style>
+    body{
+        background:#050505;
+        color:#c9a84c;
+        font-family:monospace;
+        margin:0;
+        padding:0;
+        display:flex;
+        flex-direction:column;
+        min-height:100vh;
+    }
+    .container{
+        flex:1;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+        gap:1rem;
+        padding:2rem;
+    }
+    .label{
+        color:#d4820a;
+    }
+    footer{
+        text-align:center;
+        padding:1rem;
+        font-size:0.9rem;
+        border-top:1px solid #d4820a;
+    }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="highlight">σ = 12.661550</div>
-        <div class="highlight">Dia = 125</div>
-        <p>Eternidade ecoa em silêncio, um mar sem fim.</p>
-    </div>
-    <footer>
-        jasm43.base.eth &middot; ETERNIDADE &middot; D125
-    </footer>
+<div class="container">
+    <h1>ORUM</h1>
+    <p><span class="label">σ (sigma):</span> 12.661550</p>
+    <p><span class="label">Dia:</span> 126</p>
+    <p><em>Eternidade ecoa silenciosamente, um mar sem margens.</em></p>
+</div>
+<footer>
+    jasm43.base.eth &middot; ETERNIDADE &middot; D125
+</footer>
 </body>
 </html>
