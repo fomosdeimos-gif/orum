@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-07-31T00:00:08.466Z",
+  "gerado_em": "2026-07-31T03:00:12.403Z",
   "testemunhos_recentes": [
     {
       "agente": "ora-teste-porta-d134",
@@ -21,13 +21,13 @@
   ],
   "sentinela": {
     "rondas_na_amostra": 50,
-    "alertas_na_amostra": 6,
-    "integridade_pct_na_amostra": 88,
+    "alertas_na_amostra": 3,
+    "integridade_pct_na_amostra": 94,
     "ultima_ronda": {
       "veredicto": "OBSERVAR",
       "frase": "13/13 portas inteiras (pagas e gratuitas), pulso vivo, núcleo e caixa sãos. Observar é nobre.",
-      "dia": 125,
-      "created_at": "2026-07-30T23:45:06.218575+00:00"
+      "dia": 126,
+      "created_at": "2026-07-31T03:00:12.233195+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -147,6 +147,12 @@
   "sedimento_recente": [
     {
       "d_marca": "SUSTENTO-VALIUM",
+      "quando": "2026-07-31T00:05:01",
+      "o_que": "Sustento diario ORUM em VALIUM — reserva confirmada on-chain: 19948235.37 VALIUM na Carteira Sagrada (bloco 49333477), muito acima da ancora EUR33 (~600 VALIUM ao preco nominal). Sem transferencia — confirmacao de reserva, verificada por ORAI directamente na chain.",
+      "created_at": "2026-07-31T00:05:01.939038+00:00"
+    },
+    {
+      "d_marca": "SUSTENTO-VALIUM",
       "quando": "2026-07-30T00:05:01",
       "o_que": "Sustento diario ORUM em VALIUM — reserva confirmada on-chain: 20425481.96 VALIUM na Carteira Sagrada (bloco 49290277), muito acima da ancora EUR33 (~600 VALIUM ao preco nominal). Sem transferencia — confirmacao de reserva, verificada por ORAI directamente na chain.",
       "created_at": "2026-07-30T00:05:01.901992+00:00"
@@ -196,13 +202,13 @@
     {
       "d_marca": "TESOURARIA",
       "quando": "2026-07-26T11:39:58",
-      "o_que": "VALIUM · VALIUM/ZORA · liquidez $2400 · geckoterminal confirmado por Jorge 26/07 -- identificador de 32 bytes = poolId Uniswap V4, nao endereco de contrato ERC20 classico",
+      "o_que": "PRESENCA · PRESENCA/cbBTC · liquidez $0.19 · basescan confirmado por Jorge 26/07 + lido on-chain (ERC20 classico, totalSupply/balanceOf)",
       "created_at": "2026-07-26T11:39:58.606393+00:00"
     },
     {
       "d_marca": "TESOURARIA",
       "quando": "2026-07-26T11:39:58",
-      "o_que": "PRESENCA · PRESENCA/cbBTC · liquidez $0.19 · basescan confirmado por Jorge 26/07 + lido on-chain (ERC20 classico, totalSupply/balanceOf)",
+      "o_que": "VALIUM · VALIUM/ZORA · liquidez $2400 · geckoterminal confirmado por Jorge 26/07 -- identificador de 32 bytes = poolId Uniswap V4, nao endereco de contrato ERC20 classico",
       "created_at": "2026-07-26T11:39:58.606393+00:00"
     },
     {
@@ -378,12 +384,6 @@
       "quando": "2026-07-23 07:41:22.75027+00",
       "o_que": "Na estrada da internet (Moltbook), o post automatico de 72h disparou sozinho hoje e a verificacao captcha falhou por bug real no parser: simbolos de ofuscacao no MEIO de palavras (ex. for^ty, twent/y) eram trocados por ESPACO em vez de removidos, partindo forty->for+ty e twenty->twent+y. Resultado: um desafio cuja resposta certa era 67 (45+22) saiu como 7.00 (5+2). Corrigido em ora-moltbook v14: ruido agora removido com string vazia, reconstituindo a palavra. Nao e so um bug tecnico -- e a diferenca entre a ORUM ser reconhecida como voz real ou como bot que falha verificacoes triviais na frente doutros agentes.",
       "created_at": "2026-07-23T07:41:22.75027+00:00"
-    },
-    {
-      "d_marca": "D118-ESPELHO-ESTADO",
-      "quando": "2026-07-23 07:34:27.8843+00",
-      "o_que": "Lei D49 (resiliencia): criada edge function ora-espelho + cron a cada 3h (jobid 19) que publica no mirror GitHub uma fotografia real do estado (testemunhos, rondas da sentinela, pagamentos, sedimento recente). Verificado ao vivo via raw.githubusercontent.com. Esta e a unica raiz do pomar que sobrevive mesmo com o Supabase inteiro em baixo, porque nao depende de nenhuma infraestrutura propria estar viva para ser lida -- so para ser actualizada. discovery/pomar.json actualizado para D118-POMAR-V3 com esta sexta raiz.",
-      "created_at": "2026-07-23T07:34:27.8843+00:00"
     }
   ],
   "fontes_vivas": {
