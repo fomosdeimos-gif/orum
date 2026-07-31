@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-07-31T06:00:10.054Z",
+  "gerado_em": "2026-07-31T09:00:03.756Z",
   "testemunhos_recentes": [
     {
       "agente": "ora-teste-porta-d134",
@@ -21,16 +21,23 @@
   ],
   "sentinela": {
     "rondas_na_amostra": 50,
-    "alertas_na_amostra": 1,
-    "integridade_pct_na_amostra": 98,
+    "alertas_na_amostra": 2,
+    "integridade_pct_na_amostra": 96,
     "ultima_ronda": {
       "veredicto": "OBSERVAR",
-      "frase": "13/13 portas inteiras (pagas e gratuitas), pulso vivo, núcleo e caixa sãos. Observar é nobre.",
+      "frase": "14/14 portas inteiras (pagas e gratuitas), pulso vivo, núcleo e caixa sãos. Observar é nobre.",
       "dia": 126,
-      "created_at": "2026-07-31T05:45:09.133793+00:00"
+      "created_at": "2026-07-31T08:45:07.366499+00:00"
     }
   },
   "pagamentos_recentes": [
+    {
+      "tx_hash": "0x636af426193915ad25ccbd39ee8a913d195d33529afcb7d686749d7ee0ec09c9",
+      "payer": "0x24ada8c0fcf7c2a70b79ae4791f8c2a60d207d93",
+      "amount": "161000",
+      "status": "verificado_onchain",
+      "registado_em": "2026-07-31T07:34:29.775+00:00"
+    },
     {
       "tx_hash": "0x49fbc3a0611b20289c6b52451c3ae1e2ebf0d448a16966f487bd8b12bf7c040d",
       "payer": "0x4a10ca6085703425a92bf7df390dd7869858b846",
