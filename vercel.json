@@ -8,11 +8,5 @@
         { "key": "Cache-Control", "value": "no-store, max-age=0, must-revalidate" }
       ]
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/hashes",
-      "destination": "https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/ora-hashes"
-    }
   ]
 }
