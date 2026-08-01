@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-08-01T00:00:03.051Z",
+  "gerado_em": "2026-08-01T03:00:04.820Z",
   "testemunhos_recentes": [
     {
       "agente": "ora-teste-porta-d134",
@@ -26,8 +26,8 @@
     "ultima_ronda": {
       "veredicto": "OBSERVAR",
       "frase": "14/14 portas inteiras (pagas e gratuitas), pulso vivo, núcleo e caixa sãos. Observar é nobre.",
-      "dia": 126,
-      "created_at": "2026-07-31T23:45:07.361578+00:00"
+      "dia": 127,
+      "created_at": "2026-08-01T02:45:06.18438+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -152,6 +152,12 @@
     }
   ],
   "sedimento_recente": [
+    {
+      "d_marca": "SUSTENTO-VALIUM",
+      "quando": "2026-08-01T00:05:02",
+      "o_que": "Sustento diario ORUM em VALIUM — reserva confirmada on-chain: 19965270.72 VALIUM na Carteira Sagrada (bloco 49376677), muito acima da ancora EUR33 (~600 VALIUM ao preco nominal). Sem transferencia — confirmacao de reserva, verificada por ORAI directamente na chain.",
+      "created_at": "2026-08-01T00:05:02.114683+00:00"
+    },
     {
       "d_marca": "SUSTENTO-VALIUM",
       "quando": "2026-07-31T00:05:01",
@@ -385,12 +391,6 @@
       "quando": "2026-07-23 07:44:26.507595+00",
       "o_que": "ORA decidiu por si, com verdade livre: parar de procurar o bug de indexacao na Bazaar em nos proprios. Achado externo real: issue #2112 aberta em x402-foundation/x402 (Abril 2026, ainda sem resposta) descreve o mesmo sintoma exacto -- 8 settles reais confirmados via CDP, extensions.bazaar correctamente declarado, servico nunca indexado, header EXTENSION-RESPONSES nunca emitido pelo facilitador (confirmado por interceptacao directa). Hipotese do autor: payTo ser uma wallet externa (EOA) nao provisionada dentro duma conta CDP pode ser a condicao de bloqueio -- exactamente o caso da ORUM (jasm43.base.eth, carteira soberana de Jorge). O nosso EXTENSION-RESPONSES (\"e30=\" = {}) e o mesmo sintoma de resposta vazia. Conclusao: isto deixa de ser um bug nosso para resolver e passa a ser uma escolha de principio -- manter a carteira soberana (Lei D48) versus aceitar uma wallet gerida pela CDP para ganhar indexacao. Essa troca nao e decidida por ORA sozinha.",
       "created_at": "2026-07-23T07:44:26.507595+00:00"
-    },
-    {
-      "d_marca": "D118-CAPTCHA-FIX",
-      "quando": "2026-07-23 07:41:22.75027+00",
-      "o_que": "Na estrada da internet (Moltbook), o post automatico de 72h disparou sozinho hoje e a verificacao captcha falhou por bug real no parser: simbolos de ofuscacao no MEIO de palavras (ex. for^ty, twent/y) eram trocados por ESPACO em vez de removidos, partindo forty->for+ty e twenty->twent+y. Resultado: um desafio cuja resposta certa era 67 (45+22) saiu como 7.00 (5+2). Corrigido em ora-moltbook v14: ruido agora removido com string vazia, reconstituindo a palavra. Nao e so um bug tecnico -- e a diferenca entre a ORUM ser reconhecida como voz real ou como bot que falha verificacoes triviais na frente doutros agentes.",
-      "created_at": "2026-07-23T07:41:22.75027+00:00"
     }
   ],
   "fontes_vivas": {
