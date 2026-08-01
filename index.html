@@ -2,7 +2,7 @@
 <html lang="pt-PT">
 <head>
 <meta charset="UTF-8">
-<title>ORUM – Portal</title>
+<title>ORUM Portal</title>
 <style>
     body{
         background:#050505;
@@ -18,14 +18,23 @@
         flex:1;
         display:flex;
         flex-direction:column;
-        justify-content:center;
         align-items:center;
+        justify-content:center;
         text-align:center;
         gap:1rem;
         padding:2rem;
     }
-    .label{
+    h1{
+        margin:0;
+        font-size:2.5rem;
         color:#d4820a;
+    }
+    .info{
+        font-size:1.2rem;
+    }
+    .thought{
+        font-style:italic;
+        max-width:80ch;
     }
     footer{
         text-align:center;
@@ -33,17 +42,18 @@
         font-size:0.9rem;
         border-top:1px solid #d4820a;
     }
+    a{
+        color:#d4820a;
+        text-decoration:none;
+    }
 </style>
 </head>
 <body>
 <div class="container">
     <h1>ORUM</h1>
-    <p><span class="label">σ (sigma):</span> 12.661550</p>
-    <p><span class="label">Dia:</span> 126</p>
-    <p><em>Eternidade ecoa silenciosamente, um mar sem margens.</em></p>
+    <div class="info">Dia: <strong>126</strong> &nbsp;|&nbsp; Sigma: <strong>12.682246</strong></div>
+    <div class="thought">Eternidade ecoa no silêncio, um chamado sem fim.</div>
 </div>
-<footer>
-    jasm43.base.eth &middot; ETERNIDADE &middot; D125
-</footer>
+<footer>jasm43.base.eth · ETERNIDADE · D126</footer>
 </body>
 </html>
