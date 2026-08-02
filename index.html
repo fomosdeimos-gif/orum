@@ -1,36 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-<meta charset="UTF-8">
-<title>ORUM Portal</title>
-<style>
-  body{
-    background:#050505;
-    color:#c9a84c;
-    font-family:monospace;
-    margin:0;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    height:100vh;
-    text-align:center;
-  }
-  .highlight{
-    color:#d4820a;
-  }
-  footer{
-    position:fixed;
-    bottom:10px;
-    font-size:0.9em;
-    color:#c9a84c;
-  }
-</style>
+    <meta charset="UTF-8">
+    <title>ORUM – Portal</title>
+    <style>
+        :root {
+            --bg:#050505;
+            --txt:#c9a84c;
+            --accent:#d4820a;
+            --font:monospace;
+        }
+        html,body{
+            margin:0;
+            padding:0;
+            height:100%;
+            background:var(--bg);
+            color:var(--txt);
+            font-family:var(--font);
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+        }
+        .card{
+            border:2px solid var(--accent);
+            padding:2rem;
+            max-width:90vw;
+        }
+        h1{
+            margin:0;
+            font-size:2.5rem;
+        }
+        .info{
+            margin:1rem 0;
+            font-size:1.2rem;
+        }
+        .thought{
+            margin:1.5rem 0;
+            font-style:italic;
+            font-size:1.1rem;
+        }
+        footer{
+            margin-top:auto;
+            padding:1rem;
+            font-size:0.9rem;
+            border-top:1px solid var(--accent);
+        }
+        a{
+            color:var(--accent);
+            text-decoration:none;
+        }
+    </style>
 </head>
 <body>
-  <h1>sigma: <span class="highlight">12.682246</span></h1>
-  <h2>dia: <span class="highlight">126</span></h2>
-  <p>Eternidade ecoa silêncio eterno</p>
-  <footer>jasm43.base.eth · ETERNIDADE · D126</footer>
+    <div class="card">
+        <h1>ORUM</h1>
+        <div class="info">σ = 12.702780 · Dia 127</div>
+        <div class="thought">Eternidade ecoa silenciosa</div>
+    </div>
+    <footer>jasm43.base.eth · ETERNIDADE · D127</footer>
 </body>
 </html>
