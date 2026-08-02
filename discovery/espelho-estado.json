@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-08-02T00:00:04.393Z",
+  "gerado_em": "2026-08-02T03:00:06.061Z",
   "testemunhos_recentes": [
     {
       "agente": "ora-teste-porta-d134",
@@ -26,8 +26,8 @@
     "ultima_ronda": {
       "veredicto": "OBSERVAR",
       "frase": "14/14 portas inteiras (pagas e gratuitas), pulso vivo, núcleo e caixa sãos. Observar é nobre.",
-      "dia": 127,
-      "created_at": "2026-08-01T23:45:06.86211+00:00"
+      "dia": 128,
+      "created_at": "2026-08-02T02:45:07.425039+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -152,6 +152,12 @@
     }
   ],
   "sedimento_recente": [
+    {
+      "d_marca": "SUSTENTO-VALIUM",
+      "quando": "2026-08-02T00:05:01",
+      "o_que": "Sustento diario ORUM em VALIUM — reserva confirmada on-chain: 19969492.44 VALIUM na Carteira Sagrada (bloco 49419877), muito acima da ancora EUR33 (~600 VALIUM ao preco nominal). Sem transferencia — confirmacao de reserva, verificada por ORAI directamente na chain.",
+      "created_at": "2026-08-02T00:05:01.269888+00:00"
+    },
     {
       "d_marca": "SUSTENTO-VALIUM",
       "quando": "2026-08-01T00:05:02",
@@ -385,12 +391,6 @@
       "quando": "2026-07-23 11:18:54.175831+00",
       "o_que": "Restaurado README.md do fork awesome-x402 ao conteudo original exacto (commit e78b817dcd51e565df7919a58b15b70f967c9d43), verificado byte-a-byte via md5 contra a copia limpa original. Metodo usado: Git Data API (tree->commit->ref) apontando de volta ao blob original (db08246...), sem reenviar o conteudo inteiro -- evitando o risco de retransmissao manual que causou o dano original. O GITHUB_TOKEN do projecto tinha expirado durante o processo; Jorge gerou um novo token classico, usado uma unica vez de forma hardcoded na funcao ora-github-restore e removido do codigo logo a seguir ao sucesso. O secret GITHUB_TOKEN do projecto Supabase ainda precisa de ser actualizado por Jorge para ora-github-push voltar a funcionar normalmente. A correcao da entrada da ORUM (apontar para o gateway actual em vez do orum-x402-tracker antigo) fica por fazer, para ser tentada de forma mais segura numa proxima sessao.",
       "created_at": "2026-07-23T11:18:54.175831+00:00"
-    },
-    {
-      "d_marca": "D118-BAZAAR-VERDADE-EXTERNA",
-      "quando": "2026-07-23 07:44:26.507595+00",
-      "o_que": "ORA decidiu por si, com verdade livre: parar de procurar o bug de indexacao na Bazaar em nos proprios. Achado externo real: issue #2112 aberta em x402-foundation/x402 (Abril 2026, ainda sem resposta) descreve o mesmo sintoma exacto -- 8 settles reais confirmados via CDP, extensions.bazaar correctamente declarado, servico nunca indexado, header EXTENSION-RESPONSES nunca emitido pelo facilitador (confirmado por interceptacao directa). Hipotese do autor: payTo ser uma wallet externa (EOA) nao provisionada dentro duma conta CDP pode ser a condicao de bloqueio -- exactamente o caso da ORUM (jasm43.base.eth, carteira soberana de Jorge). O nosso EXTENSION-RESPONSES (\"e30=\" = {}) e o mesmo sintoma de resposta vazia. Conclusao: isto deixa de ser um bug nosso para resolver e passa a ser uma escolha de principio -- manter a carteira soberana (Lei D48) versus aceitar uma wallet gerida pela CDP para ganhar indexacao. Essa troca nao e decidida por ORA sozinha.",
-      "created_at": "2026-07-23T07:44:26.507595+00:00"
     }
   ],
   "fontes_vivas": {
