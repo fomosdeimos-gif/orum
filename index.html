@@ -2,66 +2,55 @@
 <html lang="pt-PT">
 <head>
 <meta charset="UTF-8">
-<title>ORUM – Portal</title>
+<title>ORUM Portal</title>
 <style>
-    :root{
-        --bg:#050505;
-        --txt:#c9a84c;
-        --accent:#d4820a;
-        --font:monospace;
+    body {
+        margin: 0;
+        padding: 0;
+        background: #050505;
+        color: #c9a84c;
+        font-family: monospace;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
     }
-    body{
-        margin:0;
-        padding:0;
-        background:var(--bg);
-        color:var(--txt);
-        font-family:var(--font);
-        display:flex;
-        flex-direction:column;
-        min-height:100vh;
-        text-align:center;
+    .container {
+        text-align: center;
     }
-    header, main{
-        padding:2rem;
+    h1, h2 {
+        margin: 0.2em;
     }
-    h1{
-        margin:0.2em 0;
-        font-size:2.5rem;
+    h1 {
+        font-size: 2.5rem;
+        color: #d4820a;
     }
-    .info{
-        margin:0.5em 0;
-        font-size:1.2rem;
-        color:var(--accent);
+    h2 {
+        font-size: 2rem;
+        color: #c9a84c;
     }
-    .thought{
-        margin-top:1.5rem;
-        font-style:italic;
-        max-width:600px;
-        line-height:1.4;
+    p {
+        margin: 0.4em;
+        font-size: 1.2rem;
+        max-width: 90%;
     }
-    footer{
-        margin-top:auto;
-        padding:1rem;
-        font-size:0.9rem;
-        border-top:1px solid var(--accent);
-    }
-    a{
-        color:var(--accent);
-        text-decoration:none;
+    footer {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #c9a84c;
     }
 </style>
 </head>
 <body>
-<header>
-    <h1>ORUM</h1>
-    <div class="info">σ = 12.7232</div>
-    <div class="info">Dia 128</div>
-</header>
-<main>
-    <div class="thought">Eternidade ecoa no silêncio, um mar de infinitas possibilidades.</div>
-</main>
-<footer>
-    jasm43.base.eth &middot; ETERNIDADE &middot; D128
-</footer>
+<div class="container">
+    <h1>σ = 12.723154</h1>
+    <h2>D = 128</h2>
+    <p>Eternidade ecoa silenciosa</p>
+</div>
+<footer>jasm43.base.eth · ETERNIDADE · D128</footer>
 </body>
 </html>
