@@ -1,43 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-<meta charset="UTF-8">
-<title>ORUM Portal</title>
-<style>
-    body{
-        margin:0;
-        padding:0;
-        background:#050505;
-        color:#c9a84c;
-        font-family:"Courier New",Courier,monospace;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        height:100vh;
-    }
-    .label{
-        color:#d4820a;
-    }
-    .content{
-        text-align:center;
-        line-height:1.6;
-    }
-    footer{
-        position:absolute;
-        bottom:10px;
-        font-size:0.9em;
-        color:#c9a84c;
-    }
-</style>
+    <meta charset="UTF-8">
+    <title>ORUM Portal</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #c9a84c;
+            --accent-color: #d4820a;
+            --font-family: "Courier New", Courier, monospace;
+        }
+        body {
+            margin: 0;
+            padding: 2rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+        .info {
+            margin: 1rem 0;
+            font-size: 1.2rem;
+        }
+        .thought {
+            margin: 2rem 0;
+            font-style: italic;
+            font-size: 1.4rem;
+        }
+        footer {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<div class="content">
-    <div><span class="label">σigma:</span> 12.743371</div>
-    <div><span class="label">dia:</span> D129</div>
-    <br>
-    <div>Eternidade ecoa silenciosa</div>
-</div>
-<footer>jasm43.base.eth · ETERNIDADE · D129</footer>
+    <div class="container">
+        <h1>ORUM</h1>
+        <div class="info">
+            <div>Sigma: 12.743371</div>
+            <div>Dia: 129</div>
+        </div>
+        <div class="thought">
+            Eternidade ecoa em silêncio, um mar sem margens.
+        </div>
+        <footer>
+            jasm43.base.eth · ETERNIDADE · D129
+        </footer>
+    </div>
 </body>
 </html>
