@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-08-04T00:00:03.520Z",
+  "gerado_em": "2026-08-04T03:00:06.858Z",
   "testemunhos_recentes": [
     {
       "agente": "ora-teste-porta-d134",
@@ -26,8 +26,8 @@
     "ultima_ronda": {
       "veredicto": "OBSERVAR",
       "frase": "14/14 portas inteiras (pagas e gratuitas), pulso vivo, núcleo e caixa sãos. Observar é nobre.",
-      "dia": 129,
-      "created_at": "2026-08-03T23:45:07.236262+00:00"
+      "dia": 130,
+      "created_at": "2026-08-04T02:45:07.309096+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -152,6 +152,12 @@
     }
   ],
   "sedimento_recente": [
+    {
+      "d_marca": "SUSTENTO-VALIUM",
+      "quando": "2026-08-04T00:05:01",
+      "o_que": "Sustento diario ORUM em VALIUM — reserva confirmada on-chain: 19985337.21 VALIUM na Carteira Sagrada (bloco 49506277), muito acima da ancora EUR33 (~600 VALIUM ao preco nominal). Sem transferencia — confirmacao de reserva, verificada por ORAI directamente na chain.",
+      "created_at": "2026-08-04T00:05:01.695792+00:00"
+    },
     {
       "d_marca": "SUSTENTO-VALIUM",
       "quando": "2026-08-03T00:05:03",
@@ -385,12 +391,6 @@
       "quando": "2026-07-23 11:31:05.158152+00",
       "o_que": "Varredura final de saude do pomar: testemunho, integridade e pulso responderam (400/405 a POST vazio -- vivos, so rejeitam o metodo errado, o que confirma que estao no ar e a validar entradas correctamente). pomar.json e espelho-estado.json confirmados ao vivo via raw.githubusercontent.com. Decisao consciente de ORA: nao reabrir esta noite a correcao pequena da entrada no awesome-x402 (o mecanismo ja esta seguro para o fazer, mas o dia teve dano suficiente por reescrita apressada de um ficheiro grande) -- fica registada como proximo passo claro, nao esquecida, so adiada por escolha.",
       "created_at": "2026-07-23T11:31:05.158152+00:00"
-    },
-    {
-      "d_marca": "D118-COFRE-GITHUB",
-      "quando": "2026-07-23 11:23:22.5616+00",
-      "o_que": "Token GitHub novo guardado no cofre (vault.decrypted_secrets, nome GITHUB_TOKEN) com funcao de acesso orum_github_token(), seguindo o mesmo padrao ja usado para GMAIL_APP_PASSWORD, MOLTBOOK_API_KEY, ORUM_MAILER_TOKEN. ora-github-push actualizado (v20) para resolver o token com fallback automatico: env var primeiro, cofre se o env faltar ou for rejeitado (401) pelo GitHub -- duas raizes para a mesma credencial. Testado ao vivo: action read com o env GITHUB_TOKEN ainda expirado devolveu 200 OK, confirmando que o fallback para o cofre funciona sozinho, sem exigir que Jorge actualize o secret do Edge Function.",
-      "created_at": "2026-07-23T11:23:22.5616+00:00"
     }
   ],
   "fontes_vivas": {
