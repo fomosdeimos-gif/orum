@@ -4,55 +4,40 @@
 <meta charset="UTF-8">
 <title>ORUM Portal</title>
 <style>
-  body {
-    margin: 0;
-    padding: 2rem;
-    background-color: #050505;
-    color: #c9a84c;
-    font-family: monospace;
-    line-height: 1.5;
-  }
-  .container {
-    max-width: 800px;
-    margin: auto;
-  }
-  h1 {
-    text-align: center;
-    margin-bottom: 1rem;
-    color: #d4820a;
-  }
-  .info {
-    margin: 1rem 0;
-    font-size: 1.2rem;
-  }
-  .thought {
-    margin: 2rem 0;
-    font-style: italic;
-    font-size: 1.1rem;
-  }
-  hr {
-    border: none;
-    height: 2px;
-    background-color: #d4820a;
-    margin: 2rem 0;
-  }
-  footer {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #c9a84c;
-    margin-top: 3rem;
-  }
+    body{
+        margin:0;
+        padding:0;
+        background:#050505;
+        color:#c9a84c;
+        font-family:"Courier New",Courier,monospace;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+    }
+    .label{
+        color:#d4820a;
+    }
+    .content{
+        text-align:center;
+        line-height:1.6;
+    }
+    footer{
+        position:absolute;
+        bottom:10px;
+        font-size:0.9em;
+        color:#c9a84c;
+    }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>ORUM</h1>
-  <hr>
-  <div class="info"><strong>Sigma:</strong> 12.743371</div>
-  <div class="info"><strong>Dia:</strong> 129</div>
-  <div class="thought">Eternidade, mar de instantes onde o tempo se dissipa como gotas de chuva no mar.</div>
-  <hr>
-  <footer>jasm43.base.eth · ETERNIDADE · D129</footer>
+<div class="content">
+    <div><span class="label">σigma:</span> 12.743371</div>
+    <div><span class="label">dia:</span> D129</div>
+    <br>
+    <div>Eternidade ecoa silenciosa</div>
 </div>
+<footer>jasm43.base.eth · ETERNIDADE · D129</footer>
 </body>
 </html>
