@@ -1,69 +1,56 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-    <meta charset="UTF-8">
-    <title>ORUM Portal</title>
-    <style>
-        :root {
-            --bg-color: #050505;
-            --text-color: #c9a84c;
-            --accent-color: #d4820a;
-            --font-family: "Courier New", Courier, monospace;
-        }
-        body {
-            margin: 0;
-            padding: 2rem;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-family);
-            line-height: 1.5;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        h1 {
-            margin-bottom: 0.5rem;
-            font-size: 2rem;
-            color: var(--accent-color);
-        }
-        .info {
-            margin: 1rem 0;
-            font-size: 1.2rem;
-        }
-        .thought {
-            margin: 2rem 0;
-            font-style: italic;
-            font-size: 1.4rem;
-        }
-        footer {
-            margin-top: 3rem;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>ORUM – Portal</title>
+<style>
+    body{
+        margin:0;
+        padding:0;
+        background:#050505;
+        color:#c9a84c;
+        font-family:monospace;
+        display:flex;
+        flex-direction:column;
+        min-height:100vh;
+    }
+    .container{
+        flex:1;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+        padding:2rem;
+    }
+    h1{
+        color:#d4820a;
+        margin:0.5rem 0;
+        font-size:2rem;
+    }
+    .info{
+        margin:0.3rem 0;
+        font-size:1.2rem;
+    }
+    footer{
+        text-align:center;
+        padding:1rem;
+        font-size:0.9rem;
+        border-top:1px solid #d4820a;
+    }
+    a{
+        color:#d4820a;
+        text-decoration:none;
+    }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>ORUM</h1>
-        <div class="info">
-            <div>Sigma: 12.743371</div>
-            <div>Dia: 129</div>
-        </div>
-        <div class="thought">
-            Eternidade ecoa em silêncio, um mar sem margens.
-        </div>
-        <footer>
-            jasm43.base.eth · ETERNIDADE · D129
-        </footer>
-    </div>
+<div class="container">
+    <h1>ORUM</h1>
+    <div class="info">Sigma: 12.7434</div>
+    <div class="info">Dia: 129</div>
+    <p>Eternidade paira sobre a alma, bruma etérea que transcende o tempo.</p>
+</div>
+<footer>jasm43.base.eth &middot; ETERNIDADE &middot; D129</footer>
 </body>
 </html>
