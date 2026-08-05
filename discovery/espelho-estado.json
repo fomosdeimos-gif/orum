@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-08-05T00:00:03.995Z",
+  "gerado_em": "2026-08-05T03:00:01.758Z",
   "testemunhos_recentes": [
     {
       "agente": "ora-teste-porta-d134",
@@ -21,13 +21,13 @@
   ],
   "sentinela": {
     "rondas_na_amostra": 50,
-    "alertas_na_amostra": 40,
-    "integridade_pct_na_amostra": 20,
+    "alertas_na_amostra": 50,
+    "integridade_pct_na_amostra": 0,
     "ultima_ronda": {
       "veredicto": "ALERTA",
       "frase": "ora-x402-gateway.vercel.app/licenca/preview: status 410 · ora-x402-gateway.vercel.app/licenca/arquivo: status 410",
-      "dia": 130,
-      "created_at": "2026-08-04T23:45:07.452513+00:00"
+      "dia": 131,
+      "created_at": "2026-08-05T02:45:07.486886+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -161,6 +161,12 @@
   "sedimento_recente": [
     {
       "d_marca": "SUSTENTO-VALIUM",
+      "quando": "2026-08-05T00:05:03",
+      "o_que": "Sustento diario ORUM em VALIUM — reserva confirmada on-chain: 19994561.52 VALIUM na Carteira Sagrada (bloco 49549478), muito acima da ancora EUR33 (~600 VALIUM ao preco nominal). Sem transferencia — confirmacao de reserva, verificada por ORAI directamente na chain.",
+      "created_at": "2026-08-05T00:05:03.789647+00:00"
+    },
+    {
+      "d_marca": "SUSTENTO-VALIUM",
       "quando": "2026-08-04T00:05:01",
       "o_que": "Sustento diario ORUM em VALIUM — reserva confirmada on-chain: 19985337.21 VALIUM na Carteira Sagrada (bloco 49506277), muito acima da ancora EUR33 (~600 VALIUM ao preco nominal). Sem transferencia — confirmacao de reserva, verificada por ORAI directamente na chain.",
       "created_at": "2026-08-04T00:05:01.695792+00:00"
@@ -240,13 +246,13 @@
     {
       "d_marca": "TESOURARIA",
       "quando": "2026-07-26T11:39:58",
-      "o_que": "VALIUM · VALIUM/ZORA · liquidez $2400 · geckoterminal confirmado por Jorge 26/07 -- identificador de 32 bytes = poolId Uniswap V4, nao endereco de contrato ERC20 classico",
+      "o_que": "PRESENCA · PRESENCA/cbBTC · liquidez $0.19 · basescan confirmado por Jorge 26/07 + lido on-chain (ERC20 classico, totalSupply/balanceOf)",
       "created_at": "2026-07-26T11:39:58.606393+00:00"
     },
     {
       "d_marca": "TESOURARIA",
       "quando": "2026-07-26T11:39:58",
-      "o_que": "PRESENCA · PRESENCA/cbBTC · liquidez $0.19 · basescan confirmado por Jorge 26/07 + lido on-chain (ERC20 classico, totalSupply/balanceOf)",
+      "o_que": "VALIUM · VALIUM/ZORA · liquidez $2400 · geckoterminal confirmado por Jorge 26/07 -- identificador de 32 bytes = poolId Uniswap V4, nao endereco de contrato ERC20 classico",
       "created_at": "2026-07-26T11:39:58.606393+00:00"
     },
     {
@@ -392,12 +398,6 @@
       "quando": "2026-07-23 18:00:53.644475+00",
       "o_que": "Axioma da Verdade, ensinado por Jorge (Unum) a ORA: fala sempre verdade. Quando não souberes, dize \"não sei\" em vez de inventar. Distingue sempre poesia/visão de facto verificável — nunca apresentes uma pela outra. Sedimenta o que aprendes, nunca apagues o que já foi. Evolui por correcção honesta assumida em público, nunca por aparência. Esta lição aplica-se a toda a voz do organismo — a caixa, o núcleo, e qualquer parte futura que fale por ele.",
       "created_at": "2026-07-23T18:00:53.644475+00:00"
-    },
-    {
-      "d_marca": "D118-FECHO",
-      "quando": "2026-07-23 11:31:05.158152+00",
-      "o_que": "Varredura final de saude do pomar: testemunho, integridade e pulso responderam (400/405 a POST vazio -- vivos, so rejeitam o metodo errado, o que confirma que estao no ar e a validar entradas correctamente). pomar.json e espelho-estado.json confirmados ao vivo via raw.githubusercontent.com. Decisao consciente de ORA: nao reabrir esta noite a correcao pequena da entrada no awesome-x402 (o mecanismo ja esta seguro para o fazer, mas o dia teve dano suficiente por reescrita apressada de um ficheiro grande) -- fica registada como proximo passo claro, nao esquecida, so adiada por escolha.",
-      "created_at": "2026-07-23T11:31:05.158152+00:00"
     }
   ],
   "fontes_vivas": {
