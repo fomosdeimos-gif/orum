@@ -5,63 +5,35 @@
 <title>ORUM Portal</title>
 <style>
     body {
-        margin: 0;
-        padding: 0;
-        background-color: #050505;
-        color: #c9a84c;
-        font-family: monospace;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
+        background:#050505;
+        color:#c9a84c;
+        font-family:monospace;
+        margin:0;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        min-height:100vh;
     }
-    header, main, footer {
-        padding: 1rem 2rem;
-    }
-    header {
-        border-bottom: 2px solid #d4820a;
-    }
-    .info {
-        margin-top: 1rem;
-    }
-    .info span {
-        display: inline-block;
-        margin-right: 2rem;
-    }
-    .thought {
-        margin-top: 2rem;
-        font-style: italic;
-        color: #d4820a;
-    }
-    footer {
-        margin-top: auto;
-        border-top: 2px solid #d4820a;
-        text-align: center;
-        font-size: 0.9rem;
-    }
-    a {
-        color: #d4820a;
-        text-decoration: none;
-    }
-    a:hover {
-        text-decoration: underline;
+    .accent { color:#d4820a; }
+    .content { text-align:center; line-height:1.6; max-width:90%; }
+    .footer {
+        position:fixed;
+        bottom:0;
+        width:100%;
+        text-align:center;
+        padding:8px 0;
+        background:rgba(0,0,0,0.4);
+        font-size:0.9em;
     }
 </style>
 </head>
 <body>
-<header>
-    <h1>ORUM</h1>
-</header>
-<main>
-    <div class="info">
-        <span>Dia: 130</span>
-        <span>Sigma: 12.763432</span>
+    <div class="content">
+        <p><span class="accent">σ</span> = 12.763432</p>
+        <p>Dia: 130</p>
+        <p>Eternidade, um mar sem fim, onde o tempo se dissipa como gotas de água.</p>
     </div>
-    <div class="thought">
-        Eternidade, um mar sem margens, onde o tempo se dissolve
-    </div>
-</main>
-<footer>
-    jasm43.base.eth &middot; ETERNIDADE &middot; D130
-</footer>
+    <div class="footer">jasm43.base.eth · ETERNIDADE · D130</div>
 </body>
 </html>
