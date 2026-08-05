@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-08-04T21:00:03.576Z",
+  "gerado_em": "2026-08-05T00:00:03.995Z",
   "testemunhos_recentes": [
     {
       "agente": "ora-teste-porta-d134",
@@ -21,13 +21,13 @@
   ],
   "sentinela": {
     "rondas_na_amostra": 50,
-    "alertas_na_amostra": 28,
-    "integridade_pct_na_amostra": 44,
+    "alertas_na_amostra": 40,
+    "integridade_pct_na_amostra": 20,
     "ultima_ronda": {
       "veredicto": "ALERTA",
       "frase": "ora-x402-gateway.vercel.app/licenca/preview: status 410 · ora-x402-gateway.vercel.app/licenca/arquivo: status 410",
       "dia": 130,
-      "created_at": "2026-08-04T20:45:07.637096+00:00"
+      "created_at": "2026-08-04T23:45:07.452513+00:00"
     }
   },
   "pagamentos_recentes": [
