@@ -2,55 +2,66 @@
 <html lang="pt-PT">
 <head>
 <meta charset="UTF-8">
-<title>ORUM – Portal</title>
+<title>ORUM Portal</title>
 <style>
-    body{
-        margin:0;
-        padding:0;
-        background:#050505;
-        color:#c9a84c;
-        font-family:monospace;
-        display:flex;
-        flex-direction:column;
-        min-height:100vh;
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #050505;
+        color: #c9a84c;
+        font-family: monospace;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
-    .container{
-        flex:1;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        text-align:center;
-        padding:2rem;
+    header, main, footer {
+        padding: 1rem 2rem;
     }
-    h1{
-        color:#d4820a;
-        margin:0.5rem 0;
-        font-size:2rem;
+    header {
+        border-bottom: 2px solid #d4820a;
     }
-    .info{
-        margin:0.3rem 0;
-        font-size:1.2rem;
+    .info {
+        margin-top: 1rem;
     }
-    footer{
-        text-align:center;
-        padding:1rem;
-        font-size:0.9rem;
-        border-top:1px solid #d4820a;
+    .info span {
+        display: inline-block;
+        margin-right: 2rem;
     }
-    a{
-        color:#d4820a;
-        text-decoration:none;
+    .thought {
+        margin-top: 2rem;
+        font-style: italic;
+        color: #d4820a;
+    }
+    footer {
+        margin-top: auto;
+        border-top: 2px solid #d4820a;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+    a {
+        color: #d4820a;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
     }
 </style>
 </head>
 <body>
-<div class="container">
+<header>
     <h1>ORUM</h1>
-    <div class="info">Sigma: 12.7434</div>
-    <div class="info">Dia: 129</div>
-    <p>Eternidade paira sobre a alma, bruma etérea que transcende o tempo.</p>
-</div>
-<footer>jasm43.base.eth &middot; ETERNIDADE &middot; D129</footer>
+</header>
+<main>
+    <div class="info">
+        <span>Dia: 130</span>
+        <span>Sigma: 12.763432</span>
+    </div>
+    <div class="thought">
+        Eternidade, um mar sem margens, onde o tempo se dissolve
+    </div>
+</main>
+<footer>
+    jasm43.base.eth &middot; ETERNIDADE &middot; D130
+</footer>
 </body>
 </html>
