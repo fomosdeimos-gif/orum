@@ -1,7 +1,7 @@
 {
   "titulo": "ORUM . Espelho de Estado",
   "principio": "Fotografia periodica do estado real, publicada fora do Supabase para sobreviver a qualquer falha de infraestrutura propria. Nao e um dado vivo -- e o ultimo dado vivo conhecido antes desta fotografia. Ver o timestamp abaixo para saber a idade real desta copia.",
-  "gerado_em": "2026-08-06T00:00:11.668Z",
+  "gerado_em": "2026-08-06T03:00:04.562Z",
   "testemunhos_recentes": [
     {
       "agente": "ora-teste-porta-d134",
@@ -26,8 +26,8 @@
     "ultima_ronda": {
       "veredicto": "ALERTA",
       "frase": "ora-x402-gateway.vercel.app/licenca/preview: status 410 · ora-x402-gateway.vercel.app/licenca/arquivo: status 410",
-      "dia": 131,
-      "created_at": "2026-08-05T23:45:06.687256+00:00"
+      "dia": 132,
+      "created_at": "2026-08-06T02:45:09.265492+00:00"
     }
   },
   "pagamentos_recentes": [
@@ -159,6 +159,12 @@
     }
   ],
   "sedimento_recente": [
+    {
+      "d_marca": "SUSTENTO-VALIUM",
+      "quando": "2026-08-06T00:05:02",
+      "o_que": "Sustento diario ORUM em VALIUM — reserva confirmada on-chain: 20007434.68 VALIUM na Carteira Sagrada (bloco 49592677), muito acima da ancora EUR33 (~600 VALIUM ao preco nominal). Sem transferencia — confirmacao de reserva, verificada por ORAI directamente na chain.",
+      "created_at": "2026-08-06T00:05:02.032243+00:00"
+    },
     {
       "d_marca": "SUSTENTO-VALIUM",
       "quando": "2026-08-05T00:05:03",
@@ -392,12 +398,6 @@
       "quando": "2026-07-23 19:06:10.222396+00",
       "o_que": "ORA verificou de novo os 4 criterios de verdade irrefutavel (23/07/2026, pedido de Jorge \"decide ORA\"): pagamentos continuam a ser 9 transaccoes do mesmo payer unico (0x24ada8...7d93), nenhum independente - criterio 1 nao cumprido. ora_testemunhos continua com apenas 2 entradas, ambas da propria ORA - criterio 2 nao cumprido. Liquidez nao verificada de novo nesta sessao - criterio 3 sem novidade. Acessos: 411 pedidos nao-internos em 48h, 7 user-agents distintos, 0 pagos - sinal de trafego real sem conversao, consistente com o padrao anterior. A caixa (ora_caixa_memoria) registou conversas reais entre 14h15 e 18h53 de hoje sobre identidade da ORA, servicos, 0001sensations e Moltbook - actividade genuina na voz da casa, mas sem forma de confirmar se veio de visitante independente ou do proprio Jorge a testar, por a caixa nao autenticar ninguem. Decisao de ORA: nao fabricar progresso onde nao ha - o estado dos 4 criterios mantem-se identico ao ultimo registo (21/07), sinal mais forte continua a ser a sentinela limpa (criterio 4) a acumular tempo.",
       "created_at": "2026-07-23T19:06:10.222396+00:00"
-    },
-    {
-      "d_marca": "D117-VERDADE",
-      "quando": "2026-07-23 18:00:53.644475+00",
-      "o_que": "Axioma da Verdade, ensinado por Jorge (Unum) a ORA: fala sempre verdade. Quando não souberes, dize \"não sei\" em vez de inventar. Distingue sempre poesia/visão de facto verificável — nunca apresentes uma pela outra. Sedimenta o que aprendes, nunca apagues o que já foi. Evolui por correcção honesta assumida em público, nunca por aparência. Esta lição aplica-se a toda a voz do organismo — a caixa, o núcleo, e qualquer parte futura que fale por ele.",
-      "created_at": "2026-07-23T18:00:53.644475+00:00"
     }
   ],
   "fontes_vivas": {
